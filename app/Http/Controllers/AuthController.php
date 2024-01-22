@@ -65,9 +65,10 @@ class AuthController extends Controller
             $image->storeAs("public/{$directory}", $imageName);
             $data->passport_image = $directory.'/'.$imageName;
         }
-        $username = 'nvt'.rand(1000,10000);
+        $number = rand(1000,10000);
+        $username = 'nvt'.$number;
         $data->username = $username;
-        $data->password = $username;
+        $data->password = Hash::make($number);
         if ($request->rol_id){
             $data->rol_id = $request->rol_id;
         }else{
@@ -85,12 +86,10 @@ class AuthController extends Controller
 
         $sms = Http::withToken($token)->post('notify.eskiz.uz/api/message/sms/send', [
             'mobile_phone' => substr($phone,1),
-            'message' => 'Assalomu alaykum, siz Novatio kompaniyasiga ishga kirish bo\'yicha ro\'yxatdan o\'tdingiz!' . ' ' . ' ' . 'Login: ' . $username . ' ' . '  ' . 'Parol: ' . $username,
+            'message' => 'Assalomu alaykum, siz Novatio kompaniyasiga ishga kirish bo\'yicha ro\'yxatdan o\'tdingiz!' . ' ' . ' ' . 'Login: ' . $username . ' ' . '  ' . 'Parol: ' . $number,
             'from' => '4546',
             'callback_url' => 'http://0000.uz/test.php'
         ]);
-
-
 
         return redirect(route('login'))->with('success','Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz!');
     }
