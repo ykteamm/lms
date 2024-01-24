@@ -113,32 +113,32 @@ $urinish = 1;
                                                             @endphp
                                                             <h5 class="fw-500 text-center">{{$urinish++}} chi urinish</h5>
                                                             <div class="row">
-                                                                <p class="col-3" style="color: black;">
+                                                                <p class="col-3" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                     Javoblaringiz
                                                                 </p>
 
-                                                                <p class="col-2" style="color: black;">
+                                                                <p class="col-1" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                     To'g'ri
                                                                 </p>
 
-                                                                <p class="col-2" style="color: black;">
+                                                                <p class="col-1" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                     Noto'g'ri
                                                                 </p>
 
-                                                                <p class="col-1" style="color: black;">
-                                                                    Ball
+                                                                <p class="col-2" style="color: black;border: 1px solid black;padding: 0 !important;">
+                                                                    Ishlash kerak
                                                                 </p>
 
-                                                                <p class="col-1" style="color: black;">
-                                                                    Foiz
+                                                                <p class="col-2" style="color: black;border: 1px solid black;padding: 0 !important;">
+                                                                    To'plagan ball
                                                                 </p>
 
-                                                                <p class="col-3" style="color: black;">
+                                                                <p class="col-3" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                     Status
                                                                 </p>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-3">
+                                                                <div class="col-3" style="padding: 0 !important;">
                                                                     @foreach($res->user_answers as $questionNumber => $answer)
                                                                         @php
                                                                             $userAnswer = current($answer);
@@ -161,22 +161,22 @@ $urinish = 1;
                                                                         </p>
                                                                     @endforeach
                                                                 </div>
-                                                                <div class="col-2 justify-content-center d-flex align-items-center"  style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
+                                                                <div class="col-1 justify-content-center d-flex align-items-center"  style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
                                                                     <p>{{$res->correct_answer}}</p>
                                                                 </div>
-                                                                <div class="col-2 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                <div class="col-1 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
                                                                     <p>{{$res->question_numbers - $res->correct_answer}}</p>
                                                                 </div>
-                                                                <div class="col-1 d-flex align-items-center justify-content-center" style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
+                                                                <div class="col-2 d-flex align-items-center justify-content-center" style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
                                                                     <p>{{$group_test->ball}}</p>
                                                                 </div>
 
                                                                 @if($res->foiz >= $group_test->ball)
-                                                                    <div class="col-1 justify-content-center d-flex align-items-center" style="background: green;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-2 justify-content-center d-flex align-items-center" style="background: green;color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$res->foiz}}</p>
                                                                     </div>
                                                                 @else
-                                                                    <div class="col-1 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-2 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$res->foiz}}</p>
                                                                     </div>
                                                                 @endif
@@ -233,32 +233,32 @@ $urinish = 1;
                                                                 @endphp
                                                                 <h5 class="fw-500 text-center">{{$urinish++}} chi urinish</h5>
                                                                 <div class="row">
-                                                                    <p class="col-3" style="color: black;">
+                                                                    <p class="col-3" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         Javoblaringiz
                                                                     </p>
 
-                                                                    <p class="col-2" style="color: black;">
+                                                                    <p class="col-1" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         To'g'ri
                                                                     </p>
 
-                                                                    <p class="col-2" style="color: black;">
+                                                                    <p class="col-1" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         Noto'g'ri
                                                                     </p>
 
-                                                                    <p class="col-1" style="color: black;">
-                                                                        Ball
+                                                                    <p class="col-2" style="color: black;border: 1px solid black;padding: 0 !important;">
+                                                                        Ishlash kerak
                                                                     </p>
 
-                                                                    <p class="col-1" style="color: black;">
-                                                                        Foiz
+                                                                    <p class="col-2" style="color: black;border: 1px solid black;padding: 0 !important;">
+                                                                        To'plagan ball
                                                                     </p>
 
-                                                                    <p class="col-3" style="color: black;">
+                                                                    <p class="col-3" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         Status
                                                                     </p>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-3">
+                                                                    <div class="col-3" style="padding: 0 !important;">
                                                                         @foreach($res->user_answers as $questionNumber => $answer)
                                                                             @php
                                                                                 $userAnswer = current($answer);
@@ -281,22 +281,22 @@ $urinish = 1;
                                                                             </p>
                                                                         @endforeach
                                                                     </div>
-                                                                    <div class="col-2 justify-content-center d-flex align-items-center"  style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-1 justify-content-center d-flex align-items-center"  style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$res->correct_answer}}</p>
                                                                     </div>
-                                                                    <div class="col-2 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-1 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$res->question_numbers - $res->correct_answer}}</p>
                                                                     </div>
-                                                                    <div class="col-1 d-flex align-items-center justify-content-center" style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-2 d-flex align-items-center justify-content-center" style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$group_test->ball}}</p>
                                                                     </div>
 
                                                                     @if($res->foiz >= $group_test->ball)
-                                                                        <div class="col-1 justify-content-center d-flex align-items-center" style="background: green;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                        <div class="col-2 justify-content-center d-flex align-items-center" style="background: green;color: white; border: 2px solid white;padding: 0 !important;">
                                                                             <p>{{$res->foiz}}</p>
                                                                         </div>
                                                                     @else
-                                                                        <div class="col-1 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                        <div class="col-2 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
                                                                             <p>{{$res->foiz}}</p>
                                                                         </div>
                                                                     @endif
@@ -365,32 +365,31 @@ $urinish = 1;
                                                                 @endphp
                                                                 <h5 class="fw-500 text-center">{{$urinish++}} chi urinish</h5>
                                                                 <div class="row">
-                                                                    <p class="col-3" style="color: black;">
+                                                                    <p class="col-3" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         Javoblaringiz
                                                                     </p>
-
-                                                                    <p class="col-2" style="color: black;">
+                                                                    <p class="col-1" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         To'g'ri
                                                                     </p>
 
-                                                                    <p class="col-2" style="color: black;">
+                                                                    <p class="col-1" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         Noto'g'ri
                                                                     </p>
 
-                                                                    <p class="col-1" style="color: black;">
-                                                                        Ball
+                                                                    <p class="col-2" style="color: black;border: 1px solid black;padding: 0 !important;">
+                                                                        Ishlash kerak
                                                                     </p>
 
-                                                                    <p class="col-1" style="color: black;">
-                                                                        Foiz
+                                                                    <p class="col-2" style="color: black;border: 1px solid black;padding: 0 !important;">
+                                                                        To'plagan ball
                                                                     </p>
 
-                                                                    <p class="col-3" style="color: black;">
+                                                                    <p class="col-3" style="color: black;border: 1px solid black;padding: 0 !important;">
                                                                         Status
                                                                     </p>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-3">
+                                                                    <div class="col-3" style="padding: 0 !important;">
                                                                     @foreach($res->user_answers as $questionNumber => $answer)
                                                                         @php
                                                                             $userAnswer = current($answer);
@@ -413,22 +412,22 @@ $urinish = 1;
                                                                         </p>
                                                                     @endforeach
                                                                     </div>
-                                                                    <div class="col-2 justify-content-center d-flex align-items-center"  style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-1 justify-content-center d-flex align-items-center"  style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
                                                                       <p>{{$res->correct_answer}}</p>
                                                                     </div>
-                                                                    <div class="col-2 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-1 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
                                                                        <p>{{$res->question_numbers - $res->correct_answer}}</p>
                                                                     </div>
-                                                                    <div class="col-1 d-flex align-items-center justify-content-center" style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-2 d-flex align-items-center justify-content-center" style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$group_test->ball}}</p>
                                                                     </div>
 
                                                                     @if($res->foiz >= $group_test->ball)
-                                                                    <div class="col-1 justify-content-center d-flex align-items-center" style="background: green;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-2 justify-content-center d-flex align-items-center" style="background: green;color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$res->foiz}}</p>
                                                                     </div>
                                                                     @else
-                                                                    <div class="col-1 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
+                                                                    <div class="col-2 justify-content-center d-flex align-items-center" style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
                                                                         <p>{{$res->foiz}}</p>
                                                                     </div>
                                                                     @endif

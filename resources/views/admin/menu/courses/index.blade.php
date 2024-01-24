@@ -148,6 +148,8 @@ use App\Models\Module;
                                                             <div style="color: red" class="form-text">{{$message}}</div>
                                                             @enderror
                                                         </div>
+                                                    @else
+                                                            <input type="hidden" name="status" value="{{$test->status}}" id="status">
                                                     @endif
                                                         <div class="col-6">
                                                             <div class="mb-3 mt-30">

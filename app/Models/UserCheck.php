@@ -12,5 +12,5 @@ class UserCheck extends Model
     protected $table = 'lms_users_check';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['video','one_day_apteka','user_id'];
+    protected $fillable = ['video','one_day_apteka','user_id','test'];
 }

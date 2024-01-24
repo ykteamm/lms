@@ -120,7 +120,7 @@ class TestCheckController extends Controller
                 $pass_update->pass_status = 0;
                 $pass_update->save();
                 if ($pass_update->limit == 0){
-                    return redirect(url('user/lesson/'.$module_id))->with('dars_test_fail','Sizga berilgan imkoniyatlardan foydalana olmadingiz. Siz ushbu darsdan o\'ta olmadingiz!');
+                    return redirect(url('user/lesson/'.$module_id))->with('dars_test_fail','Sizga berilgan imkoniyatlardan foydalana olmadingiz.');
                 }else{
                     return redirect(url('user/lesson-show/'.$lesson_id))->with('dars_test','Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!');
                 }
@@ -183,12 +183,12 @@ class TestCheckController extends Controller
                 $pass->pass_status = 1;
                 $pass->save();
 
-                $date = User::findOrFail($userId);
-                $date->update([
-                    'status'=>1,
-                    'date_joined'=>now(),
-                    'date_register'=>now(),
-                ]);
+//                $date = User::findOrFail($userId);
+//                $date->update([
+//                    'status'=>1,
+//                    'date_joined'=>now(),
+//                    'date_register'=>now(),
+//                ]);
 
                 return redirect(route('user'))->with('ishga_kirish','Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!');
             }

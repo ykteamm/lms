@@ -1,13 +1,5 @@
 <?php
-use App\Models\RaspisaniyaUser;
 use App\Models\Passed;
-use Carbon\Carbon;
-use App\Models\Lesson;
-use App\Models\Video;
-use App\Models\GroupTest;
-use App\Models\AnswerCheck;
-use App\Models\Medicine;
-use App\Models\Module;
 ?>
 @extends('user.layouts.app')
 @section('title','Darslar')
@@ -59,10 +51,25 @@ use App\Models\Module;
 
             <div class="container mt-15">
                 <div class="row">
-                    @foreach($lessons as $less)
+                    @foreach($lessons as $index => $less)
                         @php
-                            $passed = Passed::where('lesson_id',$less->id)->first();
+
+                            $passed = Passed::where([
+                                'course_id'=>$course->course_id,
+                                'module_id'=>$course->id,
+                                'lesson_id'=>$less->id,
+                                'user_id'=>$userID,
+                                ])->first();
+
+                            $isReady = $index == 0 || Passed::where([
+                                'course_id'=>$course->course_id,
+                                'module_id'=>$course->id,
+                                'lesson_id'=> $lessons[$index - 1]->id,
+                                'pass_status'=>1,
+                                'user_id'=>$userID,
+                                ])->first();
                         @endphp
+                    @if($isReady)
                         <div class="side-content mt-15  mr-10 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" style="border: 2px solid #ddd; border-radius: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                             <a href="{{url('user/lesson-show/'.$less->id)}}" class="coursesCard -type-1" style="padding: 20px 10px">
                                 <div class="row align-items-center">
@@ -82,16 +89,33 @@ use App\Models\Module;
                                         <div class="col-2">
                                             <i class="fas fa-check-circle" style="color: #e5b781"></i>
                                         </div>
-                                    @elseif($passed == null)
+                                    @else
                                         <div class="col-2">
                                             <i class="far fa-circle" style="color: #e5b781"></i>
                                         </div>
                                     @endif
-
-
                                 </div>
                             </a>
                         </div>
+                    @else
+                        <div class="side-content mt-15  mr-10 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" style="border: 2px solid #ddd; border-radius: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <a href="" class="coursesCard -type-1" style="padding: 20px 10px">
+                                    <div class="row align-items-center">
+                                        <div class="col-2" style="border: 2px solid #e4ded6;border-radius: 20px; padding: 10px;background: #faf8f5;text-align: center;">
+                                            <i class="fas fa-play" style="color: green"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="text-17 lh-15 fw-500 text-dark-1 ">
+                                                {{$less->title}}
+                                            </div>
+                                        </div>
+                                            <div class="col-2">
+                                                <i class="fas fa-lock" style="color: #e5b781"></i>
+                                            </div>
+                                    </div>
+                                </a>
+                            </div>
+                    @endif
                     @endforeach
                 </div>
             </div>

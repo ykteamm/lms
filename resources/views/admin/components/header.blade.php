@@ -106,7 +106,7 @@
 
                     <div class="relative d-flex items-center ml-10">
                         <a href="#" >
-                            <img class="size-50" src="{{asset('assets/img/misc/user-profile.png')}}" alt="image">
+                            <img class="size-50" src="{{asset('storage/'.auth()->user()->image)}}" alt="image">
                         </a>
 
                     </div>

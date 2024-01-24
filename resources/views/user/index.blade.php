@@ -1,7 +1,5 @@
 <?php
 use App\Models\Module;
-
-$user = auth()->user();
 ?>
 @extends('user.layouts.app')
 @section('title','LMS')
@@ -46,7 +44,7 @@ $user = auth()->user();
             <div class="container mt-30">
                 <div class="row">
             @if($user->status == 0)
-                @if($first_course != null)
+                @if($first_course != null && !$passed)
                     <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                         <a href="{{url('user/lesson-show/'. $first_lesson->id)}}" class="coursesCard -type-1 ">
                             <div class="relative">
@@ -81,7 +79,8 @@ $user = auth()->user();
                     </div>
                 @else
                 @endif
-            @elseif($user->status == 1)
+
+            @elseif($user->status == 1 && $user_check)
                     @foreach($course as $test)
                         @php
                             $module =  Module::where('course_id', $test->id)->count()

@@ -37,7 +37,7 @@ use App\Models\Test;
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="url" class="form-label fw-700">Video dars URL</label>
-                                <input type="text" class="border form-control" id="url" name="url">
+                                <input type="text" class="border form-control" id="url" name="url" required>
                                 @error('url')
                                 <div style="color: red" class="form-text">{{$message}}</div>
                                 @enderror

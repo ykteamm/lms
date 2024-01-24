@@ -15,20 +15,20 @@ class UsersPageController extends Controller
 {
     public function index($course_id)
     {
-
+        $userID = auth()->user()->id;
         $module = Module::where('course_id',$course_id)->orderBy('id','asc')->get();
 
-        return view('user.menu.module',compact('module'));
+        return view('user.menu.module',compact('module','course_id','userID'));
     }
 
     public function lesson($module_id)
     {
-
+        $userID = auth()->user()->id;
         $course = Module::where('id',$module_id)->first();
-
         $lessons = Lesson::where('module_id',$module_id)->orderBy('id','asc')->get();
 
-        return view('user.menu.lesson',compact('lessons','course'));
+//        return $lessons;
+        return view('user.menu.lesson',compact('lessons','course','module_id','userID'));
     }
 
     public function LessonShow($lesson_id)
