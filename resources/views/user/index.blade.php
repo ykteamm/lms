@@ -79,7 +79,9 @@ use App\Models\Module;
                     </div>
                 @else
                 @endif
-            @elseif($user->status == 1 && $user_check)
+{{--            @elseif($user->status == 1 && $user_check)--}}
+{{--                ochirish kerak--}}
+                    @elseif($user->status == 1)
                     @foreach($course as $test)
                         @php
                             $module =  Module::where('course_id', $test->id)->count()
