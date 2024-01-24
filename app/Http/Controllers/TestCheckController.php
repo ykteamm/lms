@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\UserCheck;
 use App\Models\Video;
 use App\Models\WeekTest;
+use App\Models\Zumrad;
 use Illuminate\Http\Request;
 
 class TestCheckController extends Controller
@@ -71,9 +72,29 @@ class TestCheckController extends Controller
                 $pass->pass_status = 1;
                 $pass->save();
 
+                $zumrad_status = Zumrad::where('user_id',$userId)->first();
+                $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>1])->orderBy('id','desc')->first();
+                $pass_id[] = $passed_id->id;
+                if ($zumrad_status == null) {
+                    $zumrad = new Zumrad();
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $pass_id;
+                    $zumrad->zumrad = 1;
+                    $zumrad->save();
+                }else{
+                    $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>1])->orderBy('id','desc')->first();
+                    $add_pass_id = $zumrad_status->passed_id;
+                    $newPassId = $passed_id->id;
+                    $add_pass_id[] = $newPassId;
+
+                    $zumrad = Zumrad::findorFail($zumrad_status->id);
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $add_pass_id;
+                    $zumrad->zumrad = $zumrad_status->zumrad + 1;
+                    $zumrad->save();
+                }
                 return redirect(url('user/lesson/'.$module_id))->with('dars_test','Siz testni muvaffaqiyatli ishladingiz!');
-            }
-            else{
+            }else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
 //                $add_check_id = json_decode($check_status->answer_check_id,true) ?? [];
                 $add_check_id = $check_status->answer_check_id;
@@ -86,6 +107,27 @@ class TestCheckController extends Controller
                 $pass_update->pass_status = 1;
                 $pass_update->save();
 
+                $zumrad_status = Zumrad::where('user_id',$userId)->first();
+                $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>1])->orderBy('id','desc')->first();
+                $pass_id[] = $passed_id->id;
+                if ($zumrad_status == null) {
+                    $zumrad = new Zumrad();
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $pass_id;
+                    $zumrad->zumrad = 1;
+                    $zumrad->save();
+                }else{
+                    $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>1])->orderBy('id','desc')->first();
+                    $add_pass_id = $zumrad_status->passed_id;
+                    $newPassId = $passed_id->id;
+                    $add_pass_id[] = $newPassId;
+
+                    $zumrad = Zumrad::findorFail($zumrad_status->id);
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $add_pass_id;
+                    $zumrad->zumrad = $zumrad_status->zumrad + 1;
+                    $zumrad->save();
+                }
                 return redirect(url('user/lesson/'.$module_id))->with('dars_test','Siz testni muvaffaqiyatli ishladingiz!');
             }
         } elseif ($foiz < $ball){
@@ -129,7 +171,6 @@ class TestCheckController extends Controller
 
         return redirect(route('user'));
     }
-
 
 
     public function CheckTest(Request $request)
@@ -253,5 +294,19 @@ class TestCheckController extends Controller
         }
 
         return redirect(route('user'));
+    }
+
+    public function Imkoniyat(Request $request)
+    {
+        $userID = $request->user_id;
+        $lesson_id = $request->lesson_id;
+        $zumrad_number = Zumrad::where('user_id',$userID)->first();
+//        return $zumrad_number;
+        $imkoniyat = Zumrad::where('user_id',$userID)
+            ->update([
+                'zumrad'=>$zumrad_number->zumrad - 5
+            ]);
+
+        return redirect(route('lesson-show',['lesson_id'=>$lesson_id]))->with('imkoniyat','Sizning 5ta zumradingiz evaziga, 1ta imkoniyat taqdim etildi!');
     }
 }

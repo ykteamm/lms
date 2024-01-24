@@ -77,4 +77,6 @@ Route::group(['prefix' => 'user','middleware' => ['auth', 'userRole:user']], fun
 
     Route::post('/first_test',[TestCheckController::class,'CheckTest'])->name('first_test');
     Route::post('/all_test',[TestCheckController::class,'AllTest'])->name('all_test');
+
+    Route::post('/imkoniyat',[TestCheckController::class,'Imkoniyat'])->name('imkoniyat');
 });

@@ -38,12 +38,25 @@ $urinish = 1;
                 </div>
             @endif
 
+            @if(session()->has('imkoniyat') )
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="alert bg-success-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8" role="alert">
+                            <div class="text-success-2 lh-1 fw-500">
+                                {{session('imkoniyat')}}
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             @if(session()->has('dars_test') )
                 <div class="row">
                     <div class="col-12 ">
                         <div class="alert bg-error-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8" role="alert">
                             <div class="text-error-2 lh-1 fw-500">
-                                {{session('dars_test')}}
+                                {{session('dars_test')}} Sizda {{$passed ? $passed->limit :null}} ta limit qoldi.
                             </div>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
@@ -207,12 +220,27 @@ $urinish = 1;
                             </div>
                     @else
                         @if($passed && $passed->limit == 0)
-                            <div class="text-center">
-                               <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija1" style="padding: 10px">
-                                  <i class="fas fa-eye"></i>
-                                  Natijani ko'rish
-                               </button>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija1" style="padding: 10px">
+                                            <i class="fas fa-eye"></i>
+                                            Natijani ko'rish
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <button class="btn btn-info text-white" type="button" data-bs-toggle="modal" data-bs-target="#Test" style="padding: 10px">
+                                            Test yechish
+                                            <i class="fas fa-fast-forward ml-10"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+
 
                             <div class="modal fade" id="TestNatija1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-xl" >
@@ -325,6 +353,128 @@ $urinish = 1;
                                         </div>
                                     </div>
                                 </div>
+
+                            <div class="modal fade" id="Test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" >
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    <img src="{{asset('assets/img/ibrat/test.png')}}" alt="">
+                                                </div>
+                                                <div class="text-center" style="padding: 10px 20px">
+                                                    <h2 class="fw-700">Testni yechishga tayyormisiz!</h2>
+                                                </div>
+                                                <div class="text-center" style="padding: 10px 30px">
+                                                    <h5 style="color: gray">Tayyor bo'lgach, boshlash tugmasini bosing</h5>
+                                                </div>
+                                                <div style="padding: 10px 10px">
+                                                    <div class="row">
+                                                        <div class="col-3 text-center">
+                                                            <i class="icon-bar-chart-2 text-14 lh-1" style="color: blue"></i>
+                                                            <br>
+                                                            <p class="fw-400" style="color: black">Daraja</p>
+                                                        </div>
+                                                        <div class="col-2 text-center">
+                                                            <i class="fas fa-question text-14 lh-1" style="color: blue"></i>
+                                                            <br>
+                                                            <p class="fw-400" style="color: black">Savol</p>
+                                                        </div>
+                                                        <div class="col-2 text-center">
+                                                            <i class="fas fa-star text-14 lh-1" style="color:blue;"></i>
+                                                            <br>
+                                                            <p class="fw-400" style="color: black">Ball</p>
+                                                        </div>
+                                                        <div class="col-2 text-center">
+                                                            <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
+                                                            <br>
+                                                            <p class="fw-400" style="color: black">Limit</p>
+                                                        </div>
+                                                        <div class="col-3 text-center">
+                                                            <i class="fas fa-gem text-14 lh-1" style="color: blue;"></i>
+                                                            <br>
+                                                            <p class="fw-400" style="color: black">Zumrad</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                @if($passed == null)
+                                                    <div style="padding: 10px 10px">
+                                                        <div class="row">
+                                                            <div class="col-3 text-center">
+                                                                <h6 style="color: red">{{$group_test ? $group_test->level :null}}</h6>
+                                                            </div>
+                                                            <div class="col-2 text-center">
+                                                                <h6 style="color: red">{{$test_count}}</h6>
+                                                            </div>
+                                                            <div class="col-2 text-center">
+                                                                <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
+                                                            </div>
+                                                            <div class="col-2 text-center">
+                                                                <h6 style="color: red">{{ $group_test ? $group_test->limit : null}}</h6>
+                                                            </div>
+                                                            <div class="col-3 text-center">
+                                                                <h6 style="color: red">1</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div style="padding: 10px 10px">
+                                                        <div class="row">
+                                                            <div class="col-3 text-center">
+                                                                <h6 style="color: red">{{$group_test->level}}</h6>
+                                                            </div>
+                                                            <div class="col-2 text-center">
+                                                                <h6 style="color: red">{{$test_count}}</h6>
+                                                            </div>
+                                                            <div class="col-2 text-center">
+                                                                <h6 style="color: red">{{$group_test->ball}}</h6>
+                                                            </div>
+                                                            <div class="col-2 text-center">
+                                                                <h6 style="color: red">{{$passed->limit}}</h6>
+                                                            </div>
+                                                            <div class="col-3 text-center">
+                                                                <h6 style="color: red">1</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                @if($passed  && $passed->limit == 0)
+                                                    <div class="text-center mt-30">
+                                                        <h5 style="color: #dc1111">
+                                                            Sizga berilgan imkoniyatlar tugadi.
+                                                            Siz endi to'plagan zumradlarigizdan foydalanib,
+                                                            imkoniyat olishingiz mumkin!
+                                                        </h5>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <form action="{{route('imkoniyat')}}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="user_id" value="{{$user->id}}}">
+                                                            <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
+                                                            <button type="submit" class="btn btn-success mt-20" style="color: white; padding: 10px">
+                                                                Imkoniyat olish
+                                                                <i class="icon-infinity"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                @else
+                                                    <div class="text-center">
+                                                        <a href="{{url('user/lesson-test/'.$lesson->id)}}" class="btn btn-warning mt-20" style="color: white; padding: 10px">
+                                                            Davom etish
+                                                            <i class="fas fa-fast-forward ml-10"></i>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             @else
                             <div class="row">
                                 <div class="col-6">
@@ -339,7 +489,7 @@ $urinish = 1;
                                 <div class="col-6">
                                     <div class="text-center">
                                         <button class="btn btn-info text-white" type="button" data-bs-toggle="modal" data-bs-target="#Test" style="padding: 10px">
-                                            Keyingisi
+                                            Test yechish
                                             <i class="fas fa-fast-forward ml-10"></i>
                                         </button>
                                     </div>
@@ -473,7 +623,7 @@ $urinish = 1;
                                                 <div class="text-center" style="padding: 10px 30px">
                                                     <h5 style="color: gray">Tayyor bo'lgach, boshlash tugmasini bosing</h5>
                                                 </div>
-                                                <div style="padding: 10px 50px">
+                                                <div style="padding: 10px 10px">
                                                     <div class="row">
                                                         <div class="col-3 text-center">
                                                             <i class="icon-bar-chart-2 text-14 lh-1" style="color: blue"></i>
@@ -499,7 +649,7 @@ $urinish = 1;
                                                 </div>
 
                                                 @if($passed == null)
-                                                    <div style="padding: 10px 50px">
+                                                    <div style="padding: 10px 10px">
                                                         <div class="row">
                                                             <div class="col-3 text-center">
                                                                 <h6 style="color: red">{{$group_test ? $group_test->level :null}}</h6>
@@ -516,7 +666,7 @@ $urinish = 1;
                                                         </div>
                                                     </div>
                                                 @else
-                                                    <div style="padding: 10px 50px">
+                                                    <div style="padding: 10px 10px">
                                                         <div class="row">
                                                             <div class="col-3 text-center">
                                                                 <h6 style="color: red">{{$group_test->level}}</h6>
