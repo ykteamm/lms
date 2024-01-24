@@ -79,7 +79,7 @@ use App\Models\Module;
                     </div>
                 @else
                 @endif
-
+{{--salom --}}
             @elseif($user->status == 1 && $user_check)
                     @foreach($course as $test)
                         @php
