@@ -6,8 +6,8 @@
         @if($rolID === 'admin')
         <div class="sidebar__item <?php if (Request::is('admin')){echo '-is-active -dark-bg-dark-2';}?>">
             <a href="/admin" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
-                <i class="text-20 icon-discovery mr-15"></i>
-                Dashboard
+                <i class="text-20 fas fa-home mr-15"></i>
+                Asosiy sahida
             </a>
         </div>
 

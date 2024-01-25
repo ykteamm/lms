@@ -67,21 +67,19 @@ use App\Models\Module;
                                         </div>
                                         <div class="text-14 lh-1 text-dark-1">{{$first_module_count}} module</div>
                                     </div>
-                                    <div class="d-flex items-center">
-                                        <div class="mr-8">
-                                            <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">
-                                        </div>
-                                        <div class="text-14 lh-1 text-dark-1">3h 56m</div>
-                                    </div>
+{{--                                    <div class="d-flex items-center">--}}
+{{--                                        <div class="mr-8">--}}
+{{--                                            <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </a>
                     </div>
                 @else
                 @endif
-{{--            @elseif($user->status == 1 && $user_check)--}}
-{{--                ochirish kerak--}}
-                    @elseif($user->status == 1)
+            @elseif($user->status == 1 && $user_check)
                     @foreach($course as $test)
                         @php
                             $module =  Module::where('course_id', $test->id)->count()
@@ -108,12 +106,12 @@ use App\Models\Module;
                                             </div>
                                             <div class="text-14 lh-1 text-dark-1">{{$module}} module</div>
                                         </div>
-                                        <div class="d-flex items-center">
-                                            <div class="mr-8">
-                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">
-                                            </div>
-                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>
-                                        </div>
+{{--                                        <div class="d-flex items-center">--}}
+{{--                                            <div class="mr-8">--}}
+{{--                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+{{--                                            </div>--}}
+{{--                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </a>
@@ -122,76 +120,7 @@ use App\Models\Module;
             @endif
                 </div>
             </div>
-
-{{--                  <div class="container mt-30">--}}
-{{--                      <div class="row justify-content-center">--}}
-{{--                          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">--}}
-{{--                              <a href="{{ url('user/first') }}">--}}
-{{--                                  <div class="relative">--}}
-{{--                                      <div class="coursesCard__image overflow-hidden rounded-top-8">--}}
-{{--                                          <img class="w-1/1" src="{{asset('assets/img/coursesCards/img_2.png')}}" style="height: 180px;"  alt="image">--}}
-{{--                                          <div class="coursesCard__image_overlay rounded-top-8"></div>--}}
-{{--                                      </div>--}}
-{{--                                  </div>--}}
-{{--                                  <div class="h-100 pt-20 pb-15 px-30">--}}
-{{--                                      <div class="text-17 lh-15 fw-500 text-dark-1 mt-10">Ishga kirish testi</div>--}}
-{{--                                      <div class="d-flex x-gap-10 items-center pt-10">--}}
-{{--                                          <div class="d-flex items-center">--}}
-{{--                                              <div class="mr-8">--}}
-{{--                                                  <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}" alt="icon">--}}
-{{--                                              </div>--}}
-{{--                                              <div class="text-14 lh-1">3 ta imkoniyat bor</div>--}}
-{{--                                          </div>--}}
-{{--                                          <div class="d-flex items-center">--}}
-{{--                                              <div class="mr-8">--}}
-{{--                                                  <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
-{{--                                              </div>--}}
-{{--                                              <div class="text-14 lh-1">3h 56m</div>--}}
-{{--                                          </div>--}}
-{{--                                      </div>--}}
-{{--                                  </div>--}}
-{{--                              </a>--}}
-{{--                          </div>--}}
-{{--                      </div>--}}
-{{--                  </div>--}}
-
-
-
-
-
-
-
-        <footer class="footer -dashboard py-30">
-            <div class="row items-center justify-between">
-                <div class="col-auto">
-                    <div class="text-13 lh-1">© 2024 Novatio. All Right Reserved.</div>
-                </div>
-
-                <div class="col-auto">
-                    <div class="d-flex items-center">
-                        <div class="d-flex items-center flex-wrap x-gap-20">
-                            <div>
-                                <a href="" class="text-13 lh-1">Help</a>
-                            </div>
-                            <div>
-                                <a href="" class="text-13 lh-1">Privacy Policy</a>
-                            </div>
-                            <div>
-                                <a href="#" class="text-13 lh-1">Cookie Notice</a>
-                            </div>
-                            <div>
-                                <a href="#" class="text-13 lh-1">Security</a>
-                            </div>
-                            <div>
-                                <a href="" class="text-13 lh-1">Terms of Use</a>
-                            </div>
-                        </div>
-
-                        <button class="button -md -rounded bg-light-4 text-light-1 ml-30">English</button>
-                    </div>
-                </div>
-            </div>
-        </footer>
+       @include('user.components.footer')
     </div>
 </div>
 

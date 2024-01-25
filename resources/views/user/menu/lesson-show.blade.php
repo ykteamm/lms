@@ -64,6 +64,66 @@ $urinish = 1;
                 </div>
             @endif
 
+            @if(session()->has('natija'))
+                    <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
+                        <div class="modal-dialog modal-lg" >
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
+                                    </div>
+                                    <div class="text-center" style="padding: 10px 20px">
+                                        <h2 class="fw-700">Test yakunlandi</h2>
+                                    </div>
+                                    <div style="padding: 10px 10px">
+                                        <div class="row align-items-center">
+                                            <div class="col-xxl-4 col-xl-4  col-4  mt-20 text-center">
+                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">O'tish bali</p>
+                                                @if($passed == null)
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
+                                                    </div>
+                                                @else
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$group_test->ball}}</h6>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-xxl-4 col-xl-4   col-4  mt-20 text-center">
+                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">To'plagan balingiz</p>
+                                                <div class="col-12 mt-10 text-center">
+                                                    @if($group_test->ball <= $natija_result->foiz)
+                                                        <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
+                                                    @else
+                                                        <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-4 col-xl-4  col-4 mt-20 text-center">
+                                                <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">Imkoniyat</p>
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$natija_pass->limit}}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            @endif
+
+
                 <div class="content-wrapper  js-content-wrapper">
                     <section class="">
                         <div class="relative pt-20 col-12">
@@ -220,7 +280,6 @@ $urinish = 1;
                             </div>
                     @else
                         @if($passed && $passed->limit == 0)
-
                             <div class="row">
                                 <div class="col-6">
                                     <div class="text-center">
@@ -372,96 +431,74 @@ $urinish = 1;
                                                 </div>
                                                 <div style="padding: 10px 10px">
                                                     <div class="row">
-                                                        <div class="col-3 text-center">
+                                                        <div class="col-xxl-3 col-xl-3 col-4 mt-20 text-center">
                                                             <i class="icon-bar-chart-2 text-14 lh-1" style="color: blue"></i>
                                                             <br>
                                                             <p class="fw-400" style="color: black">Daraja</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 text-center mt-10">
+                                                                    <h6 style="color: red">{{$group_test ? $group_test->level :null}}</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 text-center mt-10">
+                                                                    <h6 style="color: red">{{$group_test->level}}</h6>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-2 text-center">
+                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
                                                             <i class="fas fa-question text-14 lh-1" style="color: blue"></i>
                                                             <br>
                                                             <p class="fw-400" style="color: black">Savol</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$test_count}}</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$test_count}}</h6>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-2 text-center">
-                                                            <i class="fas fa-star text-14 lh-1" style="color:blue;"></i>
+                                                        <div class="col-xxl-2 col-xl-2  col-4  mt-20 text-center">
+                                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
                                                             <br>
-                                                            <p class="fw-400" style="color: black">Ball</p>
+                                                            <p class="fw-400" style="color: black">O'tish bali</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$group_test ? $group_test->ball : null}}/100</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$group_test->ball}}/100</h6>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-2 text-center">
+                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
                                                             <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
                                                             <br>
-                                                            <p class="fw-400" style="color: black">Limit</p>
+                                                            <p class="fw-400" style="color: black">Imkoniyat</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{ $group_test ? $group_test->limit : null}}</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$passed->limit}}</h6>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-3 text-center">
-                                                            <i class="fas fa-gem text-14 lh-1" style="color: blue;"></i>
+                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
+                                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
                                                             <br>
                                                             <p class="fw-400" style="color: black">Zumrad</p>
+                                                            <div class="col-12 mt-10 text-center">
+                                                                <h6 style="color: red">1</h6>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                @if($passed == null)
-                                                    <div style="padding: 10px 10px">
-                                                        <div class="row">
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$group_test ? $group_test->level :null}}</h6>
-                                                            </div>
-                                                            <div class="col-2 text-center">
-                                                                <h6 style="color: red">{{$test_count}}</h6>
-                                                            </div>
-                                                            <div class="col-2 text-center">
-                                                                <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
-                                                            </div>
-                                                            <div class="col-2 text-center">
-                                                                <h6 style="color: red">{{ $group_test ? $group_test->limit : null}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">1</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @else
-                                                    <div style="padding: 10px 10px">
-                                                        <div class="row">
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$group_test->level}}</h6>
-                                                            </div>
-                                                            <div class="col-2 text-center">
-                                                                <h6 style="color: red">{{$test_count}}</h6>
-                                                            </div>
-                                                            <div class="col-2 text-center">
-                                                                <h6 style="color: red">{{$group_test->ball}}</h6>
-                                                            </div>
-                                                            <div class="col-2 text-center">
-                                                                <h6 style="color: red">{{$passed->limit}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">1</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-
                                                 @if($passed  && $passed->limit == 0)
-                                                    <div class="text-center mt-30">
-                                                        <h5 style="color: #dc1111">
-                                                            Sizga berilgan imkoniyatlar tugadi.
-                                                            Siz endi to'plagan zumradlarigizdan foydalanib,
-                                                            imkoniyat olishingiz mumkin!
-                                                        </h5>
-                                                    </div>
-
-                                                    <div class="text-center">
-                                                        <form action="{{route('imkoniyat')}}" method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="user_id" value="{{$user->id}}}">
-                                                            <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
-                                                            <button type="submit" class="btn btn-success mt-20" style="color: white; padding: 10px">
-                                                                Imkoniyat olish
-                                                                <i class="icon-infinity"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
                                                 @else
                                                     <div class="text-center">
                                                         <a href="{{url('user/lesson-test/'.$lesson->id)}}" class="btn btn-warning mt-20" style="color: white; padding: 10px">
@@ -625,64 +662,72 @@ $urinish = 1;
                                                 </div>
                                                 <div style="padding: 10px 10px">
                                                     <div class="row">
-                                                        <div class="col-3 text-center">
+                                                        <div class="col-xxl-3 col-xl-3 col-4 mt-20 text-center">
                                                             <i class="icon-bar-chart-2 text-14 lh-1" style="color: blue"></i>
                                                             <br>
                                                             <p class="fw-400" style="color: black">Daraja</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 text-center mt-10">
+                                                                    <h6 style="color: red">{{$group_test ? $group_test->level :null}}</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 text-center mt-10">
+                                                                    <h6 style="color: red">{{$group_test->level}}</h6>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-3 text-center">
+                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
                                                             <i class="fas fa-question text-14 lh-1" style="color: blue"></i>
                                                             <br>
                                                             <p class="fw-400" style="color: black">Savol</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$test_count}}</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$test_count}}</h6>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-3 text-center">
-                                                            <i class="fas fa-gem text-14 lh-1" style="color: blue;"></i>
+                                                        <div class="col-xxl-2 col-xl-2  col-4  mt-20 text-center">
+                                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
                                                             <br>
-                                                            <p class="fw-400" style="color: black">Ball</p>
+                                                            <p class="fw-400" style="color: black">O'tish bali</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$group_test ? $group_test->ball : null}}/100</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$group_test->ball}}/100</h6>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        <div class="col-3 text-center">
+                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
                                                             <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
                                                             <br>
-                                                            <p class="fw-400" style="color: black">Limit</p>
+                                                            <p class="fw-400" style="color: black">Imkoniyat</p>
+                                                            @if($passed == null)
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{ $group_test ? $group_test->limit : null}}</h6>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$passed->limit}}</h6>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
+                                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                            <br>
+                                                            <p class="fw-400" style="color: black">Zumrad</p>
+                                                            <div class="col-12 mt-10 text-center">
+                                                                <h6 style="color: red">1</h6>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                @if($passed == null)
-                                                    <div style="padding: 10px 10px">
-                                                        <div class="row">
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$group_test ? $group_test->level :null}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$test_count}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{ $group_test ? $group_test->limit : null}}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @else
-                                                    <div style="padding: 10px 10px">
-                                                        <div class="row">
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$group_test->level}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$test_count}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$group_test->ball}}</h6>
-                                                            </div>
-                                                            <div class="col-3 text-center">
-                                                                <h6 style="color: red">{{$passed->limit}}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
 
                                                 @if($passed  && $passed->limit == 0)
                                                 @else
@@ -701,44 +746,17 @@ $urinish = 1;
                         @endif
                     @endif
                 @endif
-
-
-
-
-
-
-            <footer class="footer -dashboard py-30">
-                <div class="row items-center justify-between">
-                    <div class="col-auto">
-                        <div class="text-13 lh-1">© 2022 Educrat. All Right Reserved.</div>
-                    </div>
-
-                    <div class="col-auto">
-                        <div class="d-flex items-center">
-                            <div class="d-flex items-center flex-wrap x-gap-20">
-                                <div>
-                                    <a href="help-center.html" class="text-13 lh-1">Help</a>
-                                </div>
-                                <div>
-                                    <a href="terms.html" class="text-13 lh-1">Privacy Policy</a>
-                                </div>
-                                <div>
-                                    <a href="#" class="text-13 lh-1">Cookie Notice</a>
-                                </div>
-                                <div>
-                                    <a href="#" class="text-13 lh-1">Security</a>
-                                </div>
-                                <div>
-                                    <a href="terms.html" class="text-13 lh-1">Terms of Use</a>
-                                </div>
-                            </div>
-
-                            <button class="button -md -rounded bg-light-4 text-light-1 ml-30">English</button>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+                    @include('user.components.footer')
         </div>
     </div>
 @endsection
-
+@section('natija_js')
+<script>
+    // Modal yopish uchun JavaScript
+    document.getElementById('closeModalButton').addEventListener('click', function () {
+        var modal = document.getElementById('Natija');
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+    });
+</script>
+@endsection

@@ -40,6 +40,7 @@
 
 <!-- JavaScript -->
 @include('user.partials.js')
+@yield('natija_js')
 </body>
 
 </html>

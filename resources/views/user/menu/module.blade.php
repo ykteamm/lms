@@ -54,15 +54,15 @@ use App\Models\Module;
                                                 <div class="mr-8">
                                                     <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}" alt="icon">
                                                 </div>
-                                                <div class="text-14 lh-1">{{$lesson}} lesson</div>
+                                                <div class="text-14 lh-1">{{$lesson}}ta dars</div>
                                             </div>
 
-                                            <div class="d-flex align-items-center">
-                                                <div class="mr-8">
-                                                    <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">
-                                                </div>
-                                                <div class="text-14 lh-1">3h 56m</div>
-                                            </div>
+{{--                                            <div class="d-flex align-items-center">--}}
+{{--                                                <div class="mr-8">--}}
+{{--                                                    <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="text-14 lh-1">3h 56m</div>--}}
+{{--                                            </div>--}}
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -74,42 +74,7 @@ use App\Models\Module;
                     @endforeach
                 </div>
             </div>
-
-
-
-
-
-            <footer class="footer -dashboard py-30">
-                <div class="row items-center justify-between">
-                    <div class="col-auto">
-                        <div class="text-13 lh-1">© 2024 Novatio. All Right Reserved.</div>
-                    </div>
-
-                    <div class="col-auto">
-                        <div class="d-flex items-center">
-                            <div class="d-flex items-center flex-wrap x-gap-20">
-                                <div>
-                                    <a href="" class="text-13 lh-1">Help</a>
-                                </div>
-                                <div>
-                                    <a href="" class="text-13 lh-1">Privacy Policy</a>
-                                </div>
-                                <div>
-                                    <a href="#" class="text-13 lh-1">Cookie Notice</a>
-                                </div>
-                                <div>
-                                    <a href="#" class="text-13 lh-1">Security</a>
-                                </div>
-                                <div>
-                                    <a href="" class="text-13 lh-1">Terms of Use</a>
-                                </div>
-                            </div>
-
-                            <button class="button -md -rounded bg-light-4 text-light-1 ml-30">English</button>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            @include('user.components.footer')
         </div>
     </div>
 

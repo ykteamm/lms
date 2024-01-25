@@ -6,8 +6,8 @@ use App\Models\AnswerCheck;
     <div class="sidebar -dashboard">
         <div class="sidebar__item <?php if (Request::is('user')){echo '-is-active -dark-bg-dark-2';}?>">
             <a href="/user" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
-                <i class="text-20 icon-discovery mr-15"></i>
-                Boshqaruv paneli
+                <i class="text-20 fas fa-home mr-15"></i>
+                Asosiy sahifa
             </a>
         </div>
 

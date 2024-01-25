@@ -46,7 +46,7 @@ $user = auth()->user();
                                                                 <div class="d-flex justify-between">
                                                                     <h4 class="text-18 lh-1 fw-500 text-white">Savol: {{$number++}}</h4>
                                                                 </div>
-                                                                <div class="text-20 lh-1 text-white mt-30">{{$first->title}}</div>
+                                                                <div class="text-20 lh-1 text-white mt-30" style="text-transform: capitalize">{{$first->title}}</div>
                                                             </div>
 
                                                             <div class="px-40 py-40">
@@ -57,7 +57,7 @@ $user = auth()->user();
                                                                             <div class="radio__icon"></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="fw-500 ml-12">A.{{$first->variant_a}}</div>
+                                                                    <div class="fw-500 ml-12" style="text-transform: capitalize">A) {{$first->variant_a}}</div>
                                                                 </div>
 
                                                                 <div class="form-radio d-flex items-center mt-20">
@@ -67,7 +67,7 @@ $user = auth()->user();
                                                                             <div class="radio__icon"></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="fw-500 ml-12">B.{{$first->variant_b}}</div>
+                                                                    <div class="fw-500 ml-12" style="text-transform: capitalize">B) {{$first->variant_b}}</div>
                                                                 </div>
 
                                                                 <div class="form-radio d-flex items-center mt-20">
@@ -77,7 +77,7 @@ $user = auth()->user();
                                                                             <div class="radio__icon"></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="fw-500 ml-12">C.{{$first->variant_c}}</div>
+                                                                    <div class="fw-500 ml-12" style="text-transform: capitalize">C) {{$first->variant_c}}</div>
                                                                 </div>
 
                                                                 <div class="form-radio d-flex items-center mt-20">
@@ -87,7 +87,7 @@ $user = auth()->user();
                                                                             <div class="radio__icon"></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="fw-500 ml-12">D.{{$first->variant_d}}</div>
+                                                                    <div class="fw-500 ml-12" style="text-transform: capitalize">D) {{$first->variant_d}}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -103,39 +103,7 @@ $user = auth()->user();
                     </div>
                 </div>
 
-
-
-            <footer class="footer -dashboard py-30">
-                <div class="row items-center justify-between">
-                    <div class="col-auto">
-                        <div class="text-13 lh-1">© 2022 Educrat. All Right Reserved.</div>
-                    </div>
-
-                    <div class="col-auto">
-                        <div class="d-flex items-center">
-                            <div class="d-flex items-center flex-wrap x-gap-20">
-                                <div>
-                                    <a href="help-center.html" class="text-13 lh-1">Help</a>
-                                </div>
-                                <div>
-                                    <a href="terms.html" class="text-13 lh-1">Privacy Policy</a>
-                                </div>
-                                <div>
-                                    <a href="#" class="text-13 lh-1">Cookie Notice</a>
-                                </div>
-                                <div>
-                                    <a href="#" class="text-13 lh-1">Security</a>
-                                </div>
-                                <div>
-                                    <a href="terms.html" class="text-13 lh-1">Terms of Use</a>
-                                </div>
-                            </div>
-
-                            <button class="button -md -rounded bg-light-4 text-light-1 ml-30">English</button>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            @include('user.components.footer')
         </div>
     </div>
 @endsection

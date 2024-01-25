@@ -53,7 +53,7 @@ class TestCheckController extends Controller
         $data->user_answers = $answers;
         $data->correct_answer = $totalScore;
         $data->question_numbers = $totalQuestions;
-        $data->foiz = $foiz;
+        $data->foiz = round($foiz);
 
         if (!$data->save()){
             return redirect(route('user'))->with('error','Test does not saved!');
@@ -93,7 +93,7 @@ class TestCheckController extends Controller
                     $zumrad->zumrad = $zumrad_status->zumrad + 1;
                     $zumrad->save();
                 }
-                return redirect(url('user/lesson/'.$module_id))->with('dars_test','Siz testni muvaffaqiyatli ishladingiz!');
+                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
             }else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
 //                $add_check_id = json_decode($check_status->answer_check_id,true) ?? [];
@@ -128,7 +128,7 @@ class TestCheckController extends Controller
                     $zumrad->zumrad = $zumrad_status->zumrad + 1;
                     $zumrad->save();
                 }
-                return redirect(url('user/lesson/'.$module_id))->with('dars_test','Siz testni muvaffaqiyatli ishladingiz!');
+                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
             }
         } elseif ($foiz < $ball){
             if ($check_status == null){
@@ -145,7 +145,7 @@ class TestCheckController extends Controller
                 $pass->pass_status = 0;
                 $pass->save();
 
-                return redirect(url('user/lesson-show/'.$lesson_id))->with('dars_test','Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!');
+                return redirect(url('user/lesson-show/'.$lesson_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
             }
             else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
@@ -164,7 +164,7 @@ class TestCheckController extends Controller
                 if ($pass_update->limit == 0){
                     return redirect(url('user/lesson/'.$module_id))->with('dars_test_fail','Sizga berilgan imkoniyatlardan foydalana olmadingiz.');
                 }else{
-                    return redirect(url('user/lesson-show/'.$lesson_id))->with('dars_test','Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!');
+                    return redirect(url('user/lesson-show/'.$lesson_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
                 }
             }
         }
@@ -205,7 +205,7 @@ class TestCheckController extends Controller
         $data->user_answers = $answers;
         $data->correct_answer = $totalScore;
         $data->question_numbers = $totalQuestions;
-        $data->foiz = $foiz;
+        $data->foiz = round($foiz);
 
         if (!$data->save()){
             return redirect(route('user'))->with('error','Test does not saved!');
@@ -224,13 +224,6 @@ class TestCheckController extends Controller
                 $pass->pass_status = 1;
                 $pass->save();
 
-//                $date = User::findOrFail($userId);
-//                $date->update([
-//                    'status'=>1,
-//                    'date_joined'=>now(),
-//                    'date_register'=>now(),
-//                ]);
-
                 return redirect(route('user'))->with('ishga_kirish','Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!');
             }
             else{
@@ -246,12 +239,6 @@ class TestCheckController extends Controller
                 $pass_update->pass_status = 1;
                 $pass_update->save();
 
-                $date = User::findOrFail($userId);
-                $date->update([
-                    'status'=>1,
-                    'date_joined'=>now(),
-                    'date_register'=>now(),
-                ]);
                 return redirect(route('user'))->with('ishga_kirish','Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!');
             }
         } elseif ($foiz < $ball){
@@ -269,7 +256,7 @@ class TestCheckController extends Controller
                 $pass->pass_status = 0;
                 $pass->save();
 
-                return redirect(url('user/lesson-show/'.$lesson_id))->with('ball_kam','Siz ishga kirish uchun yetarli ball to\'play olmadingiz.');
+                return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz']);
             }
             else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
@@ -301,11 +288,19 @@ class TestCheckController extends Controller
         $userID = $request->user_id;
         $lesson_id = $request->lesson_id;
         $zumrad_number = Zumrad::where('user_id',$userID)->first();
+
+        $ayirish = $zumrad_number->zumrad - 1;
 //        return $zumrad_number;
         $imkoniyat = Zumrad::where('user_id',$userID)
             ->update([
-                'zumrad'=>$zumrad_number->zumrad - 5
+                'zumrad'=>$ayirish
             ]);
+        $passed_limit = Passed::where([
+            'lesson_id'=>$lesson_id,
+            'user_id'=>$userID
+        ])->update([
+            'limit'=>1
+        ]);
 
         return redirect(route('lesson-show',['lesson_id'=>$lesson_id]))->with('imkoniyat','Sizning 5ta zumradingiz evaziga, 1ta imkoniyat taqdim etildi!');
     }

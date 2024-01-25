@@ -6,7 +6,14 @@ use App\Models\Test;
 @section('summernote-editor')
     <!-- include libraries(jQuery, bootstrap) -->
 {{--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">--}}
-
+    <style>
+        .panel-heading,.note-toolbar{
+            border: 1px solid black;
+        }
+        .note-btn-group,.btn-group{
+            border: 1px solid black;
+        }
+    </style>
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection
@@ -37,7 +44,7 @@ use App\Models\Test;
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="url" class="form-label fw-700">Video dars URL</label>
-                                <input type="text" class="border form-control" id="url" name="url" required>
+                                <input type="text" class="border form-control" id="url" name="url" onchange="validateYouTubeUrl()" required>
                                 @error('url')
                                 <div style="color: red" class="form-text">{{$message}}</div>
                                 @enderror
@@ -169,7 +176,7 @@ use App\Models\Test;
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-info mt-50">
+                    <button type="submit" class="btn btn-info mt-50" onclick="submitForm()">
                         <i class="fas fa-plus"></i>
                         Yaratish
                     </button>
@@ -177,40 +184,7 @@ use App\Models\Test;
                 </form>
             </div>
         </div>
-
-
-
-        <footer class="footer -dashboard py-30">
-            <div class="row items-center justify-between">
-                <div class="col-auto">
-                    <div class="text-13 lh-1">© 2022 Educrat. All Right Reserved.</div>
-                </div>
-
-                <div class="col-auto">
-                    <div class="d-flex items-center">
-                        <div class="d-flex items-center flex-wrap x-gap-20">
-                            <div>
-                                <a href="help-center.html" class="text-13 lh-1">Help</a>
-                            </div>
-                            <div>
-                                <a href="terms.html" class="text-13 lh-1">Privacy Policy</a>
-                            </div>
-                            <div>
-                                <a href="#" class="text-13 lh-1">Cookie Notice</a>
-                            </div>
-                            <div>
-                                <a href="#" class="text-13 lh-1">Security</a>
-                            </div>
-                            <div>
-                                <a href="terms.html" class="text-13 lh-1">Terms of Use</a>
-                            </div>
-                        </div>
-
-                        <button class="button -md -rounded bg-light-4 text-light-1 ml-30">English</button>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        @include('user.components.footer')
     </div>
 @endsection
 @section('summernote-editor-js')
@@ -219,7 +193,22 @@ use App\Models\Test;
         $('#video_content').summernote({
             placeholder:'Tarif...',
             tabsize:2,
-            height:300
+            height:300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['height', ['height']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['codeview', 'help']],
+            ],
+            fontNames: ['Helvetica','Verdana','Georgia','Arial','Times New Roman','Arial Black', 'Comic Sans MS', 'Merriweather','GT Walsheim Pro'],
+            addDefaultFonts: false,
+            fontSizeUnits: ['px'],
         })
     </script>
     <script type="text/javascript">
@@ -299,4 +288,30 @@ use App\Models\Test;
         });
     });
 </script>
+<script type="text/javascript">
+        function validateYouTubeUrl() {
+            var url = document.getElementById('url').value;
+
+            // YouTube URL-ni tekshirish uchun regex
+            var youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+
+            if (youtubeRegex.test(url)) {
+                // Tekshiruv muvaffaqiyatli bo'ldi
+                return true;
+            } else {
+                // Tekshiruv xatosi, alert chiqarish
+                alert('Youtubedan URLni noto\'g\'ri kiritdingiz!');
+                return false;
+            }
+        }
+
+        // Formni yuborish funktsiyasi
+        function submitForm() {
+            if (validateYouTubeUrl()) {
+                // Formni yuborish
+                document.getElementById('yourFormId').submit();
+            }
+        }
+</script>
+
 @endsection

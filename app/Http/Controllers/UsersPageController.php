@@ -39,13 +39,15 @@ class UsersPageController extends Controller
         $test_count = Test::where('lesson_id',$lesson_id)->count();
 
         $passed = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$user_id])->first();
-
         $result = AnswerCheck::where(['user_id'=>$user_id,'lesson_id'=>$lesson_id])->get();
+
+        $natija_pass = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$user_id])->orderBy('id','desc')->first();
+        $natija_result = AnswerCheck::where(['user_id'=>$user_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
 
         $lesson = Lesson::where('id',$lesson_id)->first();
         $video_lesson = Video::where('lesson_id',$lesson_id)->first();
 
-        return view('user.menu.lesson-show',compact('video_lesson','lesson','group_test','test_count','passed','result'));
+        return view('user.menu.lesson-show',compact('video_lesson','lesson','group_test','test_count','passed','result','natija_pass','natija_result'));
     }
 
     public function LessonTest($lesson_id)
