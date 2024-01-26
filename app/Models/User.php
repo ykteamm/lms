@@ -35,6 +35,7 @@ class User extends Authenticatable
         'password',
         'date_joined',
         'date_register',
+        'tg_user_id'
     ];
 
     /**

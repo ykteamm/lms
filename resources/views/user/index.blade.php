@@ -33,8 +33,8 @@ use App\Models\Module;
                 </div>
             @endif
 
-                @if(session()->has('natija'))
-                    <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
+            @if(session()->has('natija'))
+               <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
                         <div class="modal-dialog modal-lg" >
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -46,6 +46,13 @@ use App\Models\Module;
                                     </div>
                                     <div class="text-center" style="padding: 10px 20px">
                                         <h2 class="fw-700">Test yakunlandi</h2>
+                                    </div>
+                                    <div class="text-center" style="padding: 10px 30px">
+                                        @if($first_group_test->ball <= $natija_result->foiz)
+                                            <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                        @else
+                                            <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                        @endif
                                     </div>
                                     <div style="padding: 10px 10px">
                                         <div class="row align-items-center">
@@ -104,7 +111,73 @@ use App\Models\Module;
                         </div>
 
                     </div>
-                @endif
+            @endif
+
+            @if(session()->has('ishga_kirish_natija'))
+               <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
+                        <div class="modal-dialog modal-lg" >
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
+                                    </div>
+                                    <div class="text-center" style="padding: 10px 20px">
+                                        <h2 class="fw-700">Test yakunlandi</h2>
+                                    </div>
+                                    <div class="text-center" style="padding: 10px 30px">
+                                        @if($first_group_test->ball <= $natija_result->foiz)
+                                            <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                        @else
+                                            <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                        @endif
+                                    </div>
+                                    <div style="padding: 10px 10px">
+                                        <div class="row align-items-center">
+                                            <div class="col-xxl-3 col-xl-3  col-4  mt-20 text-center">
+                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">O'tish bali</p>
+                                                @if($passed == null)
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$first_group_test ? $first_group_test->ball : null}}</h6>
+                                                    </div>
+                                                @else
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$first_group_test->ball}}</h6>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3   col-4  mt-20 text-center">
+                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">To'plagan balingiz</p>
+                                                <div class="col-12 mt-10 text-center">
+                                                    @if($first_group_test->ball <= $natija_result->foiz)
+                                                        <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
+                                                    @else
+                                                        <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3  col-4 mt-20 text-center">
+                                                <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">Imkoniyat</p>
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$passed ? $passed->limit : null}}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            @endif
 
 
             <div class="row pb-50 mb-10">
@@ -112,14 +185,16 @@ use App\Models\Module;
                     <h3 class="text-30 lh-12 fw-600">Salom, {{$user->first_name}}</h3>
                 </div>
                 <div class="col-1"></div>
-                <div class="col-3 text-center">
-                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
-                    @if($zumrad != null)
-                        {{$zumrad->zumrad}}
-                    @else
-                        0
-                    @endif
-                </div>
+                @if($user_check && $user->status ==1)
+                    <div class="col-3 text-center">
+                        <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                        @if($zumrad != null)
+                            {{$zumrad->zumrad}}
+                        @else
+                            0
+                        @endif
+                    </div>
+                @endif
             </div>
 
 
@@ -202,8 +277,8 @@ use App\Models\Module;
             @endif
                 </div>
             </div>
-       @include('user.components.footer')
     </div>
+        @include('user.components.footer')
 </div>
 
 @endsection

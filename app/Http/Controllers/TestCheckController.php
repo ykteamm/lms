@@ -93,7 +93,7 @@ class TestCheckController extends Controller
                     $zumrad->zumrad = $zumrad_status->zumrad + 1;
                     $zumrad->save();
                 }
-                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
+                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
             }else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
 //                $add_check_id = json_decode($check_status->answer_check_id,true) ?? [];
@@ -128,7 +128,7 @@ class TestCheckController extends Controller
                     $zumrad->zumrad = $zumrad_status->zumrad + 1;
                     $zumrad->save();
                 }
-                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
+                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
             }
         } elseif ($foiz < $ball){
             if ($check_status == null){
@@ -144,6 +144,29 @@ class TestCheckController extends Controller
                 $pass->answer_check_id = $ans_id;
                 $pass->pass_status = 0;
                 $pass->save();
+
+                $zumrad_status = Zumrad::where('user_id',$userId)->first();
+                $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>0])->orderBy('id','desc')->first();
+                $pass_id[] = $passed_id->id;
+                if ($zumrad_status == null) {
+                    $zumrad = new Zumrad();
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $pass_id;
+                    $zumrad->zumrad = 0;
+                    $zumrad->save();
+                }else{
+                    $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>0])->orderBy('id','desc')->first();
+                    $add_pass_id = $zumrad_status->passed_id;
+                    $newPassId = $passed_id->id;
+                    $add_pass_id[] = $newPassId;
+
+                    $zumrad = Zumrad::findorFail($zumrad_status->id);
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $add_pass_id;
+                    $zumrad->zumrad = $zumrad_status->zumrad + 0;
+                    $zumrad->save();
+                }
+
 
                 return redirect(url('user/lesson-show/'.$lesson_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
             }
@@ -161,6 +184,29 @@ class TestCheckController extends Controller
                 $pass_update->limit = $check_status->limit - 1;
                 $pass_update->pass_status = 0;
                 $pass_update->save();
+
+                $zumrad_status = Zumrad::where('user_id',$userId)->first();
+                $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>0])->orderBy('id','desc')->first();
+                $pass_id[] = $passed_id->id;
+                if ($zumrad_status == null) {
+                    $zumrad = new Zumrad();
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $pass_id;
+                    $zumrad->zumrad = 0;
+                    $zumrad->save();
+                }else{
+                    $passed_id = Passed::where(['course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id,'user_id'=>$userId,'pass_status'=>0])->orderBy('id','desc')->first();
+                    $add_pass_id = $zumrad_status->passed_id;
+                    $newPassId = $passed_id->id;
+                    $add_pass_id[] = $newPassId;
+
+                    $zumrad = Zumrad::findorFail($zumrad_status->id);
+                    $zumrad->user_id = $userId;
+                    $zumrad->passed_id = $add_pass_id;
+                    $zumrad->zumrad = $zumrad_status->zumrad + 0;
+                    $zumrad->save();
+                }
+
                 if ($pass_update->limit == 0){
                     return redirect(url('user/lesson/'.$module_id))->with('dars_test_fail','Sizga berilgan imkoniyatlardan foydalana olmadingiz.');
                 }else{
@@ -224,7 +270,7 @@ class TestCheckController extends Controller
                 $pass->pass_status = 1;
                 $pass->save();
 
-                return redirect(route('user'))->with(['ishga_kirish'=>'Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
+                return redirect(route('user'))->with(['ishga_kirish'=>'Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!','ishga_kirish_natija'=>'']);
             }
             else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
@@ -239,7 +285,7 @@ class TestCheckController extends Controller
                 $pass_update->pass_status = 1;
                 $pass_update->save();
 
-                return redirect(route('user'))->with(['ishga_kirish'=>'Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
+                return redirect(route('user'))->with(['ishga_kirish'=>'Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!','ishga_kirish_natija'=>'']);
             }
         } elseif ($foiz < $ball){
             if ($check_status == null){
@@ -256,7 +302,7 @@ class TestCheckController extends Controller
                 $pass->pass_status = 0;
                 $pass->save();
 
-                return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz','natija'=>'']);
+                return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz','ishga_kirish_natija'=>'']);
             }
             else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
@@ -273,9 +319,9 @@ class TestCheckController extends Controller
                 $pass_update->pass_status = 0;
                 $pass_update->save();
                 if ($pass_update->limit == 0){
-                    return redirect(route('user'))->with(['ishga_kira_olmadi'=>'Sizga berilgan imkoniyatlardan foydalana olmadingiz, Sizni ishga qabul qila olmaymiz!','natija'=>'']);
+                    return redirect(route('user'))->with(['ishga_kira_olmadi'=>'Sizga berilgan imkoniyatlardan foydalana olmadingiz, Sizni ishga qabul qila olmaymiz!','ishga_kirish_natija'=>'']);
                 }else{
-                    return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz','natija'=>'']);
+                    return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz','ishga_kirish_natija'=>'']);
                 }
             }
         }
@@ -287,21 +333,22 @@ class TestCheckController extends Controller
     {
         $userID = $request->user_id;
         $lesson_id = $request->lesson_id;
+
         $zumrad_number = Zumrad::where('user_id',$userID)->first();
 
         $ayirish = $zumrad_number->zumrad - 1;
 //        return $zumrad_number;
-        $imkoniyat = Zumrad::where('user_id',$userID)
+        Zumrad::where('user_id',$userID)
             ->update([
                 'zumrad'=>$ayirish
             ]);
-        $passed_limit = Passed::where([
+        Passed::where([
             'lesson_id'=>$lesson_id,
             'user_id'=>$userID
         ])->update([
             'limit'=>1
         ]);
 
-        return redirect(route('lesson-show',['lesson_id'=>$lesson_id]))->with('imkoniyat','Sizning 5ta zumradingiz evaziga, 1ta imkoniyat taqdim etildi!');
+        return redirect(route('lesson-show',['lesson_id'=>$lesson_id]))->with('imkoniyat','Sizning 1ta zumradingiz evaziga, 1ta imkoniyat taqdim etildi!');
     }
 }

@@ -1,13 +1,6 @@
 <?php
-use App\Models\RaspisaniyaUser;
 use App\Models\Passed;
-use Carbon\Carbon;
-use App\Models\Lesson;
-use App\Models\Video;
-use App\Models\GroupTest;
-use App\Models\AnswerCheck;
-use App\Models\Medicine;
-use App\Models\Module;
+$user = auth()->user();
 ?>
 @extends('user.layouts.app')
 @section('title','Module')
@@ -16,13 +9,27 @@ use App\Models\Module;
         <div class="dashboard__content bg-light-4">
 
             <div class="row pb-20 mb-10">
-                <div class="col-12">
+                <div class="col-8">
                     <a href="{{route('user')}}" class="btn btn-danger text-white">
-                        <i class="fas fa-backward"></i>
+                        <i class=" fas fa-backward"></i>
                         Orqaga qaytish
                     </a>
                 </div>
+                <div class="col-1"></div>
+                @if($user->status == 1)
+                    <div class="col-3 text-center">
+                        <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                        @if($zumrad != null)
+                            {{$zumrad->zumrad}}
+                        @else
+                            0
+                        @endif
+                    </div>
+                @else
+                @endif
             </div>
+
+
             <div class="row pb-20">
                 <div class="col-12">
                     <h1 class="text-30 lh-12 fw-700">Modul</h1>
@@ -74,8 +81,8 @@ use App\Models\Module;
                     @endforeach
                 </div>
             </div>
-            @include('user.components.footer')
         </div>
+        @include('user.components.footer')
     </div>
 
 @endsection

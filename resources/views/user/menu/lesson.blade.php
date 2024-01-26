@@ -1,5 +1,6 @@
 <?php
 use App\Models\Passed;
+$user = auth()->user();
 ?>
 @extends('user.layouts.app')
 @section('title','Darslar')
@@ -8,12 +9,24 @@ use App\Models\Passed;
         <div class="dashboard__content bg-light-4">
 
             <div class="row pb-20 mb-10">
-                <div class="col-12">
+                <div class="col-8">
                     <a href="{{url('user/module/'.$course->course_id)}}" class="btn btn-danger text-white">
-                        <i class="fas fa-backward"></i>
+                        <i class=" fas fa-backward"></i>
                         Orqaga qaytish
                     </a>
                 </div>
+                <div class="col-1"></div>
+                @if($user->status == 1)
+                    <div class="col-3 text-center">
+                        <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                        @if($zumrad != null)
+                            {{$zumrad->zumrad}}
+                        @else
+                            0
+                        @endif
+                    </div>
+                @else
+                @endif
             </div>
 
             @if(session()->has('dars_test') )
@@ -119,8 +132,8 @@ use App\Models\Passed;
                     @endforeach
                 </div>
             </div>
-            @include('user.components.footer')
         </div>
+        @include('user.components.footer')
     </div>
 
 @endsection

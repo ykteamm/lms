@@ -9,6 +9,7 @@ use App\Models\Module;
 use App\Models\Passed;
 use App\Models\Test;
 use App\Models\Video;
+use App\Models\Zumrad;
 use Illuminate\Http\Request;
 
 class UsersPageController extends Controller
@@ -18,7 +19,9 @@ class UsersPageController extends Controller
         $userID = auth()->user()->id;
         $module = Module::where('course_id',$course_id)->orderBy('id','asc')->get();
 
-        return view('user.menu.module',compact('module','course_id','userID'));
+        $zumrad = Zumrad::where('user_id',$userID)->first();
+
+        return view('user.menu.module',compact('module','course_id','userID','zumrad'));
     }
 
     public function lesson($module_id)
@@ -27,8 +30,9 @@ class UsersPageController extends Controller
         $course = Module::where('id',$module_id)->first();
         $lessons = Lesson::where('module_id',$module_id)->orderBy('id','asc')->get();
 
+        $zumrad = Zumrad::where('user_id',$userID)->first();
 //        return $lessons;
-        return view('user.menu.lesson',compact('lessons','course','module_id','userID'));
+        return view('user.menu.lesson',compact('lessons','course','module_id','userID','zumrad'));
     }
 
     public function LessonShow($lesson_id)
@@ -48,7 +52,9 @@ class UsersPageController extends Controller
         $lesson = Lesson::where('id',$lesson_id)->first();
         $video_lesson = Video::where('lesson_id',$lesson_id)->first();
 
-        return view('user.menu.lesson-show',compact('video_lesson','lesson','group_test','test_count','passed','result','natija_pass','natija_result'));
+        $zumrad = Zumrad::where('user_id',$user_id)->first();
+
+        return view('user.menu.lesson-show',compact('video_lesson','zumrad','lesson','group_test','test_count','passed','result','natija_pass','natija_result'));
     }
 
     public function LessonTest($lesson_id)

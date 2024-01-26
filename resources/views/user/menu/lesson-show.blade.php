@@ -10,11 +10,22 @@ $urinish = 1;
         <div class="dashboard__content bg-light-4">
 
             @if($user->status == 1)
-                <div class="container mb-50">
-                    <a href="{{url('user/lesson/'.$lesson->module_id)}}" class="btn btn-danger">
-                        <i class=" fas fa-backward"></i>
-                        Orqaga qaytish
-                    </a>
+                <div class="row mb-50">
+                    <div class="col-8">
+                        <a href="{{url('user/lesson/'.$lesson->module_id)}}" class="btn btn-danger">
+                            <i class=" fas fa-backward"></i>
+                            Orqaga qaytish
+                        </a>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-3 text-center">
+                        <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                        @if($zumrad != null)
+                            {{$zumrad->zumrad}}
+                        @else
+                            0
+                        @endif
+                    </div>
                 </div>
             @else
                 <div class="container mb-50">
@@ -144,8 +155,73 @@ $urinish = 1;
                     </div>
             @endif
 
+            @if(session()->has('ishga_kirish_natija'))
+                    <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
+                        <div class="modal-dialog modal-lg" >
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
+                                    </div>
+                                    <div class="text-center" style="padding: 10px 20px">
+                                        <h2 class="fw-700">Test yakunlandi</h2>
+                                    </div>
+                                    <div class="text-center" style="padding: 10px 30px">
+                                        @if($group_test->ball <= $natija_result->foiz)
+                                            <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                        @else
+                                            <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                        @endif
+                                    </div>
+                                    <div style="padding: 10px 10px">
+                                        <div class="row align-items-center">
+                                            <div class="col-xxl-3 col-xl-3  col-4  mt-20 text-center">
+                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">O'tish bali</p>
+                                                @if($passed == null)
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
+                                                    </div>
+                                                @else
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$group_test->ball}}</h6>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3   col-4  mt-20 text-center">
+                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">To'plagan balingiz</p>
+                                                <div class="col-12 mt-10 text-center">
+                                                    @if($group_test->ball <= $natija_result->foiz)
+                                                        <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
+                                                    @else
+                                                        <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3  col-4 mt-20 text-center">
+                                                <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">Imkoniyat</p>
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$natija_pass->limit}}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
-                <div class="content-wrapper  js-content-wrapper">
+
+        <div class="content-wrapper  js-content-wrapper">
                     <section class="">
                         <div class="relative pt-20 col-12">
                             <img class="w-1/1" src="{{asset('storage/'. ($video_lesson ? $video_lesson->image : null))}}" alt="image">
@@ -321,7 +397,6 @@ $urinish = 1;
                                 </div>
                             </div>
 
-
                             <div class="modal fade" id="TestNatija1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-xl" >
                                         <div class="modal-content">
@@ -433,7 +508,6 @@ $urinish = 1;
                                         </div>
                                     </div>
                                 </div>
-
                             <div class="modal fade" id="Test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" >
                                         <div class="modal-content">
@@ -508,30 +582,55 @@ $urinish = 1;
                                                                 </div>
                                                             @endif
                                                         </div>
-                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
-                                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
-                                                            <br>
-                                                            <p class="fw-400" style="color: black">Zumrad</p>
-                                                            <div class="col-12 mt-10 text-center">
-                                                                <h6 style="color: red">1</h6>
+                                                        @if($passed && $passed->limit == 0 && $user->status == 1)
+                                                            <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">
+                                                                <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                                <br>
+                                                                <p class="fw-400" style="color: black">Sizning zumradingiz</p>
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">{{$zumrad->zumrad}}</h6>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @else
+                                                            @if($user->status == 1)
+                                                                <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
+                                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                                    <br>
+                                                                    <p class="fw-400" style="color: black">Zumrad</p>
+                                                                    <div class="col-12 mt-10 text-center">
+                                                                        <h6 style="color: red">1</h6>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                            @endif
+                                                        @endif
                                                     </div>
                                                 </div>
-
-                                                @if($passed  && $passed->limit == 0)
-                                                @else
-                                                    <div class="text-center">
-                                                        <a href="{{url('user/lesson-test/'.$lesson->id)}}" class="btn btn-warning mt-20" style="color: white; padding: 10px">
-                                                            Davom etish
-                                                            <i class="fas fa-fast-forward ml-10"></i>
-                                                        </a>
+                                                @if($passed  && $passed->limit == 0 && $user->status == 1)
+                                                    <div class="text-center mt-30">
+                                                        <h5 style="color: #dc1111">
+                                                            Sizga berilgan imkoniyatlar tugadi.
+                                                            Siz endi to'plagan zumradlarigizdan foydalanib,
+                                                            imkoniyat olishingiz mumkin!
+                                                        </h5>
                                                     </div>
+
+                                                    <div class="text-center">
+                                                        <form action="{{route('imkoniyat')}}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="user_id" value="{{$user->id}}">
+                                                            <input type="hidden" name="lesson_id" value="{{$lesson->id}}">
+                                                            <button type="submit" class="btn btn-success mt-20" style="color: white; padding: 10px">
+                                                                Imkoniyat olish
+                                                                <i class="icon-infinity"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                @else
                                                 @endif
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             @else
                             <div class="row">
@@ -664,7 +763,6 @@ $urinish = 1;
                                         </div>
                                     </div>
                                 </div>
-
                             <div class="modal fade" id="Test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" >
                                         <div class="modal-content">
@@ -739,37 +837,37 @@ $urinish = 1;
                                                                 </div>
                                                             @endif
                                                         </div>
-                                                        <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
-                                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
-                                                            <br>
-                                                            <p class="fw-400" style="color: black">Zumrad</p>
-                                                            <div class="col-12 mt-10 text-center">
-                                                                <h6 style="color: red">1</h6>
+                                                        @if($user->status == 1)
+                                                            <div class="col-xxl-2 col-xl-2 col-4 mt-20 text-center">
+                                                                <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                                <br>
+                                                                <p class="fw-400" style="color: black">Zumrad</p>
+                                                                <div class="col-12 mt-10 text-center">
+                                                                    <h6 style="color: red">1</h6>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @else
+                                                        @endif
                                                     </div>
                                                 </div>
-
-                                                @if($passed  && $passed->limit == 0)
-                                                @else
                                                     <div class="text-center">
                                                         <a href="{{url('user/lesson-test/'.$lesson->id)}}" class="btn btn-warning mt-20" style="color: white; padding: 10px">
                                                             Davom etish
                                                             <i class="fas fa-fast-forward ml-10"></i>
                                                         </a>
                                                     </div>
-                                                @endif
                                             </div>
                                         </div>
                                     </div>
-
-                                </div>
+                            </div>
                         @endif
                     @endif
                 @endif
-                    @include('user.components.footer')
         </div>
     </div>
+        @include('user.components.footer')
+</div>
+
 @endsection
 @section('natija_js')
 <script type="text/javascript">
