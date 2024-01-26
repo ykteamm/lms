@@ -59,14 +59,13 @@
                         <input type="file" name="passport_image" placeholder="Passport Image">
                     </div>
 
-                    <div class=" col-lg-12">
+                    <div class="col-lg-12">
                         <label for="rol_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">User Role *</label>
                         <div class="form-group">
                             <select  id="rol_id" name="rol_id" >
                                 <option value="">--Select--</option>
                                 <option value="admin">Admin</option>
                                 <option value="assistant">Assistant</option>
-                                <option value="user">User</option>
                             </select>
                         </div>
                     </div>
