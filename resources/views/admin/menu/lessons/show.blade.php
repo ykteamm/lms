@@ -9,6 +9,14 @@ use App\Models\Test;
 {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">--}}
     <!-- include summernote css/js -->
 {{--    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />--}}
+    <style>
+        .panel-heading,.note-toolbar{
+            border: 1px solid black;
+        }
+        .note-btn-group,.btn-group{
+            border: 1px solid black;
+        }
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection
 @section('action')
@@ -57,7 +65,7 @@ use App\Models\Test;
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg mt-50">
+                        <div class="modal-dialog modal-xl mt-50">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Siz {{$lesson_id->title}} darsini tahrirlayapsiz!</h5>
@@ -399,157 +407,6 @@ use App\Models\Test;
             </div>
 
 
-
-
-
-
-{{--            <div class="row">--}}
-{{--                <form action="{{route('lessons-video-dars')}}" method="POST" class="form-group" enctype="multipart/form-data">--}}
-{{--                    @csrf--}}
-{{--                    <input type="hidden" class="form-control" id="lesson_id" value="{{$lesson_id}}" name="lesson_id" required>--}}
-{{--                    <div class="row">--}}
-{{--                        <div class="col-12">--}}
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="title" class="form-label fw-700">Video dars nomi</label>--}}
-{{--                                <input type="text" class="border form-control" id="title" name="video_title" required>--}}
-{{--                                @error('video_title')--}}
-{{--                                <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-6">--}}
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="url" class="form-label fw-700">Video dars URL</label>--}}
-{{--                                <input type="text" class="border form-control" id="url" name="url" required>--}}
-{{--                                @error('url')--}}
-{{--                                <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-6">--}}
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="image" class="form-label fw-700">Video dars rasmi</label>--}}
-{{--                                <input type="file" class="form-control" id="image" name="image" accept=".png, .jpg, .jpeg, .pdf" required>--}}
-{{--                            </div>--}}
-{{--                            @error('image')--}}
-{{--                            <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
-{{--                        <div class="col-12">--}}
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="video_content" class="form-label fw-700">Video dars description</label>--}}
-{{--                                <textarea name="video_content" id="video_content" cols="30" rows="10" required></textarea>--}}
-{{--                            </div>--}}
-{{--                            @error('video_content')--}}
-{{--                            <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
-
-{{--                        <div class="row mt-20">--}}
-{{--                            <div class="col-md-12 text-center">--}}
-{{--                                <h3>Video darsga test qo'shish</h3>--}}
-{{--                                <hr>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-
-
-{{--                        <div id="questions-container">--}}
-{{--                            <!-- Questions will be dynamically added here -->--}}
-{{--                            <div class="question-container mt-30 mb-3 p-5" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">--}}
-{{--                                <label for="title1" class="form-label fw-700">Question title</label>--}}
-{{--                                <input type="text" class="form-control" id="title1" name="questions[1][title]" required>--}}
-
-{{--                                <div class="row">--}}
-{{--                                    <div class="col-6">--}}
-{{--                                        <div class="mb-3 mt-30">--}}
-{{--                                            <label for="variant_a1" class="form-label fw-700">Variant A</label>--}}
-{{--                                            <input type="text" class="form-control" id="variant_a1" name="questions[1][variants][variant_a]" required>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col-6">--}}
-{{--                                        <div class="mb-3 mt-30">--}}
-{{--                                            <label for="variant_b1" class="form-label fw-700">Variant B</label>--}}
-{{--                                            <input type="text" class="form-control" id="variant_b1" name="questions[1][variants][variant_b]" required>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col-6">--}}
-{{--                                        <div class="mb-3 mt-30">--}}
-{{--                                            <label for="variant_c1" class="form-label fw-700">Variant C</label>--}}
-{{--                                            <input type="text" class="form-control" id="variant_c1" name="questions[1][variants][variant_c]" required>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col-6">--}}
-{{--                                        <div class="mb-3 mt-30">--}}
-{{--                                            <label for="variant_d1" class="form-label fw-700">Variant D</label>--}}
-{{--                                            <input type="text" class="form-control" id="variant_d1" name="questions[1][variants][variant_d]" required>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="mb-3 mt-30">--}}
-{{--                                    <label for="answer1" class="form-label fw-700">Answer</label>--}}
-{{--                                    <select class="form-select answer-select" id="answer1" name="questions[1][answer]" required>--}}
-{{--                                        <option value="">Select Answer</option>--}}
-{{--                                        <option value="A">Variant A</option>--}}
-{{--                                        <option value="B">Variant B</option>--}}
-{{--                                        <option value="C">Variant C</option>--}}
-{{--                                        <option value="D">Variant D</option>--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                                --}}{{--                                <button type="button" class="btn btn-danger remove-question mt-15">Savolni o'chirish</button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <button type="button" class="btn btn-primary float-right" id="addQuestionBtn">Add Question</button>--}}
-
-{{--                    <div class="row mt-20">--}}
-{{--                        <div class="col-md-12 text-center">--}}
-{{--                            <h3>Testga limit, ball va level qo'shish</h3>--}}
-{{--                            <hr>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-
-{{--                    <div class="row">--}}
-{{--                        <div class="col-4">--}}
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="level" class="form-label fw-700">Level</label>--}}
-{{--                                <input type="text" class="border form-control" id="level" name="level" required>--}}
-{{--                                @error('level')--}}
-{{--                                <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-4">--}}
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="ball" class="form-label fw-700">Ball</label>--}}
-{{--                                <input type="number" class="border form-control" id="ball" name="ball" required>--}}
-{{--                                @error('ball')--}}
-{{--                                <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-4">--}}
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="limit" class="form-label fw-700">Limit</label>--}}
-{{--                                <input type="number" class="border form-control" id="limit" name="limit" required>--}}
-{{--                                @error('limit')--}}
-{{--                                <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <button type="submit" class="btn btn-info mt-50">--}}
-{{--                        <i class="fas fa-plus"></i>--}}
-{{--                        Yaratish--}}
-{{--                    </button>--}}
-
-{{--                </form>--}}
-{{--            </div>--}}
-
         </div>
 
 
@@ -601,15 +458,21 @@ use App\Models\Test;
             placeholder:'Tarif...',
             tabsize:2,
             height:300,
-            // toolbar: [
-            //     ['style', ['style']],
-            //     ['font', ['bold', 'underline', 'clear']],
-            //     ['color', ['color']],
-            //     ['para', ['ul', 'ol', 'paragraph']],
-            //     ['table', ['table']],
-            //     ['insert', ['link', 'picture', 'video']],
-            //     ['view', ['fullscreen', 'codeview', 'help']]
-            // ]
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['height', ['height']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['codeview', 'help']],
+            ],
+            fontNames: ['Helvetica','Verdana','Georgia','Arial','Times New Roman','Arial Black', 'Comic Sans MS', 'Merriweather','GT Walsheim Pro'],
+            addDefaultFonts: false,
+            fontSizeUnits: ['px'],
         })
     </script>
 
@@ -689,5 +552,6 @@ use App\Models\Test;
             });
         });
     </script>
+
 
 @endsection
