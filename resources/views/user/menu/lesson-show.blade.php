@@ -78,9 +78,16 @@ $urinish = 1;
                                     <div class="text-center" style="padding: 10px 20px">
                                         <h2 class="fw-700">Test yakunlandi</h2>
                                     </div>
+                                    <div class="text-center" style="padding: 10px 30px">
+                                        @if($group_test->ball <= $natija_result->foiz)
+                                            <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                        @else
+                                            <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                        @endif
+                                    </div>
                                     <div style="padding: 10px 10px">
                                         <div class="row align-items-center">
-                                            <div class="col-xxl-4 col-xl-4  col-4  mt-20 text-center">
+                                            <div class="col-xxl-3 col-xl-3  col-6  mt-20 text-center">
                                                 <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
                                                 <br>
                                                 <p class="fw-400" style="color: black">O'tish bali</p>
@@ -94,7 +101,7 @@ $urinish = 1;
                                                     </div>
                                                 @endif
                                             </div>
-                                            <div class="col-xxl-4 col-xl-4   col-4  mt-20 text-center">
+                                            <div class="col-xxl-3 col-xl-3   col-6  mt-20 text-center">
                                                 <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
                                                 <br>
                                                 <p class="fw-400" style="color: black">To'plagan balingiz</p>
@@ -106,12 +113,26 @@ $urinish = 1;
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-xxl-4 col-xl-4  col-4 mt-20 text-center">
+                                            <div class="col-xxl-3 col-xl-3  col-6 mt-20 text-center">
                                                 <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
                                                 <br>
                                                 <p class="fw-400" style="color: black">Imkoniyat</p>
                                                 <div class="col-12 mt-10 text-center">
                                                     <h6 style="color: red">{{$natija_pass->limit}}</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">
+                                                <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                <br>
+                                                <p class="fw-400" style="color: black">Zumrad</p>
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">
+                                                        @if($group_test->ball <= $natija_result->foiz)
+                                                            1
+                                                        @else
+                                                            0
+                                                        @endif
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -751,12 +772,31 @@ $urinish = 1;
     </div>
 @endsection
 @section('natija_js')
-<script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var natijaModal = document.getElementById('Natija');
+
+        if (natijaModal.classList.contains('show')) {
+            document.body.classList.add('modal-open');
+            var backdrop = document.createElement('div');
+            backdrop.classList.add('modal-backdrop', 'show');
+            document.body.appendChild(backdrop);
+        // .modal-backdrop.show {
+        //         opacity: var(--bs-backdrop-opacity);
+        //     }
+        }
+    });
     // Modal yopish uchun JavaScript
     document.getElementById('closeModalButton').addEventListener('click', function () {
+        var body = document.body
         var modal = document.getElementById('Natija');
+        var backdrop = document.querySelector('.modal-backdrop.show');
         modal.classList.remove('show');
         modal.style.display = 'none';
+        body.classList.remove('modal-open');
+        if (backdrop) {
+            backdrop.remove();
+        }
     });
 </script>
 @endsection

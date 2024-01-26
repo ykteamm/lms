@@ -35,6 +35,7 @@ class UsersPageController extends Controller
     {
 
         $user_id = auth()->user()->id;
+
         $group_test = GroupTest::where('lesson_id',$lesson_id)->first();
         $test_count = Test::where('lesson_id',$lesson_id)->count();
 

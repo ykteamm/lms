@@ -224,7 +224,7 @@ class TestCheckController extends Controller
                 $pass->pass_status = 1;
                 $pass->save();
 
-                return redirect(route('user'))->with('ishga_kirish','Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!');
+                return redirect(route('user'))->with(['ishga_kirish'=>'Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
             }
             else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
@@ -239,7 +239,7 @@ class TestCheckController extends Controller
                 $pass_update->pass_status = 1;
                 $pass_update->save();
 
-                return redirect(route('user'))->with('ishga_kirish','Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!');
+                return redirect(route('user'))->with(['ishga_kirish'=>'Siz ishga kirish testidan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
             }
         } elseif ($foiz < $ball){
             if ($check_status == null){
@@ -256,7 +256,7 @@ class TestCheckController extends Controller
                 $pass->pass_status = 0;
                 $pass->save();
 
-                return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz']);
+                return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz','natija'=>'']);
             }
             else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
@@ -273,9 +273,9 @@ class TestCheckController extends Controller
                 $pass_update->pass_status = 0;
                 $pass_update->save();
                 if ($pass_update->limit == 0){
-                    return redirect(route('user'))->with('ishga_kira_olmadi','Sizga berilgan imkoniyatlardan foydalana olmadingiz, Sizni ishga qabul qila olmaymiz!');
+                    return redirect(route('user'))->with(['ishga_kira_olmadi'=>'Sizga berilgan imkoniyatlardan foydalana olmadingiz, Sizni ishga qabul qila olmaymiz!','natija'=>'']);
                 }else{
-                    return redirect(url('user/lesson-show/'.$lesson_id))->with('ball_kam','Siz ishga kirish uchun yetarli ball to\'play olmadingiz');
+                    return redirect(url('user/lesson-show/'.$lesson_id))->with(['ball_kam'=>'Siz ishga kirish uchun yetarli ball to\'play olmadingiz','natija'=>'']);
                 }
             }
         }
