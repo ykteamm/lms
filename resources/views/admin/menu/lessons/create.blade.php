@@ -44,7 +44,7 @@ use App\Models\Test;
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="url" class="form-label fw-700">Video dars URL</label>
-                                <input type="text" class="border form-control" id="url" name="url" onchange="validateYouTubeUrl()" required>
+                                <input type="text" class="border form-control" id="url" name="url" oninput="validateYouTubeUrl()" required>
                                 @error('url')
                                 <div style="color: red" class="form-text">{{$message}}</div>
                                 @enderror
@@ -176,7 +176,7 @@ use App\Models\Test;
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-info mt-50" onclick="submitForm()">
+                    <button type="submit" class="btn btn-info mt-50" onclick="submitForm()" id="url_check">
                         <i class="fas fa-plus"></i>
                         Yaratish
                     </button>
@@ -289,29 +289,24 @@ use App\Models\Test;
     });
 </script>
 <script type="text/javascript">
-        function validateYouTubeUrl() {
-            var url = document.getElementById('url').value;
+    function validateYouTubeUrl() {
+        var url = document.getElementById('url').value;
+        var youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
 
-            // YouTube URL-ni tekshirish uchun regex
-            var youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-
-            if (youtubeRegex.test(url)) {
-                // Tekshiruv muvaffaqiyatli bo'ldi
-                return true;
-            } else {
-                // Tekshiruv xatosi, alert chiqarish
-                alert('Youtubedan URLni noto\'g\'ri kiritdingiz!');
-                return false;
-            }
+        if (youtubeRegex.test(url)) {
+            return true;
+        } else {
+            return false;
         }
+    }
 
-        // Formni yuborish funktsiyasi
-        function submitForm() {
-            if (validateYouTubeUrl()) {
-                // Formni yuborish
-                document.getElementById('yourFormId').submit();
-            }
+    function submitForm() {
+        if (validateYouTubeUrl()) {
+            document.getElementById('url_check').submit();
+        } else {
+            alert('Youtubedan URLni noto\'g\'ri kiritdingiz!');
         }
+    }
 </script>
 
 @endsection
