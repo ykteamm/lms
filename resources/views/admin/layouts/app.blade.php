@@ -40,7 +40,7 @@
 
 <!-- JavaScript -->
 @include('admin.partials.js')
-
+@yield('depdrop')
 </body>
 
 </html>

@@ -236,9 +236,25 @@ class LessonsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request,string $id)
     {
+        $module_id = $request->module_id;
+
+      $test_delete = Test::where('lesson_id',$id)->get();
+      $video_delete = Video::where('lesson_id',$id)->first();
+      $group_test_delete = GroupTest::where('lesson_id',$id)->first();
+
+
+        foreach ($test_delete as $test) {
+            $test->delete();
+        }
+        if ($video_delete){
+            Video::destroy($video_delete->id);
+        }
+        if ($group_test_delete) {
+            GroupTest::destroy($group_test_delete->id);
+        }
         Lesson::destroy($id);
-        return redirect(route('lessons.index'))->with('success', 'Courses medicine successfully deleted!');
+        return redirect(route('lessons-index',['module_id'=>$module_id]))->with('success', 'Darsni muvaffaqiyatli o\'chirdingiz!');
     }
 }

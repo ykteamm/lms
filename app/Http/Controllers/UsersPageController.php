@@ -30,6 +30,7 @@ class UsersPageController extends Controller
         $course = Module::where('id',$module_id)->first();
         $lessons = Lesson::where('module_id',$module_id)->orderBy('id','asc')->get();
 
+
         $zumrad = Zumrad::where('user_id',$userID)->first();
 //        return $lessons;
         return view('user.menu.lesson',compact('lessons','course','module_id','userID','zumrad'));
@@ -54,7 +55,7 @@ class UsersPageController extends Controller
 
         $zumrad = Zumrad::where('user_id',$user_id)->first();
 
-        return view('user.menu.lesson-show',compact('video_lesson','zumrad','lesson','group_test','test_count','passed','result','natija_pass','natija_result'));
+        return view('user.menu.lesson-show',compact('video_lesson','zumrad','lesson','group_test','test_count','passed','result','natija_pass','natija_result','user_id'));
     }
 
     public function LessonTest($lesson_id)

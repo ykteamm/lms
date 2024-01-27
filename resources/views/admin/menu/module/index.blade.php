@@ -3,7 +3,6 @@
 @section('action')
     <div class="dashboard__main">
         <div class="dashboard__content bg-light-4">
-
             <div class="row pb-20 mb-10">
                 <div class="col-3">
                     <a href="{{route('course.index')}}" class="btn btn-danger text-white">
@@ -12,7 +11,6 @@
                     </a>
                 </div>
             </div>
-
             @if(session()->has('success'))
                 <div class="row">
                     <div class="col-12 ">
@@ -32,7 +30,6 @@
                     </div>
                 </div>
             @endif
-
             <div class="row pb-20 mb-10">
                 <div class="col-6">
                     <h1 class="text-30 lh-12 fw-700">Modullar</h1>

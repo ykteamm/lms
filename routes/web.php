@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ElchilarController;
 use App\Http\Controllers\GroupTestsController;
 use App\Http\Controllers\IntegrationController;
 use App\Http\Controllers\LessonsController;
@@ -53,6 +54,14 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::resource('video', VideoController::class);
     Route::resource('course', CourseController::class);
 
+//    elchilar
+    Route::get('/elchi-role', [ElchilarController::class,'TgTeacher'])->name('elchi-role');
+
+    Route::get('/elchi', [ElchilarController::class,'ElchiIndex'])->name('elchi-index');
+    Route::post('/elchi-create', [ElchilarController::class,'ElchiCreate'])->name('elchi-create');
+    Route::put('/elchi-update/{id}', [ElchilarController::class,'ElchiUpdate'])->name('elchi-update');
+    Route::delete('/elchi-delete/{id}', [ElchilarController::class,'ElchiDelete'])->name('elchi-delete');
+// end elchilar
     Route::get('/module/{course_id}',[ModuleController::class, 'index'])->name('module-index');
     Route::get('/lesson/{module_id}',[LessonsController::class, 'index'])->name('lessons-index');
     Route::get('/lesson/create/{lesson_id}',[LessonsController::class, 'create'])->name('lesson-create');
@@ -66,8 +75,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::resource('lessons', LessonsController::class);
     Route::resource('raspisaniya', RaspisaniyaController::class);
 });
-
-Route::group(['prefix' => 'user','middleware' => ['auth', 'userRole:user']], function () {
+//'userRole:user'
+Route::group(['prefix' => 'user','middleware' => ['auth','userAdminRole:old_user,teacher,user']], function () {
 
     Route::get('/', [AdminController::class, 'user'])->name('user');
     Route::get('/module/{course_id}',[UsersPageController::class,'index'])->name('module');

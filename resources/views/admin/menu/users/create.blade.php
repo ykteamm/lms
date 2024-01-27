@@ -14,25 +14,25 @@
                     @csrf
                     <div class="col-lg-6">
                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Ismingiz *</label>
-                        <input type="text" name="first_name" placeholder="Firstname">
+                        <input type="text" name="first_name" placeholder="Firstname" required>
                     </div>
                     <div class="col-lg-6">
                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Familyangiz *</label>
-                        <input type="text" name="last_name" placeholder="Lastname">
+                        <input type="text" name="last_name" placeholder="Lastname" required>
                     </div>
                     <div class="col-lg-6">
                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Tug'ilgan kuningiz *</label>
-                        <input type="date"  name="birthday" placeholder="Birthday">
+                        <input type="date"  name="birthday" placeholder="Birthday" required>
                     </div>
                     <div class="col-lg-6">
                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Telefon raqam *</label>
-                        <input type="tel" name="phone" placeholder="Phone">
+                        <input type="tel" name="phone" placeholder="Phone" required>
                     </div>
 
                     <div class=" col-lg-6">
                         <label for="region_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">Viloyat *</label>
                         <div class="form-group">
-                            <select  id="region_id" name="region_id" >
+                            <select  id="region_id" name="region_id" required>
                                 <option value="">--Select--</option>
                                 @foreach($region as $test)
                                     <option value="{{$test->id}}">{{$test->name}}</option>
@@ -44,7 +44,7 @@
                     <div class=" col-lg-6">
                         <label for="district_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">Shahar *</label>
                         <div class="form-group">
-                            <select id="district_id" name="district_id" >
+                            <select id="district_id" name="district_id" required>
                                 {{--                                                <option value="">--Select--</option>--}}
                             </select>
                         </div>
@@ -52,17 +52,17 @@
 
                     <div class="col-lg-6">
                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Rasmingiz *</label>
-                        <input type="file" name="image" placeholder="Image">
+                        <input type="file" name="image" placeholder="Image" required>
                     </div>
                     <div class="col-lg-6">
                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Passport Rasmingiz *</label>
-                        <input type="file" name="passport_image" placeholder="Passport Image">
+                        <input type="file" name="passport_image" placeholder="Passport Image" required>
                     </div>
 
                     <div class="col-lg-12">
                         <label for="rol_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">User Role *</label>
                         <div class="form-group">
-                            <select  id="rol_id" name="rol_id" >
+                            <select  id="rol_id" name="rol_id" required>
                                 <option value="">--Select--</option>
                                 <option value="admin">Admin</option>
                                 <option value="assistant">Assistant</option>

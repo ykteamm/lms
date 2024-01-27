@@ -132,7 +132,7 @@ use App\Models\GroupTest;
                                 </div>
                             </a>
                             <div class="row py-15">
-                                <div class="col-12 text-center">
+                                <div class="col-5 text-center">
                                     <button class="btn btn-primary text-white" type="button" data-bs-toggle="modal" data-bs-target="#CourseModalEdit{{$less->id}}">
                                         <i class="fas fa-edit"></i>
                                         Tahrirlash
@@ -171,30 +171,30 @@ use App\Models\GroupTest;
                                     </div>
                                     {{--                             end edit modal--}}
                                 </div>
-                                <div class="col text-center">
-{{--                                    <button class="btn btn-danger text-white" type="button" data-bs-toggle="modal" data-bs-target="#CourseModal{{$less->id}}">--}}
-{{--                                        <i class="fas fa-trash-alt"></i>--}}
-{{--                                        O'chirish--}}
-{{--                                    </button>--}}
+                                <div class="col-5 text-center">
+                                    <button class="btn btn-danger text-white" type="button" data-bs-toggle="modal" data-bs-target="#CourseModal{{$less->id}}">
+                                        <i class="fas fa-trash-alt"></i>
+                                        O'chirish
+                                    </button>
                                     {{--                                modal delete--}}
                                     <div class="modal fade" id="CourseModal{{$less->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog ">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Siz {{$less->title}} kursini o'chirmoqchisiz!</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Siz {{$less->title}} darsini o'chirmoqchisiz!</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="" method="POST">
+                                                    <form action="{{route('lessons.destroy', ['lesson' => $less->id])}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <input type="hidden" value="{{$less->course_id}}" class="form-control" id="course_id" name="course_id">
+                                                        <input type="hidden" value="{{$less->module_id}}" class="form-control" id="module_id" name="module_id">
                                                         <h3>Sizni ishonchingiz komilmi!</h3>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
                                                             <button type="submit" class="btn btn-danger">
                                                                 <i class="fas fa-trash-alt"></i>
-                                                                Modulni o'chirish
+                                                                Darsni o'chirish
                                                             </button>
                                                         </div>
                                                     </form>

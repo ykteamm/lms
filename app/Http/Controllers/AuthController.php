@@ -91,7 +91,6 @@ class AuthController extends Controller
             'from' => '4546',
             'callback_url' => 'http://0000.uz/test.php'
         ]);
-
         return redirect(route('login'))->with('success','Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz!');
     }
 
@@ -130,7 +129,7 @@ class AuthController extends Controller
             } elseif ($user->rol_id === 'assistant') {
                 return redirect(route('admin'))->with('success', 'Successfully logged in!');
             }
-            elseif ($user->rol_id === 'user') {
+            elseif ($user->rol_id === 'user' || $user->rol_id === 'old_user' || $user->rol_id === 'teacher') {
                 return redirect(route('user'))->with('success', 'Successfully logged in!');
             }
             // Authentication passed

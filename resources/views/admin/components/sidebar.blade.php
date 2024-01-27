@@ -19,6 +19,14 @@
             </a>
         </div>
 
+        <div class="sidebar__item <?php if (Request::is('admin/elchi')){echo '-is-active -dark-bg-dark-2';}?>">
+            <a href="{{url('admin/elchi')}}" class="d-flex items-center text-17 lh-1 fw-500">
+{{--                <i class="text-20 icon-setting mr-15"></i>--}}
+                <i class="fas fa-users text-20 mr-15"></i>
+                Elchilar
+            </a>
+        </div>
+
 {{--        <div class="sidebar__item <?php if (Request::is('admin/users_all')){echo '-is-active -dark-bg-dark-2';}?>">--}}
 {{--            <a href="{{url('admin/users_all')}}" class="d-flex items-center text-17 lh-1 fw-500">--}}
 {{--                --}}{{--                <i class="text-20 icon-setting mr-15"></i>--}}
@@ -97,6 +105,15 @@
                 </a>
             </div>
 
+            <div class="sidebar__item <?php if (Request::is('admin/elchi')){echo '-is-active -dark-bg-dark-2';}?>">
+                <a href="{{url('admin/elchi')}}" class="d-flex items-center text-17 lh-1 fw-500">
+                    {{--                <i class="text-20 icon-setting mr-15"></i>--}}
+                    <i class="fas fa-users text-20 mr-15"></i>
+                    Elchilar
+                </a>
+            </div>
+
+
             <div class="sidebar__item <?php if (Request::is('admin/course')){echo '-is-active -dark-bg-dark-2';}?> ">
                 <a href="{{url('admin/course')}}" class="d-flex items-center text-17 lh-1 fw-500 ">
                     <i class="text-20 icon-play-button mr-15"></i>
@@ -113,13 +130,13 @@
 {{--            </div>--}}
         @else
             <h1>
-                Sizda admin panelga kirishga ruxsat yo'q
+                Nima bor senga!
             </h1>
         @endif
         <div class="sidebar__item ">
             <a href="{{route('logout')}}" class="d-flex items-center text-17 lh-1 fw-500 ">
                 <i class="text-20 icon-power mr-15"></i>
-                Logout
+                Chiqish
             </a>
         </div>
 
