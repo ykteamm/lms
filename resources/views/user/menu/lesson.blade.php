@@ -161,7 +161,7 @@ $user = auth()->user();
                                 'course_id'=>$course->course_id,
                                 'module_id'=>$course->id,
                                 'lesson_id'=>$less->id,
-                                'user_id'=>$userID,
+                                'user_id'=>$user->id,
                                 ])->first();
 
                             $isReady = $index == 0 || Passed::where([
@@ -169,7 +169,7 @@ $user = auth()->user();
                                 'module_id'=>$course->id,
                                 'lesson_id'=> $lessons[$index - 1]->id,
                                 'pass_status'=>1,
-                                'user_id'=>$userID,
+                                'user_id'=>$user->id,
                                 ])->first();
                         @endphp
                         @if($isReady)
