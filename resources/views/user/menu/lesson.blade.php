@@ -31,91 +31,85 @@ $user = auth()->user();
                 @endif
             </div>
 
-{{--            @if(session()->has('natija'))--}}
-{{--                @php--}}
-{{--                    $group_test = GroupTest::where('lesson_id',$less->id)->first();--}}
-{{--                    $passed = Passed::where(['lesson_id'=>$less->id,'user_id'=>$user->id])->first();--}}
-{{--                    $natija_pass = Passed::where(['lesson_id'=>$less->id,'user_id'=>$user->id])->orderBy('id','desc')->first();--}}
-{{--                    $natija_result = AnswerCheck::where(['user_id'=>$user->id,'lesson_id'=>$less->id])->orderBy('id','desc')->first();--}}
-{{--                @endphp--}}
-{{--                <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">--}}
-{{--                    <div class="modal-dialog modal-lg" >--}}
-{{--                        <div class="modal-content">--}}
-{{--                            <div class="modal-header">--}}
-{{--                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>--}}
-{{--                            </div>--}}
-{{--                            <div class="modal-body">--}}
-{{--                                <div class="text-center">--}}
-{{--                                    <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">--}}
-{{--                                </div>--}}
-{{--                                <div class="text-center" style="padding: 10px 20px">--}}
-{{--                                    <h2 class="fw-700">Test yakunlandi</h2>--}}
-{{--                                </div>--}}
-{{--                                <div class="text-center" style="padding: 10px 30px">--}}
-{{--                                    @if($group_test->ball <= $natija_result->foiz)--}}
-{{--                                        <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>--}}
-{{--                                    @else--}}
-{{--                                        <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
-{{--                                <div style="padding: 10px 10px">--}}
-{{--                                    <div class="row align-items-center">--}}
-{{--                                        <div class="col-xxl-3 col-xl-3  col-6  mt-20 text-center">--}}
-{{--                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>--}}
-{{--                                            <br>--}}
-{{--                                            <p class="fw-400" style="color: black">O'tish bali</p>--}}
-{{--                                            @if($passed == null)--}}
-{{--                                                <div class="col-12 mt-10 text-center">--}}
-{{--                                                    <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>--}}
-{{--                                                </div>--}}
-{{--                                            @else--}}
-{{--                                                <div class="col-12 mt-10 text-center">--}}
-{{--                                                    <h6 style="color: red">{{$group_test->ball}}</h6>--}}
-{{--                                                </div>--}}
-{{--                                            @endif--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-xxl-3 col-xl-3   col-6  mt-20 text-center">--}}
-{{--                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>--}}
-{{--                                            <br>--}}
-{{--                                            <p class="fw-400" style="color: black">To'plagan balingiz</p>--}}
-{{--                                            <div class="col-12 mt-10 text-center">--}}
-{{--                                                @if($group_test->ball <= $natija_result->foiz)--}}
-{{--                                                    <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>--}}
-{{--                                                @else--}}
-{{--                                                    <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>--}}
-{{--                                                @endif--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-xxl-3 col-xl-3  col-6 mt-20 text-center">--}}
-{{--                                            <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>--}}
-{{--                                            <br>--}}
-{{--                                            <p class="fw-400" style="color: black">Imkoniyat</p>--}}
-{{--                                            <div class="col-12 mt-10 text-center">--}}
-{{--                                                <h6 style="color: red">{{$natija_pass->limit}}</h6>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">--}}
-{{--                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>--}}
-{{--                                            <br>--}}
-{{--                                            <p class="fw-400" style="color: black">Zumrad</p>--}}
-{{--                                            <div class="col-12 mt-10 text-center">--}}
-{{--                                                <h6 style="color: red">--}}
-{{--                                                    @if($group_test->ball <= $natija_result->foiz)--}}
-{{--                                                        1--}}
-{{--                                                    @else--}}
-{{--                                                        0--}}
-{{--                                                    @endif--}}
-{{--                                                </h6>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+            @if(session()->has('natija'))
+                <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
+                    <div class="modal-dialog modal-lg" >
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
+                                </div>
+                                <div class="text-center" style="padding: 10px 20px">
+                                    <h2 class="fw-700">Test yakunlandi</h2>
+                                </div>
+                                <div class="text-center" style="padding: 10px 30px">
+                                    @if($group_test->ball <= $natija_result->foiz)
+                                        <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                    @else
+                                        <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                    @endif
+                                </div>
+                                <div style="padding: 10px 10px">
+                                    <div class="row align-items-center">
+                                        <div class="col-xxl-3 col-xl-3  col-6  mt-20 text-center">
+                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">O'tish bali</p>
+                                            @if($passed == null)
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
+                                                </div>
+                                            @else
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$group_test->ball}}</h6>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3   col-6  mt-20 text-center">
+                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">To'plagan balingiz</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                @if($group_test->ball <= $natija_result->foiz)
+                                                    <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
+                                                @else
+                                                    <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3  col-6 mt-20 text-center">
+                                            <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">Imkoniyat</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                <h6 style="color: red">{{$natija_pass->limit}}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">
+                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">Zumrad</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                <h6 style="color: red">
+                                                    @if($group_test->ball <= $natija_result->foiz)
+                                                        1
+                                                    @else
+                                                        0
+                                                    @endif
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-{{--                </div>--}}
-{{--            @endif--}}
+                </div>
+            @endif
 
             @if(session()->has('dars_test') )
                 <div class="row">

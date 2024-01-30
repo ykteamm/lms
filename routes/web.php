@@ -45,7 +45,7 @@ Route::group(['prefix' => '/'], function () {
 Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,assistant']], function () {
     Route::get('/', [AdminController::class, 'admin'])->name('admin');
     Route::resource('users', UsersController::class);
-    Route::resource('users_all', UsersAllController::class);
+    Route::resource('new_user', UsersAllController::class);
     Route::resource('users_check', UserCheckController::class);
     Route::get('/integration',[IntegrationController::class,'index'])->name('integration');
     Route::get('/jang_matrix/{id}',[IntegrationController::class,'jang'])->name('jang_matrix');
@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::resource('group_test', GroupTestsController::class);
     Route::resource('video', VideoController::class);
     Route::resource('course', CourseController::class);
+
 
 //    elchilar
     Route::get('/elchi-role', [ElchilarController::class,'TgTeacher'])->name('elchi-role');
@@ -88,4 +89,5 @@ Route::group(['prefix' => 'user','middleware' => ['auth','userAdminRole:old_user
     Route::post('/all_test',[TestCheckController::class,'AllTest'])->name('all_test');
 
     Route::post('/imkoniyat',[TestCheckController::class,'Imkoniyat'])->name('imkoniyat');
+    Route::get('/settings')->name('settings');
 });

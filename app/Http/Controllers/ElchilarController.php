@@ -60,28 +60,27 @@ class ElchilarController extends Controller
     public function ElchiCreate(Request $request){
 
         $request->validate([
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'birthday'=>'required',
             'rol_id'=>'required',
             'status'=>'required',
-            'region_id'=>'required|integer',
-            'district_id'=>'required|integer',
             'phone'=>'required|unique:lms_users',
             'image'=>'required|image|mimes:png,jpg,jpeg',
             'passport_image'=>'required|image|mimes:png,jpg,jpeg',
         ]);
         $phone = $request->phone;
+        $tg_user_id = $request->tg_user_id;
+        $tg_user = DB::table('tg_user')->where('id',$tg_user_id)->first();
+
         $data = new User();
-        $data->first_name = $request->first_name;
-        $data->last_name = $request->last_name;
-        $data->birthday = $request->birthday;
-        $data->region_id = $request->region_id;
-        $data->district_id = $request->district_id;
+        $data->first_name = $tg_user->first_name;
+        $data->last_name = $tg_user->last_name;
+        $data->birthday = $tg_user->birthday;
+        $data->region_id = $tg_user->region_id;
+        $data->district_id = $tg_user->district_id;
         $data->status = $request->status;
-        $data->tg_user_id = $request->tg_user_id;
+        $data->tg_user_id = $tg_user_id;
         $data->date_joined = now();
         $data->phone = $phone;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = Str::random(5) .'.'.$image->getClientOriginalExtension();
@@ -100,6 +99,7 @@ class ElchilarController extends Controller
         $username = 'nvt'.$number;
         $data->username = $username;
         $data->password = Hash::make($number);
+
         if ($request->rol_id){
             $data->rol_id = $request->rol_id;
         }

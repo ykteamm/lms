@@ -2,7 +2,7 @@
 $t_r = 1;
 ?>
 @extends('admin.layouts.app')
-@section('title','Users check')
+@section('title','Yangi elchilar')
 @section('dashboard')
     <div class="dashboard__main">
         <div class="dashboard__content bg-light-4">
@@ -29,7 +29,7 @@ $t_r = 1;
 
             <div class="row pb-50 mb-10">
                 <div class="col-6">
-                    <h1 class="text-30 lh-12 fw-700">Users all</h1>
+                    <h1 class="text-30 lh-12 fw-700">Yangi elchilar</h1>
                 </div>
 {{--                <div class="col-6 d-flex justify-content-end">--}}
 {{--                    <a href="{{route('users_all.create')}}">--}}
@@ -63,6 +63,9 @@ $t_r = 1;
 {{--                            <th>{{$test->id}}</th>--}}
                             <td>{{$test->first_name}}</td>
                             <td>{{$test->last_name}}</td>
+                            <td>
+                                <img src="{{asset('storage/'.$test->image)}}" width="120" height="50" alt="">
+                            </td>
                             <td>{{$test->phone}}</td>
                             <td>{{$test->username}}</td>
                             <td>
@@ -97,7 +100,7 @@ $t_r = 1;
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('users_all.destroy',['users_all' => $test->id])}}" method="POST">
+                                                    <form action="{{route('new_user.destroy',['new_user' => $test->id])}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <h1>Are you sure?</h1>

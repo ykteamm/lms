@@ -61,69 +61,35 @@ $t_r = 1;
                                         <form class="contact-form respondForm__form row y-gap-20 pt-30" action="{{route('elchi-create')}}" method="POST"  enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="status" value="1">
-                                                <div class="col-lg-6">
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Ismingiz *</label>
-                                                    <input type="text" name="first_name" placeholder="Firstname" required>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Familyangiz *</label>
-                                                    <input type="text" name="last_name" placeholder="Lastname" required>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Tug'ilgan kuningiz *</label>
-                                                    <input type="date"  name="birthday" placeholder="Birthday" required>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Telefon raqam *</label>
-                                                    <input type="tel" name="phone" class="input-phone" placeholder="Phone" required>
-                                                </div>
 
-                                                <div class=" col-lg-6">
-                                                    <label for="region_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">Viloyat *</label>
-                                                    <div class="form-group">
-                                                        <select  id="region_id" name="region_id" required>
-                                                            <option value="">--Select--</option>
-                                                            @foreach($region as $test)
-                                                                <option value="{{$test->id}}">{{$test->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            <div class="col-lg-6">
+                                                <label for="rol_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">User Role *</label>
+                                                <select  id="rol_id" name="rol_id" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="old_user">Elchi</option>
+                                                    <option value="teacher">Teacher</option>
+                                                </select>
+                                            </div>
 
-                                                <div class=" col-lg-6">
-                                                    <label for="district_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">Shahar *</label>
-                                                    <div class="form-group">
-                                                        <select id="district_id" name="district_id" required>
+                                            <div class="col-lg-6">
+                                                <label for="tg_user_id" class="form-label fw-700">TG User *</label>
+                                                <select id="tg_user_id" name="tg_user_id" required>
+                                                </select>
+                                            </div>
 
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                            <div class="col-lg-4">
+                                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Telefon raqam *</label>
+                                                <input type="tel" name="phone" class="input-phone" placeholder="Phone" required>
+                                            </div>
 
-                                                <div class="col-lg-6">
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Rasmingiz *</label>
-                                                    <input type="file" name="image" placeholder="Image" required>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Passport Rasmingiz *</label>
-                                                    <input type="file" name="passport_image" placeholder="Passport Image" required>
-                                                </div>
-
-                                                <div class="col-lg-6">
-                                                    <label for="rol_id" class="text-16 lh-1 fw-500 text-dark-1 mb-10">User Role *</label>
-                                                    <select  id="rol_id" name="rol_id" required>
-                                                        <option value="">--Select--</option>
-                                                        <option value="old_user">Elchi</option>
-                                                        <option value="teacher">Teacher</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-lg-6">
-                                                    <label for="tg_user_id" class="form-label fw-700">TG User *</label>
-                                                    <select id="tg_user_id" name="tg_user_id" required>
-
-                                                    </select>
-                                                </div>
-
+                                            <div class="col-lg-4">
+                                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Rasmingiz *</label>
+                                                <input type="file" class="mt-10" name="image" placeholder="Image" required>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Passport Rasmingiz *</label>
+                                                <input type="file" class="mt-10" name="passport_image" placeholder="Passport Image" required>
+                                            </div>
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

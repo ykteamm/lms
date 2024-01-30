@@ -21,19 +21,17 @@
 
         <div class="sidebar__item <?php if (Request::is('admin/elchi')){echo '-is-active -dark-bg-dark-2';}?>">
             <a href="{{url('admin/elchi')}}" class="d-flex items-center text-17 lh-1 fw-500">
-{{--                <i class="text-20 icon-setting mr-15"></i>--}}
                 <i class="fas fa-users text-20 mr-15"></i>
-                Elchilar
+                Ustozlar va Elchilar
             </a>
         </div>
 
-{{--        <div class="sidebar__item <?php if (Request::is('admin/users_all')){echo '-is-active -dark-bg-dark-2';}?>">--}}
-{{--            <a href="{{url('admin/users_all')}}" class="d-flex items-center text-17 lh-1 fw-500">--}}
-{{--                --}}{{--                <i class="text-20 icon-setting mr-15"></i>--}}
-{{--                <i class="fas fa-users text-20 mr-15"></i>--}}
-{{--                Users All--}}
-{{--            </a>--}}
-{{--        </div>--}}
+        <div class="sidebar__item <?php if (Request::is('admin/new_user')){echo '-is-active -dark-bg-dark-2';}?>">
+            <a href="{{url('admin/new_user')}}" class="d-flex items-center text-17 lh-1 fw-500">
+                <i class="fas fa-users text-20 mr-15"></i>
+                Yangi Elchilar
+            </a>
+        </div>
 
 {{--        <div class="sidebar__item <?php if (Request::is('admin/users_check')){echo '-is-active -dark-bg-dark-2';}?>">--}}
 {{--            <a href="{{url('admin/users_check')}}" class="d-flex items-center text-17 lh-1 fw-500">--}}
@@ -105,11 +103,19 @@
                 </a>
             </div>
 
+
+            <div class="sidebar__item <?php if (Request::is('admin/new_user')){echo '-is-active -dark-bg-dark-2';}?>">
+                <a href="{{url('admin/new_user')}}" class="d-flex items-center text-17 lh-1 fw-500">
+                    <i class="fas fa-users text-20 mr-15"></i>
+                    Yangi Elchilar
+                </a>
+            </div>
+
             <div class="sidebar__item <?php if (Request::is('admin/elchi')){echo '-is-active -dark-bg-dark-2';}?>">
                 <a href="{{url('admin/elchi')}}" class="d-flex items-center text-17 lh-1 fw-500">
                     {{--                <i class="text-20 icon-setting mr-15"></i>--}}
                     <i class="fas fa-users text-20 mr-15"></i>
-                    Elchilar
+                    Ustozlar va Elchilar
                 </a>
             </div>
 
