@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\GroupTest;
+use App\Models\Lesson;
 use App\Models\Module;
+use App\Models\Test;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -86,6 +90,14 @@ class ModuleController extends Controller
     {
         $course_id = $request->course_id;
         Module::destroy($id);
+
+        $lessonsToDelete = Lesson::where('module_id', $id)->get();
+        foreach ($lessonsToDelete as $lesson) {
+            GroupTest::where('lesson_id',$lesson->id)->delete();
+            Video::where('lesson_id',$lesson->id)->delete();
+            Test::where('lesson_id',$lesson->id)->delete();
+            $lesson->delete();
+        }
 
         return redirect(route('module-index',['course_id'=>$course_id]))->with('success','Module muvaffaqiyatli o\'chirildi !');
     }

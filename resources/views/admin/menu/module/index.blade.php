@@ -143,16 +143,16 @@
                                 {{--                             end edit modal--}}
                             </div>
                             <div class="col-5 text-center">
-{{--                                <button class="btn btn-danger text-white" type="button" data-bs-toggle="modal" data-bs-target="#CourseModal{{$modul->id}}">--}}
-{{--                                    <i class="fas fa-trash-alt"></i>--}}
-{{--                                    O'chirish--}}
-{{--                                </button>--}}
-                                {{--                                modal delete--}}
+                                <button class="btn btn-danger text-white" type="button" data-bs-toggle="modal" data-bs-target="#CourseModal{{$modul->id}}">
+                                    <i class="fas fa-trash-alt"></i>
+                                    O'chirish
+                                </button>
+{{--                                                                modal delete--}}
                                 <div class="modal fade" id="CourseModal{{$modul->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog ">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Siz {{$modul->title}} kursini o'chirmoqchisiz!</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Siz {{$modul->title}} moduleni o'chirmoqchisiz!</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -173,7 +173,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{--                               end modal delete--}}
+{{--                               end modal delete--}}
                             </div>
                         </div>
                     </div>
