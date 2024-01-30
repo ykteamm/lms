@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\District;
+use App\Models\EnterLogout;
 use App\Models\Region;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -122,7 +123,11 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
+            $enter_exit = new EnterLogout([
+                'user_id'=>$user->id,
+                'login_time'=>now(),
+                ]);
+            $enter_exit->save();
             // Check the user's role and redirect accordingly
             if ($user->rol_id === 'admin') {
                 return redirect(route('admin'))->with('success', 'Successfully logged in!');
@@ -141,6 +146,19 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $user = \auth()->user();
+        $userLog = EnterLogout::where('user_id', $user->id)->latest()->first();
+
+        if ($userLog){
+            $userLog->logout_time = now();
+            $userLog->save();
+        }else{
+            $logout = new EnterLogout([
+                'user_id'=>$user->id,
+                'logout_time'=>now(),
+            ]);
+            $logout->save();
+        }
         Session::flush();
         Auth::logout();
         return redirect(route('login'));
