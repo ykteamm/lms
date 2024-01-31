@@ -54,7 +54,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::resource('video', VideoController::class);
     Route::resource('course', CourseController::class);
 
-    Route::post('/elchi-login', [ElchilarController::class,'UpdateLoginPass'])->name('elchi-login');
 //    elchilar
     Route::get('/elchi-role', [ElchilarController::class,'TgTeacher'])->name('elchi-role');
 
