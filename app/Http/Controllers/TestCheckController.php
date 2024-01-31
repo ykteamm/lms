@@ -93,7 +93,19 @@ class TestCheckController extends Controller
                     $zumrad->zumrad = $zumrad_status->zumrad + 1;
                     $zumrad->save();
                 }
-                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
+                $natija_pass = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$userId])->orderBy('id','desc')->first();
+                $natija_result = AnswerCheck::where(['user_id'=>$userId,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
+                $passed = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$userId])->first();
+                $group_test = GroupTest::where('lesson_id',$lesson_id)->first();
+
+                return redirect(url('user/lesson/'.$module_id))->with([
+                    'dars_test'=>'Siz testdan muvaffaqiyatli o\'tdingiz!',
+                    'natija'=>'',
+                    'natija_pass' => $natija_pass,
+                    'natija_result' => $natija_result,
+                    'passed' => $passed,
+                    'group_test' => $group_test,
+                ]);
             }else{
                 $answer_id = AnswerCheck::where(['user_id'=>$userId,'course_id'=>$course_id,'module_id'=>$module_id,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
 //                $add_check_id = json_decode($check_status->answer_check_id,true) ?? [];
@@ -128,7 +140,19 @@ class TestCheckController extends Controller
                     $zumrad->zumrad = $zumrad_status->zumrad + 1;
                     $zumrad->save();
                 }
-                return redirect(url('user/lesson/'.$module_id))->with(['dars_test'=>'Siz testdan muvaffaqiyatli o\'tdingiz!','natija'=>'']);
+                $natija_pass = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$userId])->orderBy('id','desc')->first();
+                $natija_result = AnswerCheck::where(['user_id'=>$userId,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
+                $passed = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$userId])->first();
+                $group_test = GroupTest::where('lesson_id',$lesson_id)->first();
+
+                return redirect(url('user/lesson/'.$module_id))->with([
+                    'dars_test'=>'Siz testdan muvaffaqiyatli o\'tdingiz!',
+                    'natija'=>'',
+                    'natija_pass' => $natija_pass,
+                    'natija_result' => $natija_result,
+                    'passed' => $passed,
+                    'group_test' => $group_test,
+                ]);
             }
         } elseif ($foiz < $ball){
             if ($check_status == null){
@@ -166,7 +190,6 @@ class TestCheckController extends Controller
                     $zumrad->zumrad = $zumrad_status->zumrad + 0;
                     $zumrad->save();
                 }
-
 
                 return redirect(url('user/lesson-show/'.$lesson_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
             }
@@ -208,7 +231,18 @@ class TestCheckController extends Controller
                 }
 
                 if ($pass_update->limit == 0){
-                    return redirect(url('user/lesson/'.$module_id))->with('dars_test_fail','Sizga berilgan imkoniyatlardan foydalana olmadingiz.');
+                    $group_test = GroupTest::where('lesson_id',$lesson_id)->first();
+                    $natija_pass = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$userId])->orderBy('id','desc')->first();
+                    $natija_result = AnswerCheck::where(['user_id'=>$userId,'lesson_id'=>$lesson_id])->orderBy('id','desc')->first();
+                    $passed = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$userId])->first();
+                    return redirect(url('user/lesson/'.$module_id))->with([
+                        'dars_test_fail'=>'Sizga berilgan imkoniyatlardan foydalana olmadingiz.',
+                        'natija'=>'',
+                        'natija_pass' => $natija_pass,
+                        'natija_result' => $natija_result,
+                        'passed' => $passed,
+                        'group_test' => $group_test,
+                    ]);
                 }else{
                     return redirect(url('user/lesson-show/'.$lesson_id))->with(['dars_test'=>'Siz testdan o\'ta olmadingiz! Ehtiyotkorlik bilan qaytadan ishlang!','natija'=>'']);
                 }

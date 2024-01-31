@@ -47,9 +47,9 @@ class ElchilarController extends Controller
             $data = DB::table('tg_user')->select('tg_user.*', 'tg_user.id as user_id','tg_user.first_name as user_first_name', 'tg_user.last_name as user_last_name')
                 ->leftJoin('teachers', 'teachers.user_id', '=', 'tg_user.id')
                 ->whereNull('teachers.user_id')
-                ->whereNotIn('tg_user.id', function ($query) {
-                    $query->select('user_id')->from('tg_jamoalar');
-                })
+//                ->whereNotIn('tg_user.id', function ($query) {
+//                    $query->select('user_id')->from('tg_jamoalar');
+//                })
                 ->orderBy('id','asc')
                 ->get();
             return response()->json($data);
@@ -115,7 +115,7 @@ class ElchilarController extends Controller
 
         $sms = Http::withToken($token)->post('notify.eskiz.uz/api/message/sms/send', [
             'mobile_phone' => substr($phone,1),
-            'message' => 'Assalomu alaykum, siz Novatio kompaniyasing Akademiyasiga qabul qilindingiz! '  .  ' Login: ' . $username . '. ' . ' Parol: ' . $number,
+            'message' => 'Assalomu alaykum, siz Novatio kompaniyasing Akademiyasiga qabul qilindingiz! '  . 'Sayt: https://academy.novatio.uz' .  ' Login: ' . $username . '; ' . '  Parol: ' . $number,
             'from' => '4546',
             'callback_url' => 'http://0000.uz/test.php'
         ]);

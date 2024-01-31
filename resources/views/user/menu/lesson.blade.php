@@ -46,10 +46,16 @@ $user = auth()->user();
                                     <h2 class="fw-700">Test yakunlandi</h2>
                                 </div>
                                 <div class="text-center" style="padding: 10px 30px">
-                                    @if($group_test->ball <= $natija_result->foiz)
-                                        <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
-                                    @else
-                                        <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                    @if(session()->has('group_test') && session()->has('natija_result'))
+                                        @php
+                                        $group_test = session()->get('group_test');
+                                        $natija_result = session()->get('natija_result');
+                                        @endphp
+                                        @if($group_test->ball <= $natija_result->foiz)
+                                            <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                        @else
+                                            <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                        @endif
                                     @endif
                                 </div>
                                 <div style="padding: 10px 10px">
@@ -58,14 +64,19 @@ $user = auth()->user();
                                             <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
                                             <br>
                                             <p class="fw-400" style="color: black">O'tish bali</p>
-                                            @if($passed == null)
-                                                <div class="col-12 mt-10 text-center">
-                                                    <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
-                                                </div>
-                                            @else
-                                                <div class="col-12 mt-10 text-center">
-                                                    <h6 style="color: red">{{$group_test->ball}}</h6>
-                                                </div>
+                                            @if(session()->has('passed'))
+                                                @php
+                                                $passed = session()->get('passed');
+                                                @endphp
+                                                @if($passed == null)
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$group_test ? $group_test->ball : null}}</h6>
+                                                    </div>
+                                                @else
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$group_test->ball}}</h6>
+                                                    </div>
+                                                @endif
                                             @endif
                                         </div>
                                         <div class="col-xxl-3 col-xl-3   col-6  mt-20 text-center">
@@ -73,10 +84,16 @@ $user = auth()->user();
                                             <br>
                                             <p class="fw-400" style="color: black">To'plagan balingiz</p>
                                             <div class="col-12 mt-10 text-center">
-                                                @if($group_test->ball <= $natija_result->foiz)
-                                                    <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
-                                                @else
-                                                    <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
+                                                @if(session()->has('group_test') && session()->has('natija_result'))
+                                                    @php
+                                                        $group_test = session()->get('group_test');
+                                                        $natija_result = session()->get('natija_result');
+                                                    @endphp
+                                                    @if($group_test->ball <= $natija_result->foiz)
+                                                        <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
+                                                    @else
+                                                        <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -85,7 +102,12 @@ $user = auth()->user();
                                             <br>
                                             <p class="fw-400" style="color: black">Imkoniyat</p>
                                             <div class="col-12 mt-10 text-center">
+                                                @if(session()->has('natija_pass'))
+                                                    @php
+                                                        $natija_pass = session()->get('natija_pass');
+                                                    @endphp
                                                 <h6 style="color: red">{{$natija_pass->limit}}</h6>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">
@@ -94,10 +116,16 @@ $user = auth()->user();
                                             <p class="fw-400" style="color: black">Zumrad</p>
                                             <div class="col-12 mt-10 text-center">
                                                 <h6 style="color: red">
-                                                    @if($group_test->ball <= $natija_result->foiz)
-                                                        1
-                                                    @else
-                                                        0
+                                                    @if(session()->has('group_test') && session()->has('natija_result'))
+                                                        @php
+                                                            $group_test = session()->get('group_test');
+                                                            $natija_result = session()->get('natija_result');
+                                                        @endphp
+                                                        @if($group_test->ball <= $natija_result->foiz)
+                                                            1
+                                                        @else
+                                                            0
+                                                        @endif
                                                     @endif
                                                 </h6>
                                             </div>
