@@ -171,4 +171,41 @@ class ElchilarController extends Controller
         User::destroy($id);
         return redirect(route('elchi-index'))->with('success','Elchi muvaffaqiyatli o\'chirildi!');
     }
+
+    public function UpdateLoginPass(Request $request){
+        $lms_user = User::all();
+
+        foreach ($lms_user as $user){
+            $tg_id = $user->tg_user_id;
+            $tg_user = DB::table('tg_user')->where('id',$tg_id)->first();
+            if ($tg_user){
+                $update_login = User::where('tg_user_id',$tg_id)->update([
+                    'username'=>$tg_user->username,
+                    'password'=>Hash::make($tg_user->pr),
+                ]);
+                $phone = $tg_user->phone_number;
+                $username = $tg_user->username;
+                $password = $tg_user->pr;
+                if ($update_login){
+                    $response = Http::post('notify.eskiz.uz/api/auth/login', [
+                        'email' => 'mubashirov2002@gmail.com',
+                        'password' => 'PM4g0AWXQxRg0cQ2h4Rmn7Ysoi7IuzyMyJ76GuJa'
+                    ]);
+                    $token = $response['data']['token'];
+
+                    $sms = Http::withToken($token)->post('notify.eskiz.uz/api/message/sms/send', [
+                        'mobile_phone' => substr($phone,1),
+                        'message' => 'Assalomu alaykum, siz Novatio kompaniyasing Akademiyasiga qabul qilindingiz! '  . 'Sayt: https://academy.novatio.uz' .  ' Login: ' . $username . '; ' . '  Parol: ' . $password,
+                        'from' => '4546',
+                        'callback_url' => 'http://0000.uz/test.php'
+                    ]);
+                }
+            }
+        }
+
+        return "zor";
+    }
+
+
+
 }
