@@ -30,10 +30,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => '/'], function () {
-    Route::get('/', [AuthController::class, 'registerView'])->name('register-view');
+    Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-    Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
+    Route::get('/', [AuthController::class, 'loginView'])->name('login-view');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 
     Route::get('/users-region', [AuthController::class, 'ChooseRegion'])->name('users-region');
