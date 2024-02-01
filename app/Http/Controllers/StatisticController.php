@@ -9,6 +9,7 @@ class StatisticController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
         $user_foiz = AnswerCheck::selectRaw(
             'lms_answer_check.user_id,
             ROUND(AVG(lms_answer_check.foiz)) as average_foiz,
@@ -74,6 +75,6 @@ class StatisticController extends Controller
 //        return $user_foiz;
 
 
-        return view('user.menu.statistika.index',compact('rankedResults'));
+        return view('user.menu.statistika.index',compact('rankedResults','user'));
     }
 }

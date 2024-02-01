@@ -10,7 +10,11 @@ $t_r = 0
         <div class="dashboard__content bg-light-4">
             <div class="row pb-50 mb-10">
                 <div class="col-12">
-                    <a href="{{url('/')}}" class="btn btn-danger text-white">
+                    @if($user->rol_id == 'user' || $user->rol_id == 'old_user'|| $user->rol_id == 'teacher')
+                    <a href="{{route('user')}}" class="btn btn-danger text-white">
+                    @elseif($user->rol_id == 'admin' || $user->rol_id == 'assistant')
+                    <a href="{{route('admin')}}" class="btn btn-danger text-white">
+                    @endif
                         <i class=" fas fa-backward"></i>
                         Orqaga qaytish
                     </a>
