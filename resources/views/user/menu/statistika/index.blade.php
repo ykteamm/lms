@@ -9,7 +9,14 @@ $t_r = 0
     <div class="dashboard__main">
         <div class="dashboard__content bg-light-4">
             <div class="row pb-50 mb-10">
-                <div class="col-auto">
+                <div class="col-12">
+                    <a href="{{route('user')}}" class="btn btn-danger text-white">
+                        <i class=" fas fa-backward"></i>
+                        Orqaga qaytish
+                    </a>
+                </div>
+
+                <div class="col-auto mt-20">
                     <h1 class="text-30 lh-12 fw-700">Peshqadamlar</h1>
 {{--                    <div class="mt-10">Lorem ipsum dolor sit amet, consectetur.</div>--}}
                 </div>
