@@ -75,7 +75,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::resource('module', ModuleController::class);
     Route::resource('lessons', LessonsController::class);
     Route::resource('raspisaniya', RaspisaniyaController::class);
-    Route::get('/statistic',[StatisticController::class,'index'])->name('statistic_admin');
+    Route::get('/statistic',[StatisticController::class,'admin'])->name('statistic_admin');
 });
 //'userRole:user'
 Route::group(['prefix' => 'user','middleware' => ['auth','userAdminRole:old_user,teacher,user']], function () {
