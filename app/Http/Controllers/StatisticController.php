@@ -25,38 +25,13 @@ class StatisticController extends Controller
             ->get();
 
         // Keyingi qadamlarda natijalarni tahlil qilish va har bir foydalanuvchi uchun orinlarini aniqlash
-//        $rankedResults = [];
-//        $previousRank = 1;
-//        foreach ($user_foiz as $index => $result) {
-//            if ($index > 0 && $result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
-//                // Natija avvalgi foydalanuvchidan pastroq bo'lsa, yangi orin aniqlash
-//                $previousRank = $index + 1;
-//            }
-//            // Foydalanuvchini natijasi va orini arrayga qo'shish
-//            $rankedResults[] = [
-//                'user_id' => $result->user_id,
-//                'average_foiz' => $result->average_foiz,
-//                'zumrad' => $result->zumrad,
-//                'first_name' => $result->first_name,
-//                'last_name' => $result->last_name,
-//                'image' => $result->image,
-//                'rank' => $previousRank,
-//            ];
-//        }
         $rankedResults = [];
         $previousRank = 1;
-
         foreach ($user_foiz as $index => $result) {
-            if ($index > 0) {
+            if ($index > 0 && $result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
                 // Natija avvalgi foydalanuvchidan pastroq bo'lsa, yangi orin aniqlash
-                if ($result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
-                    $previousRank = $index + 0;
-                } elseif ($result->average_foiz === $user_foiz[$index - 1]->average_foiz) {
-                    // Agar ikkita bir xil rank bo'lsa, keyingi foydalanuvchiga keyingi rankni boshlash
-                    $previousRank = $index + 0;
-                }
+                $previousRank = $index + 1;
             }
-
             // Foydalanuvchini natijasi va orini arrayga qo'shish
             $rankedResults[] = [
                 'user_id' => $result->user_id,
@@ -68,6 +43,31 @@ class StatisticController extends Controller
                 'rank' => $previousRank,
             ];
         }
+//        $rankedResults = [];
+//        $previousRank = 1;
+//
+//        foreach ($user_foiz as $index => $result) {
+//            if ($index > 0) {
+//                // Natija avvalgi foydalanuvchidan pastroq bo'lsa, yangi orin aniqlash
+//                if ($result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
+//                    $previousRank = $index + 0;
+//                } elseif ($result->average_foiz === $user_foiz[$index - 1]->average_foiz) {
+//                    // Agar ikkita bir xil rank bo'lsa, keyingi foydalanuvchiga keyingi rankni boshlash
+//                    $previousRank = $index + 0;
+//                }
+//            }
+//
+//            // Foydalanuvchini natijasi va orini arrayga qo'shish
+//            $rankedResults[] = [
+//                'user_id' => $result->user_id,
+//                'average_foiz' => $result->average_foiz,
+//                'zumrad' => $result->zumrad,
+//                'first_name' => $result->first_name,
+//                'last_name' => $result->last_name,
+//                'image' => $result->image,
+//                'rank' => $previousRank,
+//            ];
+//        }
 
 
 //        return $rankedResults;
@@ -97,38 +97,13 @@ class StatisticController extends Controller
             ->get();
 
         // Keyingi qadamlarda natijalarni tahlil qilish va har bir foydalanuvchi uchun orinlarini aniqlash
-//        $rankedResults = [];
-//        $previousRank = 1;
-//        foreach ($user_foiz as $index => $result) {
-//            if ($index > 0 && $result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
-//                // Natija avvalgi foydalanuvchidan pastroq bo'lsa, yangi orin aniqlash
-//                $previousRank = $index + 1;
-//            }
-//            // Foydalanuvchini natijasi va orini arrayga qo'shish
-//            $rankedResults[] = [
-//                'user_id' => $result->user_id,
-//                'average_foiz' => $result->average_foiz,
-//                'zumrad' => $result->zumrad,
-//                'first_name' => $result->first_name,
-//                'last_name' => $result->last_name,
-//                'image' => $result->image,
-//                'rank' => $previousRank,
-//            ];
-//        }
         $rankedResults = [];
         $previousRank = 1;
-
         foreach ($user_foiz as $index => $result) {
-            if ($index > 0) {
+            if ($index > 0 && $result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
                 // Natija avvalgi foydalanuvchidan pastroq bo'lsa, yangi orin aniqlash
-                if ($result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
-                    $previousRank = $index + 0;
-                } elseif ($result->average_foiz === $user_foiz[$index - 1]->average_foiz) {
-                    // Agar ikkita bir xil rank bo'lsa, keyingi foydalanuvchiga keyingi rankni boshlash
-                    $previousRank = $index + 0;
-                }
+                $previousRank = $index + 1;
             }
-
             // Foydalanuvchini natijasi va orini arrayga qo'shish
             $rankedResults[] = [
                 'user_id' => $result->user_id,
@@ -140,6 +115,31 @@ class StatisticController extends Controller
                 'rank' => $previousRank,
             ];
         }
+//        $rankedResults = [];
+//        $previousRank = 1;
+//
+//        foreach ($user_foiz as $index => $result) {
+//            if ($index > 0) {
+//                // Natija avvalgi foydalanuvchidan pastroq bo'lsa, yangi orin aniqlash
+//                if ($result->average_foiz < $user_foiz[$index - 1]->average_foiz) {
+//                    $previousRank = $index + 0;
+//                } elseif ($result->average_foiz === $user_foiz[$index - 1]->average_foiz) {
+//                    // Agar ikkita bir xil rank bo'lsa, keyingi foydalanuvchiga keyingi rankni boshlash
+//                    $previousRank = $index + 0;
+//                }
+//            }
+//
+//            // Foydalanuvchini natijasi va orini arrayga qo'shish
+//            $rankedResults[] = [
+//                'user_id' => $result->user_id,
+//                'average_foiz' => $result->average_foiz,
+//                'zumrad' => $result->zumrad,
+//                'first_name' => $result->first_name,
+//                'last_name' => $result->last_name,
+//                'image' => $result->image,
+//                'rank' => $previousRank,
+//            ];
+//        }
 
 
 //        return $rankedResults;

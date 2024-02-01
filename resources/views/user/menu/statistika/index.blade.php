@@ -42,64 +42,27 @@ $t_r = 0
                                     <ul class="list-group">
                                         @foreach($rankedResults as $statistic)
                                             @if($statistic['rank'] == 1)
-                                            <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid rgb(221 176 96); border-radius: 20px;background: #ecebeb;">
-                                                <img width="25" src="{{asset('assets/img/medal/awwards-01.png')}}" alt="">
-                                                <div class="relative d-flex items-center text-center">
-                                                    <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
-                                                </div>
-                                                <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: #212529;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
-                                                    {{$statistic['first_name']}}
-                                                </span>
-                                                <span class="badge rounded-pill" style="color: black;">
-                                                    <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
-                                                    {{$statistic['average_foiz']}}
-                                                </span>
-                                                <span class="badge rounded-pill" style="color: black;">
-                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
-                                                    {{$statistic['zumrad']}}
-                                                </span>
-                                            </li>
-                                            @elseif($statistic['rank'] == 2)
-                                            <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid rgb(179 181 182); border-radius: 20px;background: #ecebeb;">
-                                                <img width="25" src="{{asset('assets/img/medal/awwards-03.png')}}" alt="">
-                                                <div class="relative d-flex items-center text-center">
-                                                    <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
-                                                </div>
-                                                <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: #212529;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
-                                                    {{$statistic['first_name']}}
-                                                </span>
-                                                <span class="badge rounded-pill" style="color: black;">
-                                                    <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
-                                                    {{$statistic['average_foiz']}}
-                                                </span>
-                                                <span class="badge rounded-pill" style="color: black;">
-                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
-                                                    {{$statistic['zumrad']}}
-                                                </span>
-                                            </li>
-                                            @elseif($statistic['rank'] == 3)
-                                            <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid #d57600; border-radius: 20px;background: #ecebeb;">
-                                                <img width="25" src="{{asset('assets/img/medal/awwards-02.png')}}" alt="">
-                                                <div class="relative d-flex items-center text-center">
-                                                    <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
-                                                </div>
-                                                <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: #212529;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
-                                                    {{$statistic['first_name']}}
-                                                </span>
-                                                <span class="badge rounded-pill" style="color: black;">
-                                                    <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
-                                                    {{$statistic['average_foiz']}}
-                                                </span>
-                                                <span class="badge rounded-pill" style="color: black; ">
-                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
-                                                    {{$statistic['zumrad']}}
-                                                </span>
-                                            </li>
-                                            @else
-                                                <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid white; background: #ecebeb; border-radius: 20px">
-                                                    <span class="ml-10 mr-15">
-                                                        {{$statistic['rank']}}
-                                                    </span>
+                                                @if($statistic['user_id'] == $user->id)
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid rgb(221 176 96); border-radius: 20px;background: #1bc874f0;">
+                                                        <img width="25" src="{{asset('assets/img/medal/awwards-01.png')}}" alt="">
+                                                        <div class="relative d-flex items-center text-center">
+                                                            <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
+                                                        </div>
+                                                        <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: #fff;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
+                                                            {{$statistic['first_name']}}
+                                                        </span>
+                                                        <span class="badge rounded-pill" style="color: white;">
+                                                            <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
+                                                            {{$statistic['average_foiz']}}
+                                                        </span>
+                                                        <span class="badge rounded-pill" style="color: white;">
+                                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                            {{$statistic['zumrad']}}
+                                                        </span>
+                                                    </li>
+                                                @else
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid rgb(221 176 96); border-radius: 20px;background: #ecebeb;">
+                                                    <img width="25" src="{{asset('assets/img/medal/awwards-01.png')}}" alt="">
                                                     <div class="relative d-flex items-center text-center">
                                                         <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
                                                     </div>
@@ -110,11 +73,130 @@ $t_r = 0
                                                         <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
                                                         {{$statistic['average_foiz']}}
                                                     </span>
-                                                    <span class="badge rounded-pill" style="color: black; ">
+                                                    <span class="badge rounded-pill" style="color: black;">
                                                         <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
                                                         {{$statistic['zumrad']}}
                                                     </span>
-                                                </li>
+                                                    </li>
+                                                @endif
+                                            @elseif($statistic['rank'] == 2)
+                                                @if($statistic['user_id'] == $user->id)
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid rgb(179 181 182); border-radius: 20px;background: #1bc874f0;">
+                                                        <img width="25" src="{{asset('assets/img/medal/awwards-03.png')}}" alt="">
+                                                        <div class="relative d-flex items-center text-center">
+                                                            <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
+                                                        </div>
+                                                        <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: white;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
+                                                    {{$statistic['first_name']}}
+                                                </span>
+                                                        <span class="badge rounded-pill" style="color: white;">
+                                                    <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
+                                                    {{$statistic['average_foiz']}}
+                                                </span>
+                                                        <span class="badge rounded-pill" style="color: white;">
+                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                    {{$statistic['zumrad']}}
+                                                </span>
+                                                    </li>
+                                                @else
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid rgb(179 181 182); border-radius: 20px;background: #ecebeb;">
+                                                        <img width="25" src="{{asset('assets/img/medal/awwards-03.png')}}" alt="">
+                                                        <div class="relative d-flex items-center text-center">
+                                                            <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
+                                                        </div>
+                                                        <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: #212529;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
+                                                    {{$statistic['first_name']}}
+                                                </span>
+                                                        <span class="badge rounded-pill" style="color: black;">
+                                                    <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
+                                                    {{$statistic['average_foiz']}}
+                                                </span>
+                                                        <span class="badge rounded-pill" style="color: black;">
+                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                    {{$statistic['zumrad']}}
+                                                </span>
+                                                    </li>
+                                                @endif
+                                            @elseif($statistic['rank'] == 3)
+                                                @if($statistic['user_id'] == $user->id)
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid #d57600; border-radius: 20px;background: #1bc874f0;">
+                                                        <img width="25" src="{{asset('assets/img/medal/awwards-02.png')}}" alt="">
+                                                        <div class="relative d-flex items-center text-center">
+                                                            <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
+                                                        </div>
+                                                        <span class="text-center" style="color: white; overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
+                                                        {{$statistic['first_name']}}
+                                                    </span>
+                                                        <span class="badge rounded-pill" style="color: white;">
+                                                    <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
+                                                    {{$statistic['average_foiz']}}
+                                                </span>
+                                                        <span class="badge rounded-pill" style="color: white; ">
+                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                    {{$statistic['zumrad']}}
+                                                </span>
+                                                    </li>
+                                                @else
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid #d57600; border-radius: 20px;background: #ecebeb;">
+                                                        <img width="25" src="{{asset('assets/img/medal/awwards-02.png')}}" alt="">
+                                                        <div class="relative d-flex items-center text-center">
+                                                            <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
+                                                        </div>
+                                                        <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: #212529;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
+                                                    {{$statistic['first_name']}}
+                                                </span>
+                                                        <span class="badge rounded-pill" style="color: black;">
+                                                    <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
+                                                    {{$statistic['average_foiz']}}
+                                                </span>
+                                                        <span class="badge rounded-pill" style="color: black; ">
+                                                    <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                    {{$statistic['zumrad']}}
+                                                </span>
+                                                    </li>
+                                                @endif
+                                            @else
+                                                @if($statistic['user_id'] == $user->id)
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style=" border: 1px solid white; background: #1bc874f0; border-radius: 20px">
+                                                    <span class="ml-10 mr-15" style="color: white">
+                                                        {{$statistic['rank']}}
+                                                    </span>
+                                                        <div class="relative d-flex items-center text-center">
+                                                            <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
+                                                        </div>
+                                                        <span class="text-center" style="color: white;overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
+                                                        {{$statistic['first_name']}}
+                                                    </span>
+                                                        <span class="badge rounded-pill" style="color: white;">
+                                                        <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
+                                                        {{$statistic['average_foiz']}}
+                                                    </span>
+                                                    <span class="badge rounded-pill" style="color: white; ">
+                                                        <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                        {{$statistic['zumrad']}}
+                                                    </span>
+                                                    </li>
+                                                @else
+                                                    <li class="mt-15 list-group-item d-flex justify-content-between align-items-center" style="border: 1px solid white; background: #ecebeb; border-radius: 20px">
+                                                    <span class="ml-10 mr-15">
+                                                        {{$statistic['rank']}}
+                                                    </span>
+                                                        <div class="relative d-flex items-center text-center">
+                                                            <img class="size-40 img-fluid"  src="{{asset('storage/'.$statistic['image'])}}" style="border-radius: 50px;" alt="image">
+                                                        </div>
+                                                        <span class="text-center" style="overflow: hidden; white-space: nowrap;text-overflow: ellipsis; margin-left: 10px ;color: #212529;font-size: 15px; line-height: 1.7;font-family: 'GT Walsheim Pro', sans-serif;font-weight: 400">
+                                                        {{$statistic['first_name']}}
+                                                    </span>
+                                                        <span class="badge rounded-pill" style="color: black;">
+                                                        <i class="fas fa-graduation-cap text-14 lh-1" style="color: blue"></i>
+                                                        {{$statistic['average_foiz']}}
+                                                    </span>
+                                                        <span class="badge rounded-pill" style="color: black; ">
+                                                        <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                                        {{$statistic['zumrad']}}
+                                                    </span>
+                                                    </li>
+                                                @endif
                                             @endif
                                         @endforeach
                                     </ul>
