@@ -33,6 +33,13 @@
             </a>
         </div>
 
+        <div class="sidebar__item <?php if (Request::is('admin/statistic')){echo '-is-active -dark-bg-dark-2';}?>">
+            <a href="{{route('statistic_admin')}}" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
+                <i class="fas fa-trophy text-20 mr-15"></i>
+                Statistika
+            </a>
+        </div>
+
 {{--        <div class="sidebar__item <?php if (Request::is('admin/users_check')){echo '-is-active -dark-bg-dark-2';}?>">--}}
 {{--            <a href="{{url('admin/users_check')}}" class="d-flex items-center text-17 lh-1 fw-500">--}}
 {{--                --}}{{--                <i class="text-20 icon-setting mr-15"></i>--}}
@@ -100,6 +107,13 @@
                 <a href="/admin" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                     <i class="text-20 icon-discovery mr-15"></i>
                     Dashboard
+                </a>
+            </div>
+
+            <div class="sidebar__item <?php if (Request::is('admin/statistic')){echo '-is-active -dark-bg-dark-2';}?>">
+                <a href="{{route('statistic_admin')}}" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
+                    <i class="fas fa-trophy text-20 mr-15"></i>
+                    Statistika
                 </a>
             </div>
 

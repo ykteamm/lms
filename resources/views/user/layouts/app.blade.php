@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('user.partials.css')
+    @yield('css')
     <title>@yield('title','LMS')</title>
 </head>
 

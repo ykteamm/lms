@@ -11,6 +11,14 @@ use App\Models\AnswerCheck;
             </a>
         </div>
 
+
+        <div class="sidebar__item <?php if (Request::is('user/statistic')){echo '-is-active -dark-bg-dark-2';}?>">
+            <a href="{{route('statistic')}}" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
+                <i class="fas fa-trophy text-20 mr-15"></i>
+                Statistika
+            </a>
+        </div>
+
         <div class="sidebar__item ">
             <a href="{{route('logout')}}" class="d-flex items-center text-17 lh-1 fw-500 ">
                 <i class="text-20 icon-power mr-15"></i>

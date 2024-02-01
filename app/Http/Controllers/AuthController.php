@@ -140,8 +140,7 @@ class AuthController extends Controller
             // Authentication passed
 //            return redirect(route('user'))->with('success','Successfully enter!'); // Change the redirection URL
         }
-        return redirect(route('login'))->with('error','Login details are not valid!');
-
+        return redirect(route('login-view'))->with('error','Login yoki parolni xato yozdingiz');
     }
 
     public function logout()
@@ -163,8 +162,6 @@ class AuthController extends Controller
         Auth::logout();
         return redirect(route('login-view'));
     }
-
-
 
     public function ChooseRegion(Request $request)
     {

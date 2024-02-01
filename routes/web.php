@@ -9,6 +9,7 @@ use App\Http\Controllers\IntegrationController;
 use App\Http\Controllers\LessonsController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\RaspisaniyaController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\TestCheckController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserCheckController;
@@ -74,6 +75,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::resource('module', ModuleController::class);
     Route::resource('lessons', LessonsController::class);
     Route::resource('raspisaniya', RaspisaniyaController::class);
+    Route::get('/statistic',[StatisticController::class,'index'])->name('statistic_admin');
 });
 //'userRole:user'
 Route::group(['prefix' => 'user','middleware' => ['auth','userAdminRole:old_user,teacher,user']], function () {
@@ -89,4 +91,5 @@ Route::group(['prefix' => 'user','middleware' => ['auth','userAdminRole:old_user
 
     Route::post('/imkoniyat',[TestCheckController::class,'Imkoniyat'])->name('imkoniyat');
     Route::get('/settings')->name('settings');
+    Route::get('/statistic',[StatisticController::class,'index'])->name('statistic');
 });
