@@ -10,7 +10,7 @@ $t_r = 0
         <div class="dashboard__content bg-light-4">
             <div class="row pb-50 mb-10">
                 <div class="col-12">
-                    <a href="{{route('user')}}" class="btn btn-danger text-white">
+                    <a href="{{url('/')}}" class="btn btn-danger text-white">
                         <i class=" fas fa-backward"></i>
                         Orqaga qaytish
                     </a>
