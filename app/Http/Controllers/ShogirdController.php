@@ -50,9 +50,10 @@ class ShogirdController extends Controller
             $modules = Module::where('course_id', $cour_id->id)->select('id', 'title', 'course_id')->get();
             $module_id = [];
             foreach ($modules as $mod_id){
-                $module_id = $mod_id;
+                $module_id[] = $mod_id->id;
             }
-            $lesson = Lesson::where('module_id',$module_id['id'])->select('id','title','module_id')->get();
+//            return $module_id;
+            $lesson = Lesson::whereIn('module_id',$module_id)->select('id','title','module_id')->get();
 //            return $module_id;
             // $course_id ni yaratish
             $course_id['course'][] = [
@@ -64,30 +65,40 @@ class ShogirdController extends Controller
             ];
         }
 //        return $course_id;
+//            $answer_check = [];
+//            $test = [];
+//            $course_ids = [];
             foreach ($course_id['course'] as $course){
-//                $test = $course;
-//                return $test;
+                $course_ids[] = $course['id'];
                 $modul_ids = [];
                 foreach ($course['modules'] as $modul_id){
-                    $modul_ids = $modul_id;
-//                    $test = $modul_ids;
-//                    return $test;
+                    $modul_ids[] = $modul_id['id'];
                 }
-                $lesson_ids = [];
+//                return $modul_ids;
                 $group_test = [];
                 $test = [];
+                $lesson_ids = [];
+                $less_ids = [];
 //                return $course['lessons'];
                 foreach ($course['lessons'] as $lesson_id){
+                    $dars_ids[]['lesson_id']  = $lesson_id['id'];
+                    $less_ids[] = $lesson_id['id'];
+                    $lesson_ids[]['lesson_id']  = $lesson_id['id'];
                     $group_test[] = GroupTest::where('lesson_id',$lesson_id['id'])->select('id','ball','limit','lesson_id')->first();
                     $test[] = Test::where('lesson_id',$lesson_id['id'])->select('id','answer','lesson_id')->first();
-                    $lesson_ids[]['lesson_id']  = $lesson_id['id'];
-//                    return $test;
-                    $answer_check = AnswerCheck::
-                    where([
-                        'course_id' => $course['id'],
-                        'module_id' => $modul_ids['id'],
+                }
+//                return $less_ids;
+//                return $lesson_ids;
+//                return $test;
+
+//                return $lesson_ids;
+//                $answer_check[$course['id']]
+                $data   = AnswerCheck::
+                where([
+                    'course_id' => $course['id'],
                     ])
-                    ->whereIn('lesson_id',$lesson_ids)
+                    ->whereIn('module_id',$modul_ids)
+                    ->whereIn('lesson_id',$less_ids)
                     ->whereIn('user_id',$user_id)
                     ->orderBy('lesson_id','asc')
                     ->select(
@@ -102,21 +113,33 @@ class ShogirdController extends Controller
                         'foiz',
                     )
                     ->get();
-                }
-
-//                return $test;
+                $answer_check[] = [
+                  'course_id'=>$course['id'],
+                  'lesson_id'=>$lesson_ids,
+                  'data'=>$data,
+                  'test'=>$test,
+                  'group_test'=>$group_test,
+                ];
             }
+//            return $answer_check;
+//            return $lesson_ids;
+//            return $dars_ids;
+//            return $test;
+//            return $course_id;
+//            $array = $course_ids[0];
+//            return $array;
+//            return $course_ids;
+//            return $answer_check;
+//            return $course['id'];
+
+//            return $users;
 //            return $test;
 //            return $group_test;
 //            return $lesson_ids;
 //            return $answer_check;
 
 
-//        $module
-
-
-
-        return view('user.menu.shogird.index',compact('users','answer_check','user','lesson_ids','test','group_test'));
+        return view('user.menu.shogird.index',compact('users','answer_check','user','dars_ids'));
         }else{
             abort(404);
         }

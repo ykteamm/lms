@@ -40,7 +40,7 @@
                                     <a href="{{route('register-view')}}" class="text-purple-1">Ro'yxatdan o'tish</a>
                                 </p>
 
-                                <form class="contact-form respondForm__form row y-gap-20 pt-30" method="POST" autocomplete="off" action="{{route('login')}}">
+                                <form class="contact-form respondForm__form row y-gap-20 pt-30" method="POST" autocomplete="off" action="{{route('login-check')}}">
                                     @csrf
                                     <div class="col-12">
                                         <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Login</label>

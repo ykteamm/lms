@@ -92,7 +92,7 @@ class AuthController extends Controller
             'from' => '4546',
             'callback_url' => 'http://0000.uz/test.php'
         ]);
-        return redirect(route('login'))->with('success','Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz!');
+        return redirect(route('login-view'))->with('success','Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz!');
     }
 
 
@@ -112,7 +112,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function LoginCheck(Request $request)
     {
         $request->validate([
             'username'=>'required',
@@ -140,6 +140,7 @@ class AuthController extends Controller
             // Authentication passed
 //            return redirect(route('user'))->with('success','Successfully enter!'); // Change the redirection URL
         }
+
         return redirect(route('login-view'))->with('error','Login yoki parolni xato yozdingiz');
     }
 

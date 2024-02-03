@@ -35,8 +35,9 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/register', [AuthController::class, 'registerView'])->name('register-view');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-    Route::get('/', [AuthController::class, 'loginView'])->name('login-view');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/', [AuthController::class, 'loginView'])->name('login');
+    Route::get('/login', [AuthController::class, 'loginView'])->name('login-view');
+    Route::post('/login-check', [AuthController::class, 'LoginCheck'])->name('login-check');
 
     Route::get('/users-region', [AuthController::class, 'ChooseRegion'])->name('users-region');
 
