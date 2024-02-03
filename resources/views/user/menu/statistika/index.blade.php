@@ -18,7 +18,6 @@ $t_r = 0
 
                 <div class="col-auto mt-20">
                     <h1 class="text-30 lh-12 fw-700">Peshqadamlar</h1>
-{{--                    <div class="mt-10">Lorem ipsum dolor sit amet, consectetur.</div>--}}
                 </div>
             </div>
             <div class="row y-gap-30">

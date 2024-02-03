@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnswerCheck;
+use App\Models\Course;
+use App\Models\Lesson;
+use App\Models\Module;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StatisticController extends Controller
 {
     public function index()
     {
+        $course = Course::where('status',0)->first();
+        $module = Module::where('course_id',$course->id)->first();
+        $lesson = Lesson::where('module_id',$module->id)->first();
         $user = auth()->user();
         $user_foiz = AnswerCheck::selectRaw(
             'lms_answer_check.user_id,
@@ -18,6 +25,8 @@ class StatisticController extends Controller
             lms_users.last_name,
             lms_users.image
             ')
+            ->where('lms_answer_check.lesson_id', '<>', $lesson->id)
+            ->whereNotNull('lms_answer_check.lesson_id')
             ->join('lms_zumrad', 'lms_zumrad.user_id', '=', 'lms_answer_check.user_id')
             ->join('lms_users', 'lms_users.id', '=', 'lms_answer_check.user_id')
             ->groupBy('lms_answer_check.user_id', 'lms_zumrad.zumrad', 'lms_users.first_name', 'lms_users.last_name', 'lms_users.image')
@@ -82,6 +91,12 @@ class StatisticController extends Controller
     public function admin()
     {
         $user = auth()->user();
+
+        $course = Course::where('status',0)->first();
+        $module = Module::where('course_id',$course->id)->first();
+        $lesson = Lesson::where('module_id',$module->id)->first();
+
+//        DB::table('lms_answer_check')->where()
         $user_foiz = AnswerCheck::selectRaw(
             'lms_answer_check.user_id,
             ROUND(AVG(lms_answer_check.foiz)) as average_foiz,
@@ -90,6 +105,8 @@ class StatisticController extends Controller
             lms_users.last_name,
             lms_users.image
             ')
+            ->where('lms_answer_check.lesson_id', '<>', $lesson->id)
+            ->whereNotNull('lms_answer_check.lesson_id')
             ->join('lms_zumrad', 'lms_zumrad.user_id', '=', 'lms_answer_check.user_id')
             ->join('lms_users', 'lms_users.id', '=', 'lms_answer_check.user_id')
             ->groupBy('lms_answer_check.user_id', 'lms_zumrad.zumrad', 'lms_users.first_name', 'lms_users.last_name', 'lms_users.image')
