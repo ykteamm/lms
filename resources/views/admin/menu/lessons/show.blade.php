@@ -350,12 +350,20 @@ use App\Models\Test;
                                                         @method('PUT')
                                                         <input type="hidden" value="{{$video_dars->lesson_id}}" name="lesson_id">
                                                         <div class="row">
-                                                            <div class="mb-3">
-                                                                <label for="level" class="form-label fw-700">Level</label>
-                                                                <input type="text" value="{{$group_test->level}}" class="border form-control" id="level" name="level" required>
-                                                                @error('level')
-                                                                <div style="color: red" class="form-text">{{$message}}</div>
-                                                                @enderror
+
+                                                            <div class="col-12">
+                                                                <div class="mb-3">
+                                                                    <label for="level" class="form-label fw-700">Level</label>
+                                                                    <select class="form-select answer-select" id="level" name="level" required>
+                                                                        <option value="">--Select--</option>
+                                                                        <option @if($group_test->level == "Boshlang'ich") selected @endif value="Boshlang'ich">Boshlang'ich</option>
+                                                                        <option @if($group_test->level == "O'rta") selected @endif  value="O'rta">O'rta</option>
+                                                                        <option @if($group_test->level == "Yuqori") selected @endif  value="Yuqori">Yuqori</option>
+                                                                    </select>
+                                                                    @error('level')
+                                                                    <div style="color: red" class="form-text">{{$message}}</div>
+                                                                    @enderror
+                                                                </div>
                                                             </div>
 
                                                            <div class="col-6">
@@ -536,7 +544,7 @@ use App\Models\Test;
             $('.form-select').each(function() {
                 $(this).select2({
                     theme: 'bootstrap4',
-                    width: 'style',
+                    width: '500',
                     placeholder: $(this).attr('placeholder'),
                     allowClear: Boolean($(this).data('allow-clear')),
                 });

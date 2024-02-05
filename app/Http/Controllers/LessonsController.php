@@ -99,18 +99,20 @@ class LessonsController extends Controller
         }
         $data->save();
 // tests databasega saqlash
-        foreach ($questions as $question) {
-            // Map the JSON data to the model's attributes
-            $test = new Test();
-            $test->title = $question['title'];
-            $test->variant_a = $question['variants']['variant_a'];
-            $test->variant_b = $question['variants']['variant_b'];
-            $test->variant_c = $question['variants']['variant_c'];
-            $test->variant_d = $question['variants']['variant_d'];
-            $test->answer = $question['answer'];
-            $test->lesson_id = $lesson_id;
-            // Save the model to the database
-            $test->save();
+        if ($questions){
+            foreach ($questions as $question) {
+                // Map the JSON data to the model's attributes
+                $test = new Test();
+                $test->title = $question['title'];
+                $test->variant_a = $question['variants']['variant_a'];
+                $test->variant_b = $question['variants']['variant_b'];
+                $test->variant_c = $question['variants']['variant_c'];
+                $test->variant_d = $question['variants']['variant_d'];
+                $test->answer = $question['answer'];
+                $test->lesson_id = $lesson_id;
+                // Save the model to the database
+                $test->save();
+            }
         }
 //        end database
 
