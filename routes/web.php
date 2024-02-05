@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ElchilarController;
+use App\Http\Controllers\EnterExitController;
 use App\Http\Controllers\GroupTestsController;
 use App\Http\Controllers\IntegrationController;
 use App\Http\Controllers\LessonsController;
@@ -78,6 +79,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::resource('lessons', LessonsController::class);
     Route::resource('raspisaniya', RaspisaniyaController::class);
     Route::get('/statistic',[StatisticController::class,'admin'])->name('statistic_admin');
+    Route::get('/enter_exit',[EnterExitController::class,'index'])->name('enter-exit');
 });
 //'userRole:user'
 Route::group(['prefix' => 'user','middleware' => ['auth','userAdminRole:old_user,teacher,user']], function () {

@@ -28,12 +28,23 @@ class UsersPageController extends Controller
     {
         $userID = auth()->user()->id;
         $course = Module::where('id',$module_id)->first();
-        $lessons = Lesson::where('module_id',$module_id)->orderBy('id','asc')->get();
-
-
         $zumrad = Zumrad::where('user_id',$userID)->first();
+
+        $module_status = [];
+        $lessons = [];
+        if ($course->status == 1){
+            $lesson_status = Lesson::where('module_id',$module_id)->get();
+            $module_status = $lesson_status;
+        }else{
+            $lessons = Lesson::where('module_id',$module_id)->orderBy('id','asc')->get();
+        }
+
+//        return $module_status;
+
+//        $module = Module::where('status',1)->get();
+//        $status_lesson = Lesson::whereIn('module_id');
 //        return $lessons;
-        return view('user.menu.lesson',compact('lessons','course','module_id','userID','zumrad'));
+        return view('user.menu.lesson',compact('lessons','course','module_id','userID','zumrad','module_status'));
     }
 
     public function LessonShow($lesson_id)

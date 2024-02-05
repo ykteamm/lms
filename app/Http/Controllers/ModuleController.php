@@ -42,6 +42,7 @@ class ModuleController extends Controller
         $data = new Module();
         $data->title = $request->title;
         $data->course_id = $request->course_id;
+        $data->status = 0;
 
         if (!$data->save()){
             return redirect(route('module-index',['course_id'=>$request->course_id]))->with('error','Module qo\'shishda xatolik');
@@ -76,7 +77,8 @@ class ModuleController extends Controller
         ]);
         $user_data = Module::find($id);
         $user_data->title = $request->title;
-        if (!$user_data->save()){
+        $user_data->status = $request->status;
+        if (!$user_data->save()) {
             return redirect(route('module-index',['course_id'=>$request->course_id]))->with('error','Module tahrirlashda xatolik');
         }
         return redirect(route('module-index',['course_id'=>$request->course_id]))->with('success','Module muvaffaqiyatli tahrirlandi !');

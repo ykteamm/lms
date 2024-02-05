@@ -76,54 +76,54 @@ use App\Models\Test;
                             </div>
                         </div>
 
-
-
                         <div id="questions-container">
                             <!-- Questions will be dynamically added here -->
-                            <div class="question-container mt-30 mb-3 p-5" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <h6 class="mb-20">Savol: 1</h6>
-                                <label for="title1" class="form-label fw-700">Question title</label>
-                                <input type="text" class="form-control" id="title1" name="questions[1][title]" required>
+{{--                            <div class="question-container mt-30 mb-3 p-5" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">--}}
+{{--                                <h6 class="mb-20">Savol: 1</h6>--}}
+{{--                                <label for="title1" class="form-label fw-700">Question title</label>--}}
+{{--                                <input type="text" class="form-control" id="title1" name="questions[1][title]" required>--}}
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="mb-3 mt-30">
-                                            <label for="variant_a1" class="form-label fw-700">Variant A</label>
-                                            <input type="text" class="form-control" id="variant_a1" name="questions[1][variants][variant_a]" >
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3 mt-30">
-                                            <label for="variant_b1" class="form-label fw-700">Variant B</label>
-                                            <input type="text" class="form-control" id="variant_b1" name="questions[1][variants][variant_b]" >
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3 mt-30">
-                                            <label for="variant_c1" class="form-label fw-700">Variant C</label>
-                                            <input type="text" class="form-control" id="variant_c1" name="questions[1][variants][variant_c]" >
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3 mt-30">
-                                            <label for="variant_d1" class="form-label fw-700">Variant D</label>
-                                            <input type="text" class="form-control" id="variant_d1" name="questions[1][variants][variant_d]" >
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-6">--}}
+{{--                                        <div class="mb-3 mt-30">--}}
+{{--                                            <label for="variant_a1" class="form-label fw-700">Variant A</label>--}}
+{{--                                            <input type="text" class="form-control" id="variant_a1" name="questions[1][variants][variant_a]" >--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-6">--}}
+{{--                                        <div class="mb-3 mt-30">--}}
+{{--                                            <label for="variant_b1" class="form-label fw-700">Variant B</label>--}}
+{{--                                            <input type="text" class="form-control" id="variant_b1" name="questions[1][variants][variant_b]" >--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-6">--}}
+{{--                                        <div class="mb-3 mt-30">--}}
+{{--                                            <label for="variant_c1" class="form-label fw-700">Variant C</label>--}}
+{{--                                            <input type="text" class="form-control" id="variant_c1" name="questions[1][variants][variant_c]" >--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-6">--}}
+{{--                                        <div class="mb-3 mt-30">--}}
+{{--                                            <label for="variant_d1" class="form-label fw-700">Variant D</label>--}}
+{{--                                            <input type="text" class="form-control" id="variant_d1" name="questions[1][variants][variant_d]" >--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="mb-3 mt-30">
-                                    <label for="answer1" class="form-label fw-700">Answer</label>
-                                    <select class="form-select answer-select" id="answer1" name="questions[1][answer]" required>
-                                        <option value="">Select Answer</option>
-                                        <option value="A">Variant A</option>
-                                        <option value="B">Variant B</option>
-                                        <option value="C">Variant C</option>
-                                        <option value="D">Variant D</option>
-                                    </select>
-                                </div>
-                            </div>
+{{--                                <div class="mb-3 mt-30">--}}
+{{--                                    <label for="answer1" class="form-label fw-700">Answer</label>--}}
+{{--                                    <select class="form-select answer-select" id="answer1" name="questions[1][answer]" required>--}}
+{{--                                        <option value="">Select Answer</option>--}}
+{{--                                        <option value="A">Variant A</option>--}}
+{{--                                        <option value="B">Variant B</option>--}}
+{{--                                        <option value="C">Variant C</option>--}}
+{{--                                        <option value="D">Variant D</option>--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
                         </div>
+
                     </div>
 
                     <button type="button" class="btn btn-primary float-right" id="addQuestionBtn">Add Question</button>
@@ -138,14 +138,6 @@ use App\Models\Test;
 
                     <div class="row">
                         <div class="col-4">
-{{--                            <div class="mb-3">--}}
-{{--                                <label for="level" class="form-label fw-700">Level</label>--}}
-{{--                                --}}
-{{--                                <input type="text" class="border form-control" id="level" name="level" required>--}}
-{{--                                @error('level')--}}
-{{--                                <div style="color: red" class="form-text">{{$message}}</div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
                             <div class="mb-3">
                                 <label for="level" class="form-label fw-700">Level</label>
                                 <select class="form-select answer-select" id="level" name="level" required>
@@ -212,7 +204,7 @@ use App\Models\Test;
         })
     </script>
     <script type="text/javascript">
-    $(document).ready(function() {
+        $(document).ready(function() {
         // Add new question button click event
         $('#addQuestionBtn').click(function() {
             var questionCount = $('.question-container').length + 1;
@@ -252,7 +244,7 @@ use App\Models\Test;
 
                     <div class="mb-3 mt-30">
                         <label for="answer${questionCount}" class="form-label fw-700">Answer</label>
-                        <select class="form-select answer-select" id="answer${questionCount}" name="questions[${questionCount}][answer]" required>
+                        <select class="answer-select" id="answer${questionCount}" name="questions[${questionCount}][answer]" required>
                             <option value="">Select Answer</option>
                             <option value="A">Variant A</option>
                             <option value="B">Variant B</option>
@@ -267,7 +259,7 @@ use App\Models\Test;
             $('#questions-container').append(newQuestionHtml);
             $('#answer' + questionCount).select2({
                 theme: 'bootstrap4',
-                width: 'style',
+                width: '500',
                 placeholder: $('#answer' + questionCount).attr('placeholder'),
                 allowClear: Boolean($('#answer' + questionCount).data('allow-clear')),
             });
@@ -281,32 +273,31 @@ use App\Models\Test;
         $('.form-select').each(function() {
             $(this).select2({
                 theme: 'bootstrap4',
-                width: 'style',
+                width: '300',
                 placeholder: $(this).attr('placeholder'),
                 allowClear: Boolean($(this).data('allow-clear')),
             });
         });
     });
-</script>
-<script type="text/javascript">
-    function validateYouTubeUrl() {
-        var url = document.getElementById('url').value;
-        var youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    </script>
+    <script type="text/javascript">
+        function validateYouTubeUrl() {
+            var url = document.getElementById('url').value;
+            var youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
 
-        if (youtubeRegex.test(url)) {
-            return true;
-        } else {
-            return false;
+            if (youtubeRegex.test(url) ){
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
 
-    function submitForm() {
-        if (validateYouTubeUrl()) {
-            document.getElementById('url_check').submit();
-        } else {
-            alert('Youtubedan URLni noto\'g\'ri kiritdingiz!');
+        function submitForm() {
+            if (validateYouTubeUrl()) {
+                document.getElementById('url_check').submit();
+            } else {
+                alert('Youtubedan URLni noto\'g\'ri kiritdingiz!');
+            }
         }
-    }
-</script>
-
+    </script>
 @endsection

@@ -242,6 +242,43 @@ $user = auth()->user();
                                 </div>
                         @endif
                     @endforeach
+                    @foreach($module_status as $status)
+                        @php
+                            $passed = Passed::where([
+                                'course_id'=>$course->course_id,
+                                'module_id'=>$course->id,
+                                'lesson_id'=>$status->id,
+                                'user_id'=>$user->id,
+                                ])->first();
+                        @endphp
+                            <div class="side-content mt-15  mr-10 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" style="border: 2px solid #ddd; border-radius: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <a href="{{url('user/lesson-show/'.$status->id)}}" class="coursesCard -type-1" style="padding: 20px 10px">
+                                    <div class="row align-items-center">
+                                        <div class="col-2" style="border: 2px solid #e4ded6;border-radius: 20px; padding: 10px;background: #faf8f5;text-align: center;">
+                                            <i class="fas fa-play" style="color: green"></i>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="text-17 lh-15 fw-500 text-dark-1 ">
+                                                {{$status->title}}
+                                            </div>
+                                        </div>
+                                        @if($passed && $passed->pass_status == 0 && $passed->limit == 0)
+                                            <div class="col-2">
+                                                <i class="far fa-times-circle" style="color: #e5b781"></i>
+                                            </div>
+                                        @elseif($passed && $passed->pass_status == 1)
+                                            <div class="col-2">
+                                                <i class="fas fa-check-circle" style="color: #e5b781"></i>
+                                            </div>
+                                        @else
+                                            <div class="col-2">
+                                                <i class="far fa-circle" style="color: #e5b781"></i>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </a>
+                            </div>
+                    @endforeach
                 </div>
             </div>
         </div>

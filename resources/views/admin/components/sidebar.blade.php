@@ -33,6 +33,14 @@
             </a>
         </div>
 
+
+        <div class="sidebar__item <?php if (Request::is('admin/enter_exit')){echo '-is-active -dark-bg-dark-2';}?>">
+            <a href="{{url('admin/enter_exit')}}" class="d-flex items-center text-17 lh-1 fw-500">
+                <i class="fas fa-users text-20 mr-15"></i>
+                Kirish va Chiqish
+            </a>
+        </div>
+
         <div class="sidebar__item <?php if (Request::is('admin/statistic')){echo '-is-active -dark-bg-dark-2';}?>">
             <a href="{{route('statistic_admin')}}" class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                 <i class="fas fa-trophy text-20 mr-15"></i>

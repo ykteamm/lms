@@ -53,7 +53,7 @@ class ShogirdController extends Controller
                 $module_id[] = $mod_id->id;
             }
 //            return $module_id;
-            $lesson = Lesson::whereIn('module_id',$module_id)->select('id','title','module_id')->get();
+            $lesson = Lesson::whereIn('module_id',$module_id)->select('id','title','module_id')->orderBy('id','asc')->get();
 //            return $module_id;
             // $course_id ni yaratish
             $course_id['course'][] = [

@@ -87,7 +87,6 @@ class StatisticController extends Controller
         return view('user.menu.statistika.index',compact('rankedResults','user'));
     }
 
-
     public function admin()
     {
         $user = auth()->user();
@@ -166,4 +165,5 @@ class StatisticController extends Controller
 
         return view('admin.menu.statistika.index',compact('rankedResults','user'));
     }
+
 }

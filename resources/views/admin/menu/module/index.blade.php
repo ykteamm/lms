@@ -128,6 +128,12 @@
                                                             @error('title')
                                                             <div style="color: red" class="form-text">{{$message}}</div>
                                                             @enderror
+
+                                                            <label for="status" class="form-label fw-700">Module status</label>
+                                                            <input type="number" value="{{$modul->status}}" class="form-control" id="status" name="status">
+                                                            @error('number')
+                                                            <div style="color: red" class="form-text">{{$message}}</div>
+                                                            @enderror
                                                         </div>
 
                                                     </div>
