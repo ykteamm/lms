@@ -86,18 +86,20 @@ class LessonsController extends Controller
 //        }
 //        $content = $dom->saveHTML();
 
-        $data = new Video();
-        $data->url = $url;
-        $data->content = $content;
-        $data->lesson_id = $lesson_id;
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = Str::random(5) .'.'.$image->getClientOriginalExtension();
-            $directory = 'video_image';
-            $image->storeAs("public/{$directory}", $imageName);
-            $data->image = $directory.'/'.$imageName;
+        if ($url && $content){
+            $data = new Video();
+            $data->url = $url;
+            $data->content = $content;
+            $data->lesson_id = $lesson_id;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = Str::random(5) .'.'.$image->getClientOriginalExtension();
+                $directory = 'video_image';
+                $image->storeAs("public/{$directory}", $imageName);
+                $data->image = $directory.'/'.$imageName;
+            }
+            $data->save();
         }
-        $data->save();
 // tests databasega saqlash
         if ($questions){
             foreach ($questions as $question) {
@@ -113,30 +115,31 @@ class LessonsController extends Controller
                 // Save the model to the database
                 $test->save();
             }
+
+            // group test
+            $test_json = Test::where('lesson_id',$lesson_id)->pluck('id');
+            $level = $request->level;
+            $ball = $request->ball;
+            $limit = $request->limit;
+//        save database
+            $group_test = new GroupTest();
+            $group_test->level = $level;
+            $group_test->ball = $ball;
+            $group_test->limit = $limit;
+            $group_test->test_json = $test_json;
+            $group_test->lesson_id = $lesson_id;
+            $group_test->save();
+// end group test
         }
 //        end database
 
-// group test
-        $test_json = Test::where('lesson_id',$lesson_id)->pluck('id');
-        $level = $request->level;
-        $ball = $request->ball;
-        $limit = $request->limit;
-//        save database
-        $group_test = new GroupTest();
-        $group_test->level = $level;
-        $group_test->ball = $ball;
-        $group_test->limit = $limit;
-        $group_test->test_json = $test_json;
-        $group_test->lesson_id = $lesson_id;
-        $group_test->save();
-// end group test
 
 //        module->id
         $module_id = Lesson::where('id',$lesson_id)->first();
 //        return $module_id;
-        if (!$data->save()){
-            return redirect(route('lessons-index',['module_id'=>$module_id->module_id]))->with('error','Video dars va test yaratilishida xatolik!');
-        }
+//        if (!$data->save()){
+//            return redirect(route('lessons-index',['module_id'=>$module_id->module_id]))->with('error','Video dars va test yaratilishida xatolik!');
+//        }
         return redirect(route('lessons-index',['module_id'=>$module_id->module_id]))->with('success','Video dars va testlar muvaffaqiyatli yaratildi!');
     }
 

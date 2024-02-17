@@ -44,7 +44,7 @@ use App\Models\Test;
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="url" class="form-label fw-700">Video dars URL</label>
-                                <input type="text" class="border form-control" id="url" name="url" oninput="validateYouTubeUrl()" required>
+                                <input type="text" class="border form-control" id="url" name="url" >
                                 @error('url')
                                 <div style="color: red" class="form-text">{{$message}}</div>
                                 @enderror
@@ -53,7 +53,7 @@ use App\Models\Test;
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="image" class="form-label fw-700">Video dars rasmi</label>
-                                <input type="file" class="form-control" id="image" name="image" accept=".png, .jpg, .jpeg, .pdf" required>
+                                <input type="file" class="form-control" id="image" name="image" accept=".png, .jpg, .jpeg, .pdf" >
                             </div>
                             @error('image')
                             <div style="color: red" class="form-text">{{$message}}</div>
@@ -62,7 +62,7 @@ use App\Models\Test;
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="video_content" class="form-label fw-700">Video dars description</label>
-                                <textarea name="video_content" id="video_content" cols="30" rows="10" required></textarea>
+                                <textarea name="video_content" id="video_content" cols="30" rows="10" ></textarea>
                             </div>
                             @error('video_content')
                             <div style="color: red" class="form-text">{{$message}}</div>
@@ -140,7 +140,7 @@ use App\Models\Test;
                         <div class="col-4">
                             <div class="mb-3">
                                 <label for="level" class="form-label fw-700">Level</label>
-                                <select class="form-select answer-select" id="level" name="level" required>
+                                <select class="form-select answer-select" id="level" name="level" >
                                     <option value="">--Select--</option>
                                     <option value="Boshlang'ich">Boshlang'ich</option>
                                     <option value="O'rta">O'rta</option>
@@ -151,7 +151,7 @@ use App\Models\Test;
                         <div class="col-4">
                             <div class="mb-3">
                                 <label for="ball" class="form-label fw-700">Ball</label>
-                                <input type="number" class="border form-control" id="ball" name="ball" required>
+                                <input type="number" class="border form-control" id="ball" name="ball" >
                                 @error('ball')
                                 <div style="color: red" class="form-text">{{$message}}</div>
                                 @enderror
@@ -160,7 +160,7 @@ use App\Models\Test;
                         <div class="col-4">
                             <div class="mb-3">
                                 <label for="limit" class="form-label fw-700">Limit</label>
-                                <input type="number" class="border form-control" id="limit" name="limit" required>
+                                <input type="number" class="border form-control" id="limit" name="limit" >
                                 @error('limit')
                                 <div style="color: red" class="form-text">{{$message}}</div>
                                 @enderror
@@ -168,7 +168,7 @@ use App\Models\Test;
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-info mt-50" onclick="submitForm()" id="url_check">
+                    <button type="submit" class="btn btn-info mt-50"  id="url_check">
                         <i class="fas fa-plus"></i>
                         Yaratish
                     </button>

@@ -53,6 +53,18 @@ class UsersPageController extends Controller
         $user_id = auth()->user()->id;
 
         $group_test = GroupTest::where('lesson_id',$lesson_id)->first();
+//        if ($group_test){
+//            return $group_test;
+//        }else{
+//            $a = 'yomon';
+//            return $a;
+//        }
+        $test = Test::where('lesson_id',$lesson_id)->get();
+//        if ($test->isEmpty()) {
+//            $a = 'yomon';
+//            return $a;
+//        }
+//        return $test;
         $test_count = Test::where('lesson_id',$lesson_id)->count();
 
         $passed = Passed::where(['lesson_id'=>$lesson_id,'user_id'=>$user_id])->first();
@@ -66,7 +78,9 @@ class UsersPageController extends Controller
 
         $zumrad = Zumrad::where('user_id',$user_id)->first();
 
-        return view('user.menu.lesson-show',compact('video_lesson','zumrad','lesson','group_test','test_count','passed','result','natija_pass','natija_result','user_id'));
+
+
+        return view('user.menu.lesson-show',compact('video_lesson','test','zumrad','lesson','group_test','test_count','passed','result','natija_pass','natija_result','user_id'));
     }
 
     public function LessonTest($lesson_id)

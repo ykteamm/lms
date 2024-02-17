@@ -221,11 +221,12 @@ $urinish = 1;
 
 
         <div class="content-wrapper  js-content-wrapper">
+            @if($video_lesson)
                     <section class="">
                         <div class="relative pt-20 col-12">
-                            <img class="w-1/1" src="{{asset('storage/'. ($video_lesson ? $video_lesson->image : null))}}" alt="image">
+                            <img class="w-1/1" src="{{asset('storage/'. $video_lesson->image)}}" alt="image">
                             <div class="absolute-full-center d-flex justify-center items-center">
-                                <a href="{{$video_lesson ? $video_lesson->url : null}}" class="d-flex justify-center items-center size-60 rounded-full bg-white js-gallery" data-gallery="gallery1">
+                                <a href="{{$video_lesson->url}}" class="d-flex justify-center items-center size-60 rounded-full bg-white js-gallery" data-gallery="gallery1">
                                     <div class="icon-play text-18"></div>
                                 </a>
                             </div>
@@ -245,25 +246,24 @@ $urinish = 1;
                                     <div class="">
                                         <h4 class="text-18 fw-500">Tavsif</h4>
                                         <p class="mt-30">
-                                            {!!$video_lesson ? $video_lesson->content : null !!}
+                                            {!!$video_lesson->content !!}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </div>
+            @endif
 
-
-                @if($video_lesson == null)
-                @else
-                    @if($passed && $passed->pass_status == 1)
-                        <div class="text-center">
-                            <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija2" style="padding: 10px">
-                                <i class="fas fa-eye"></i>
-                               Natijani ko'rish
-                           </button>
-                        </div>
-                        <div class="modal fade" id="TestNatija2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        @if((!$test->isEmpty()) && $group_test)
+            @if($passed && $passed->pass_status == 1)
+                    <div class="text-center">
+                        <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija2" style="padding: 10px">
+                            <i class="fas fa-eye"></i>
+                            Natijani ko'rish
+                        </button>
+                    </div>
+                    <div class="modal fade" id="TestNatija2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl" >
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -374,29 +374,27 @@ $urinish = 1;
                                     </div>
                                 </div>
                             </div>
-                    @else
-                        @if($passed && $passed->limit == 0)
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="text-center">
-                                        <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija1" style="padding: 10px">
-                                            <i class="fas fa-eye"></i>
-                                            Natijani ko'rish
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="text-center">
-                                        <button class="btn btn-info text-white" type="button" data-bs-toggle="modal" data-bs-target="#Test" style="padding: 10px">
-                                            Test yechish
-                                            <i class="fas fa-fast-forward ml-10"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal fade" id="TestNatija1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            @else
+                @if($passed && $passed->limit == 0)
+                  <div class="row">
+                      <div class="col-6">
+                          <div class="text-center">
+                              <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija1" style="padding: 10px">
+                                  <i class="fas fa-eye"></i>
+                                  Natijani ko'rish
+                              </button>
+                          </div>
+                      </div>
+                      <div class="col-6">
+                          <div class="text-center">
+                              <button class="btn btn-info text-white" type="button" data-bs-toggle="modal" data-bs-target="#Test" style="padding: 10px">
+                                  Test yechish
+                                  <i class="fas fa-fast-forward ml-10"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+                        <div class="modal fade" id="TestNatija1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-xl" >
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -507,7 +505,7 @@ $urinish = 1;
                                         </div>
                                     </div>
                                 </div>
-                            <div class="modal fade" id="Test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="Test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" >
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -631,28 +629,26 @@ $urinish = 1;
                                         </div>
                                     </div>
                                 </div>
-                            @else
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="text-center">
-                                        <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija" style="padding: 10px">
-                                            <i class="fas fa-eye"></i>
-                                            Natijani ko'rish
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="text-center">
-                                        <button class="btn btn-info text-white" type="button" data-bs-toggle="modal" data-bs-target="#Test" style="padding: 10px">
-                                            Test yechish
-                                            <i class="fas fa-fast-forward ml-10"></i>
-                                        </button>
-                                    </div>
+                @else
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <button class="btn btn-warning text-white" type="button" data-bs-toggle="modal" data-bs-target="#TestNatija" style="padding: 10px">
+                                        <i class="fas fa-eye"></i>
+                                        Natijani ko'rish
+                                    </button>
                                 </div>
                             </div>
-
-                            <div class="modal fade" id="TestNatija" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <button class="btn btn-info text-white" type="button" data-bs-toggle="modal" data-bs-target="#Test" style="padding: 10px">
+                                        Test yechish
+                                        <i class="fas fa-fast-forward ml-10"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="TestNatija" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-xl" >
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -762,7 +758,7 @@ $urinish = 1;
                                         </div>
                                     </div>
                                 </div>
-                            <div class="modal fade" id="Test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="Test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" >
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -859,9 +855,9 @@ $urinish = 1;
                                         </div>
                                     </div>
                             </div>
-                        @endif
-                    @endif
                 @endif
+            @endif
+        @endif
         </div>
     </div>
         @include('user.components.footer')
