@@ -1,5 +1,7 @@
 <?php
-use App\Models\Module;
+
+use app\Models\Module;
+
 ?>
 @extends('user.layouts.app')
 @section('title','LMS')
@@ -10,7 +12,8 @@ use App\Models\Module;
             @if(session()->has('ishga_kira_olmadi') )
                 <div class="row">
                     <div class="col-12 ">
-                        <div class="alert bg-error-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8" role="alert">
+                        <div class="alert bg-error-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8"
+                             role="alert">
                             <div class="text-error-2 lh-1 fw-500">
                                 {{session('ishga_kira_olmadi')}}
                             </div>
@@ -23,7 +26,8 @@ use App\Models\Module;
             @if(session()->has('ishga_kirish') )
                 <div class="row">
                     <div class="col-12 ">
-                        <div class="alert bg-success-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8" role="alert">
+                        <div class="alert bg-success-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8"
+                             role="alert">
                             <div class="text-success-2 lh-1 fw-500">
                                 {{session('ishga_kirish')}}
                             </div>
@@ -33,142 +37,173 @@ use App\Models\Module;
                 </div>
             @endif
 
-            @if(session()->has('natija'))
-               <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
-                        <div class="modal-dialog modal-lg" >
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>
+                @if(session()->has('oraliq_test_error') )
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="alert bg-error-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8"
+                                 role="alert">
+                                <div class="text-error-2 lh-1 fw-500">
+                                    {{session('oraliq_test_error')}}
                                 </div>
-                                <div class="modal-body">
-                                    <div class="text-center">
-                                        <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
-                                    </div>
-                                    <div class="text-center" style="padding: 10px 20px">
-                                        <h2 class="fw-700">Test yakunlandi</h2>
-                                    </div>
-                                    <div class="text-center" style="padding: 10px 30px">
-                                        @if($first_group_test->ball <= $natija_result->foiz)
-                                            <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
-                                        @else
-                                            <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
-                                        @endif
-                                    </div>
-                                    <div style="padding: 10px 10px">
-                                        <div class="row align-items-center">
-                                            <div class="col-xxl-3 col-xl-3  col-6  mt-20 text-center">
-                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
-                                                <br>
-                                                <p class="fw-400" style="color: black">O'tish bali</p>
-                                                @if($passed == null)
-                                                    <div class="col-12 mt-10 text-center">
-                                                        <h6 style="color: red">{{$first_group_test ? $first_group_test->ball : null}}</h6>
-                                                    </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @if(session()->has('oraliq_test_success') )
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="alert bg-success-1 alert-dismissible fade show pb-20 pt-20 pl-20 pr-20 rounded-8"
+                                 role="alert">
+                                <div class="text-success-2 lh-1 fw-500">
+                                    {{session('oraliq_test_success')}}
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+            @if(session()->has('natija'))
+                <div class="modal fade show" id="Natija" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-modal="true" role="dialog" style="display: block">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                        id="closeModalButton"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
+                                </div>
+                                <div class="text-center" style="padding: 10px 20px">
+                                    <h2 class="fw-700">Test yakunlandi</h2>
+                                </div>
+                                <div class="text-center" style="padding: 10px 30px">
+                                    @if($first_group_test->ball <= $natija_result->foiz)
+                                        <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                    @else
+                                        <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                    @endif
+                                </div>
+                                <div style="padding: 10px 10px">
+                                    <div class="row align-items-center">
+                                        <div class="col-xxl-3 col-xl-3  col-6  mt-20 text-center">
+                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">O'tish bali</p>
+                                            @if($passed == null)
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$first_group_test ? $first_group_test->ball : null}}</h6>
+                                                </div>
+                                            @else
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$first_group_test->ball}}</h6>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3   col-6  mt-20 text-center">
+                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">To'plagan balingiz</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                @if($first_group_test->ball <= $natija_result->foiz)
+                                                    <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
                                                 @else
-                                                    <div class="col-12 mt-10 text-center">
-                                                        <h6 style="color: red">{{$first_group_test->ball}}</h6>
-                                                    </div>
+                                                    <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
                                                 @endif
                                             </div>
-                                            <div class="col-xxl-3 col-xl-3   col-6  mt-20 text-center">
-                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
-                                                <br>
-                                                <p class="fw-400" style="color: black">To'plagan balingiz</p>
-                                                <div class="col-12 mt-10 text-center">
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3  col-6 mt-20 text-center">
+                                            <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">Imkoniyat</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                <h6 style="color: red">{{$passed->limit}}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">
+                                            <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">Zumrad</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                <h6 style="color: red">
                                                     @if($first_group_test->ball <= $natija_result->foiz)
-                                                        <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
+                                                        1
                                                     @else
-                                                        <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
+                                                        0
                                                     @endif
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-3 col-xl-3  col-6 mt-20 text-center">
-                                                <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
-                                                <br>
-                                                <p class="fw-400" style="color: black">Imkoniyat</p>
-                                                <div class="col-12 mt-10 text-center">
-                                                    <h6 style="color: red">{{$passed->limit}}</h6>
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">
-                                                <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
-                                                <br>
-                                                <p class="fw-400" style="color: black">Zumrad</p>
-                                                <div class="col-12 mt-10 text-center">
-                                                    <h6 style="color: red">
-                                                        @if($first_group_test->ball <= $natija_result->foiz)
-                                                            1
-                                                        @else
-                                                            0
-                                                        @endif
-                                                    </h6>
-                                                </div>
+                                                </h6>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+                </div>
             @endif
 
             @if(session()->has('ishga_kirish_natija'))
-               <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
-                        <div class="modal-dialog modal-lg" >
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>
+                <div class="modal fade show" id="Natija" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-modal="true" role="dialog" style="display: block">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                        id="closeModalButton"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
                                 </div>
-                                <div class="modal-body">
-                                    <div class="text-center">
-                                        <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
-                                    </div>
-                                    <div class="text-center" style="padding: 10px 20px">
-                                        <h2 class="fw-700">Test yakunlandi</h2>
-                                    </div>
-                                    <div class="text-center" style="padding: 10px 30px">
-                                        @if($first_group_test->ball <= $natija_result->foiz)
-                                            <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
-                                        @else
-                                            <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
-                                        @endif
-                                    </div>
-                                    <div style="padding: 10px 10px">
-                                        <div class="row align-items-center">
-                                            <div class="col-xxl-3 col-xl-3  col-4  mt-20 text-center">
-                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
-                                                <br>
-                                                <p class="fw-400" style="color: black">O'tish bali</p>
-                                                @if($passed == null)
-                                                    <div class="col-12 mt-10 text-center">
-                                                        <h6 style="color: red">{{$first_group_test ? $first_group_test->ball : null}}</h6>
-                                                    </div>
+                                <div class="text-center" style="padding: 10px 20px">
+                                    <h2 class="fw-700">Test yakunlandi</h2>
+                                </div>
+                                <div class="text-center" style="padding: 10px 30px">
+                                    @if($first_group_test->ball <= $natija_result->foiz)
+                                        <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                    @else
+                                        <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                    @endif
+                                </div>
+                                <div style="padding: 10px 10px">
+                                    <div class="row align-items-center">
+                                        <div class="col-xxl-3 col-xl-3  col-4  mt-20 text-center">
+                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">O'tish bali</p>
+                                            @if($passed == null)
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$first_group_test ? $first_group_test->ball : null}}</h6>
+                                                </div>
+                                            @else
+                                                <div class="col-12 mt-10 text-center">
+                                                    <h6 style="color: red">{{$first_group_test->ball}}</h6>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3   col-4  mt-20 text-center">
+                                            <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">To'plagan balingiz</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                @if($first_group_test->ball <= $natija_result->foiz)
+                                                    <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
                                                 @else
-                                                    <div class="col-12 mt-10 text-center">
-                                                        <h6 style="color: red">{{$first_group_test->ball}}</h6>
-                                                    </div>
+                                                    <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
                                                 @endif
                                             </div>
-                                            <div class="col-xxl-3 col-xl-3   col-4  mt-20 text-center">
-                                                <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
-                                                <br>
-                                                <p class="fw-400" style="color: black">To'plagan balingiz</p>
-                                                <div class="col-12 mt-10 text-center">
-                                                    @if($first_group_test->ball <= $natija_result->foiz)
-                                                        <h6 style="color: white; background: green;">{{$natija_result->foiz}}</h6>
-                                                    @else
-                                                        <h6 style="color: white; background: red;">{{$natija_result->foiz}}</h6>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-3 col-xl-3  col-4 mt-20 text-center">
-                                                <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
-                                                <br>
-                                                <p class="fw-400" style="color: black">Imkoniyat</p>
-                                                <div class="col-12 mt-10 text-center">
-                                                    <h6 style="color: red">{{$passed ? $passed->limit : null}}</h6>
-                                                </div>
+                                        </div>
+                                        <div class="col-xxl-3 col-xl-3  col-4 mt-20 text-center">
+                                            <i class="icon-infinity text-14 lh-1" style="color:blue;"></i>
+                                            <br>
+                                            <p class="fw-400" style="color: black">Imkoniyat</p>
+                                            <div class="col-12 mt-10 text-center">
+                                                <h6 style="color: red">{{$passed ? $passed->limit : null}}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -176,6 +211,77 @@ use App\Models\Module;
                             </div>
                         </div>
                     </div>
+                </div>
+            @endif
+
+
+            @if(session()->has('oraliq_test'))
+               <div class="modal fade show" id="Natija"  tabindex="-1" aria-labelledby="exampleModalLabel"  aria-modal="true" role="dialog" style="display: block">
+                   <div class="modal-dialog modal-lg" >
+                       <div class="modal-content">
+                           <div class="modal-header">
+                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalButton"></button>
+                           </div>
+                           <div class="modal-body">
+                               <div class="text-center">
+                                   <img src="{{asset('assets/img/ibrat/natija.jpg')}}" width="200" height="50" alt="">
+                               </div>
+                               <div class="text-center" style="padding: 10px 20px">
+                                   <h2 class="fw-700">Test yakunlandi</h2>
+                               </div>
+                               <div class="text-center" style="padding: 10px 30px">
+                                   @if(session()->has('ball') && session()->has('success'))
+                                       @php
+                                           $ball = session()->get('ball');
+                                           $success = session()->get('success');
+                                           @endphp
+                                       @if($success <= $ball)
+                                           <h5 style="color: #16e116">Muvaffaqiyatli o'tdingiz</h5>
+                                       @else
+                                           <h5 style="color: red">Muvaffaqiyatsiz urunish</h5>
+                                       @endif
+                                   @endif
+                               </div>
+                               <div style="padding: 10px 10px">
+                                   <div class="row align-items-center">
+                                       <div class="col-xxl-6 col-xl-6  col-6  mt-20 text-center">
+                                           <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                           <br>
+                                           <p class="fw-400" style="color: black">O'tish bali</p>
+                                           @if(session()->has('success'))
+                                               @php
+                                                   $success = session()->get('success');
+                                               @endphp
+
+                                               <div class="col-12 mt-10 text-center">
+                                                   <h6 style="color: red">{{$success}}</h6>
+                                               </div>
+                                           @endif
+                                       </div>
+                                       <div class="col-xxl-6 col-xl-6   col-6  mt-20 text-center">
+                                           <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                           <br>
+                                           <p class="fw-400" style="color: black">To'plagan balingiz</p>
+                                           <div class="col-12 mt-10 text-center">
+                                               @if(session()->has('ball') && session()->has('success'))
+                                                   @php
+                                                       $ball = session()->get('ball');
+                                                       $success = session()->get('success');
+                                                   @endphp
+                                                   @if($success <= $ball)
+                                                       <h6 style="color: white; background: green;">{{$ball}}</h6>
+                                                   @else
+                                                       <h6 style="color: white; background: red;">{{$ball}}</h6>
+                                                   @endif
+                                               @endif
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
             @endif
 
 
@@ -205,164 +311,240 @@ use App\Models\Module;
                 @endif
             </div>
 
+            @if($user->status == 1)
+                @if(!$oraliq_test)
+                    <div class="container mt-30" style="text-align: center">
+                        <button  class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#OraliqTest">
+                            Oraliq nazorat test
+                        </button>
+                    </div>
+
+                        <div class="modal fade" id="OraliqTest" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text-center">
+                                            <img src="{{asset('assets/img/ibrat/test.png')}}" alt="">
+                                        </div>
+                                        <div class="text-center" style="padding: 10px 20px">
+                                            <h2 class="fw-700">Testni yechishga tayyormisiz!</h2>
+                                        </div>
+                                        <div class="text-center" style="padding: 10px 30px">
+                                            <h5 style="color: gray">Tayyor bo'lgach, boshlash tugmasini bosing</h5>
+                                        </div>
+                                        <div style="padding: 10px 10px">
+                                            <div class="row">
+                                                <div class="col-xxl-6 col-xl-6 col-6 mt-20 text-center">
+                                                    <i class="fas fa-question text-14 lh-1" style="color: blue"></i>
+                                                    <br>
+                                                    <p class="fw-400" style="color: black">Savol</p>
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">{{$count}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-6 col-xl-6  col-6  mt-20 text-center">
+                                                    <i class="fas fa-star text-14 lh-1" style="color: blue;"></i>
+                                                    <br>
+                                                    <p class="fw-400" style="color: black">O'tish bali</p>
+                                                    <div class="col-12 mt-10 text-center">
+                                                        <h6 style="color: red">90</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center mt-20">
+                                            <a href="{{route('oraliq-test')}}" class="btn btn-success">
+                                                Test yechish
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                @endif
+            @endif
+
             <div class="container mt-30">
                 <div class="row">
-                @if($user->status == 0)
-                    @if($first_course != null && !$passed)
-                        <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                            <a href="{{url('user/lesson-show/'. $first_lesson->id)}}" class="coursesCard -type-1 ">
-                                <div class="relative">
-                                    <div class="coursesCard__image overflow-hidden rounded-8">
-                                        <div style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
-                                            <img src="{{ asset('storage/' . $first_course->image) }}" alt="" style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                        </div>
-                                        <div class="coursesCard__image_overlay rounded-8"></div>
-                                    </div>
-                                </div>
-
-                                <div class="h-100 pt-15">
-                                    <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
-                                        {{$first_course->title}}
-                                    </div>
-                                    <div class="d-flex items-center justify-content-evenly pt-10">
-                                        <div class="d-flex items-center">
-                                            <div class="mr-8">
-                                                <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}" alt="icon">
+                    @if($user->status == 0)
+                        @if($first_course != null && !$passed)
+                            <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6"
+                                 style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <a href="{{url('user/lesson-show/'. $first_lesson->id)}}" class="coursesCard -type-1 ">
+                                    <div class="relative">
+                                        <div class="coursesCard__image overflow-hidden rounded-8">
+                                            <div
+                                                style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
+                                                <img src="{{ asset('storage/' . $first_course->image) }}" alt=""
+                                                     style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                             </div>
-                                            <div class="text-14 lh-1 text-dark-1">{{$first_module_count}} module</div>
+                                            <div class="coursesCard__image_overlay rounded-8"></div>
                                         </div>
-    {{--                                    <div class="d-flex items-center">--}}
-    {{--                                        <div class="mr-8">--}}
-    {{--                                            <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
-    {{--                                        </div>--}}
-    {{--                                        <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
-    {{--                                    </div>--}}
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    @else
+
+                                    <div class="h-100 pt-15">
+                                        <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
+                                            {{$first_course->title}}
+                                        </div>
+                                        <div class="d-flex items-center justify-content-evenly pt-10">
+                                            <div class="d-flex items-center">
+                                                <div class="mr-8">
+                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}"
+                                                         alt="icon">
+                                                </div>
+                                                <div class="text-14 lh-1 text-dark-1">{{$first_module_count}}module
+                                                </div>
+                                            </div>
+                                            {{--                                    <div class="d-flex items-center">--}}
+                                            {{--                                        <div class="mr-8">--}}
+                                            {{--                                            <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+                                            {{--                                        </div>--}}
+                                            {{--                                        <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
+                                            {{--                                    </div>--}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @else
+                        @endif
+                    @elseif($user->status == 1 && $user_check)
+                        @foreach($course as $test)
+                            @php
+                                $module =  Module::where('course_id', $test->id)->count()
+                            @endphp
+                            <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6"
+                                 style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <a href="{{url('user/module/'.$test->id)}}" class="coursesCard -type-1 ">
+                                    <div class="relative">
+                                        <div class="coursesCard__image overflow-hidden rounded-8">
+                                            <div
+                                                style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
+                                                <img src="{{ asset('storage/' . $test->image) }}" alt=""
+                                                     style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                            </div>
+                                            <div class="coursesCard__image_overlay rounded-8"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="h-100 pt-15">
+                                        <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
+                                            {{$test->title}}
+                                        </div>
+                                        <div class="d-flex items-center justify-content-evenly pt-10">
+                                            <div class="d-flex items-center">
+                                                <div class="mr-8">
+                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}"
+                                                         alt="icon">
+                                                </div>
+                                                <div class="text-14 lh-1 text-dark-1">{{$module}} module</div>
+                                            </div>
+                                            {{--                                        <div class="d-flex items-center">--}}
+                                            {{--                                            <div class="mr-8">--}}
+                                            {{--                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+                                            {{--                                            </div>--}}
+                                            {{--                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
+                                            {{--                                        </div>--}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    @elseif($user->status == 1 && $user->rol_id == 'old_user')
+                        @foreach($course as $test)
+                            @php
+                                $module =  Module::where('course_id', $test->id)->count()
+                            @endphp
+                            <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6"
+                                 style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <a href="{{url('user/module/'.$test->id)}}" class="coursesCard -type-1 ">
+                                    <div class="relative">
+                                        <div class="coursesCard__image overflow-hidden rounded-8">
+                                            <div
+                                                style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
+                                                <img src="{{ asset('storage/' . $test->image) }}" alt=""
+                                                     style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                            </div>
+                                            <div class="coursesCard__image_overlay rounded-8"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="h-100 pt-15">
+                                        <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
+                                            {{$test->title}}
+                                        </div>
+                                        <div class="d-flex items-center justify-content-evenly pt-10">
+                                            <div class="d-flex items-center">
+                                                <div class="mr-8">
+                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}"
+                                                         alt="icon">
+                                                </div>
+                                                <div class="text-14 lh-1 text-dark-1">{{$module}} module</div>
+                                            </div>
+                                            {{--                                        <div class="d-flex items-center">--}}
+                                            {{--                                            <div class="mr-8">--}}
+                                            {{--                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+                                            {{--                                            </div>--}}
+                                            {{--                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
+                                            {{--                                        </div>--}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    @elseif($user->status == 1 && $user->rol_id == 'teacher')
+                        @foreach($course as $test)
+                            @php
+                                $module =  Module::where('course_id', $test->id)->count()
+                            @endphp
+                            <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6"
+                                 style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <a href="{{url('user/module/'.$test->id)}}" class="coursesCard -type-1 ">
+                                    <div class="relative">
+                                        <div class="coursesCard__image overflow-hidden rounded-8">
+                                            <div
+                                                style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
+                                                <img src="{{ asset('storage/' . $test->image) }}" alt=""
+                                                     style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                            </div>
+                                            <div class="coursesCard__image_overlay rounded-8"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="h-100 pt-15">
+                                        <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
+                                            {{$test->title}}
+                                        </div>
+                                        <div class="d-flex items-center justify-content-evenly pt-10">
+                                            <div class="d-flex items-center">
+                                                <div class="mr-8">
+                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}"
+                                                         alt="icon">
+                                                </div>
+                                                <div class="text-14 lh-1 text-dark-1">{{$module}} module</div>
+                                            </div>
+                                            {{--                                        <div class="d-flex items-center">--}}
+                                            {{--                                            <div class="mr-8">--}}
+                                            {{--                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+                                            {{--                                            </div>--}}
+                                            {{--                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
+                                            {{--                                        </div>--}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
                     @endif
-                @elseif($user->status == 1 && $user_check)
-                    @foreach($course as $test)
-                            @php
-                                $module =  Module::where('course_id', $test->id)->count()
-                            @endphp
-                            <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <a href="{{url('user/module/'.$test->id)}}" class="coursesCard -type-1 ">
-                                    <div class="relative">
-                                        <div class="coursesCard__image overflow-hidden rounded-8">
-                                            <div style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
-                                                <img src="{{ asset('storage/' . $test->image) }}" alt="" style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                            </div>
-                                            <div class="coursesCard__image_overlay rounded-8"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="h-100 pt-15">
-                                        <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
-                                            {{$test->title}}
-                                        </div>
-                                        <div class="d-flex items-center justify-content-evenly pt-10">
-                                            <div class="d-flex items-center">
-                                                <div class="mr-8">
-                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}" alt="icon">
-                                                </div>
-                                                <div class="text-14 lh-1 text-dark-1">{{$module}} module</div>
-                                            </div>
-    {{--                                        <div class="d-flex items-center">--}}
-    {{--                                            <div class="mr-8">--}}
-    {{--                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
-    {{--                                            </div>--}}
-    {{--                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
-    {{--                                        </div>--}}
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
-                @elseif($user->status == 1 && $user->rol_id == 'old_user')
-                    @foreach($course as $test)
-                            @php
-                                $module =  Module::where('course_id', $test->id)->count()
-                            @endphp
-                            <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <a href="{{url('user/module/'.$test->id)}}" class="coursesCard -type-1 ">
-                                    <div class="relative">
-                                        <div class="coursesCard__image overflow-hidden rounded-8">
-                                            <div style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
-                                                <img src="{{ asset('storage/' . $test->image) }}" alt="" style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                            </div>
-                                            <div class="coursesCard__image_overlay rounded-8"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="h-100 pt-15">
-                                        <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
-                                            {{$test->title}}
-                                        </div>
-                                        <div class="d-flex items-center justify-content-evenly pt-10">
-                                            <div class="d-flex items-center">
-                                                <div class="mr-8">
-                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}" alt="icon">
-                                                </div>
-                                                <div class="text-14 lh-1 text-dark-1">{{$module}} module</div>
-                                            </div>
-                                            {{--                                        <div class="d-flex items-center">--}}
-                                            {{--                                            <div class="mr-8">--}}
-                                            {{--                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
-                                            {{--                                            </div>--}}
-                                            {{--                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
-                                            {{--                                        </div>--}}
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
-                @elseif($user->status == 1 && $user->rol_id == 'teacher')
-                    @foreach($course as $test)
-                            @php
-                                $module =  Module::where('course_id', $test->id)->count()
-                            @endphp
-                            <div class="side-content pt-20 pb-20 mb-15 col-xl-4 col-lg-6 col-md-4 col-sm-6" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                <a href="{{url('user/module/'.$test->id)}}" class="coursesCard -type-1 ">
-                                    <div class="relative">
-                                        <div class="coursesCard__image overflow-hidden rounded-8">
-                                            <div style="width: 100%; height: 200px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: space-evenly;">
-                                                <img src="{{ asset('storage/' . $test->image) }}" alt="" style="max-width: 100%; max-height: 100%; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                                            </div>
-                                            <div class="coursesCard__image_overlay rounded-8"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="h-100 pt-15">
-                                        <div class="text-17 lh-15 fw-500 text-dark-1 mt-10 text-center">
-                                            {{$test->title}}
-                                        </div>
-                                        <div class="d-flex items-center justify-content-evenly pt-10">
-                                            <div class="d-flex items-center">
-                                                <div class="mr-8">
-                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}" alt="icon">
-                                                </div>
-                                                <div class="text-14 lh-1 text-dark-1">{{$module}} module</div>
-                                            </div>
-                                            {{--                                        <div class="d-flex items-center">--}}
-                                            {{--                                            <div class="mr-8">--}}
-                                            {{--                                                <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
-                                            {{--                                            </div>--}}
-                                            {{--                                            <div class="text-14 lh-1 text-dark-1">3h 56m</div>--}}
-                                            {{--                                        </div>--}}
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
-                @endif
                 </div>
             </div>
-    </div>
+        </div>
         @include('user.components.footer')
-</div>
+    </div>
 
 @endsection
 @section('natija_js')

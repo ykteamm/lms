@@ -1,5 +1,7 @@
 <?php
-use App\Models\Passed;
+
+use app\Models\Passed;
+
 $user = auth()->user();
 ?>
 @extends('user.layouts.app')
@@ -40,8 +42,8 @@ $user = auth()->user();
                 <div class="row">
                     @foreach($module as $modul)
                         @php
-                            $lesson =  \App\Models\Lesson::where('module_id', $modul->id)->count();
-                            $lesson_id =  \App\Models\Lesson::where('module_id', $modul->id)->first();
+                            $lesson =  \app\Models\Lesson::where('module_id', $modul->id)->count();
+                            $lesson_id =  \app\Models\Lesson::where('module_id', $modul->id)->first();
                             $passed = Passed::where(['user_id'=>$userID,'module_id'=>$modul->id,'course_id'=>$course_id,'pass_status'=>1])->count();
                             if ($lesson != 0){
                                 $progress = round(($passed / $lesson) * 100);
@@ -49,7 +51,8 @@ $user = auth()->user();
                                 $progress = 0;
                             }
                         @endphp
-                        <div class="side-content ml-10 mr-10 mt-20 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12" style="padding: 10px 20px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div class="side-content ml-10 mr-10 mt-20 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12"
+                             style="padding: 10px 20px; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                             <a href="{{url('user/lesson/'.$modul->id)}}" class="coursesCard -type-1 ">
                                 <div class="row">
                                     <div class="col-8">
@@ -59,21 +62,23 @@ $user = auth()->user();
                                         <div class="d-flex pt-10">
                                             <div class="d-flex align-items-center mr-20">
                                                 <div class="mr-8">
-                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}" alt="icon">
+                                                    <img src="{{asset('assets/img/coursesCards/icons/1.svg')}}"
+                                                         alt="icon">
                                                 </div>
                                                 <div class="text-14 lh-1">{{$lesson}}ta dars</div>
                                             </div>
 
-{{--                                            <div class="d-flex align-items-center">--}}
-{{--                                                <div class="mr-8">--}}
-{{--                                                    <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
-{{--                                                </div>--}}
-{{--                                                <div class="text-14 lh-1">3h 56m</div>--}}
-{{--                                            </div>--}}
+                                            {{--                                            <div class="d-flex align-items-center">--}}
+                                            {{--                                                <div class="mr-8">--}}
+                                            {{--                                                    <img src="{{asset('assets/img/coursesCards/icons/2.svg')}}" alt="icon">--}}
+                                            {{--                                                </div>--}}
+                                            {{--                                                <div class="text-14 lh-1">3h 56m</div>--}}
+                                            {{--                                            </div>--}}
                                         </div>
                                     </div>
                                     <div class="col-4">
-                                        <div role="progressbar" aria-valuenow="{{$progress}}" aria-valuemin="0" aria-valuemax="100" style="--value: {{$progress}}"></div>
+                                        <div role="progressbar" aria-valuenow="{{$progress}}" aria-valuemin="0"
+                                             aria-valuemax="100" style="--value: {{$progress}}"></div>
                                     </div>
                                 </div>
                             </a>

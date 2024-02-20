@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AnswerCheck;
 use App\Models\GroupTest;
 use App\Models\Lesson;
+use App\Models\LmsOraliqTest;
 use App\Models\Module;
 use App\Models\Passed;
 use App\Models\Test;
@@ -91,5 +92,73 @@ class UsersPageController extends Controller
         $tests = Test::where('lesson_id',$lesson_id)->orderBy('id','asc')->get();
 
         return view('user.menu.lesson-test',compact('tests','group_test','lesson','course_id'));
+    }
+
+    public function OraliqTest()
+    {
+        $user_id = auth()->user()->id;
+//        return $user_id;
+        $passed = Passed::where('user_id',$user_id)->get();
+        $lesson_ids = $passed->pluck('lesson_id');
+//        $tests = Test::whereIn('lesson_id',$lesson_ids)->get();
+        $tests = Test::whereIn('lesson_id', $lesson_ids)->inRandomOrder()->limit(20)->get();
+
+        $count = $tests->count();
+
+//        return $count;
+
+//        return $tests;
+//        return $lesson_ids;
+        return view('user.menu.oraliq-test',compact('tests','user_id','count'));
+    }
+
+    public function OraliqCheck(Request $request)
+    {
+        $user_id = $request->user_id;
+        $question_ids = $request->question_ids;
+        $question_number = $request->count;
+        $answer = $request->answers;
+
+        $success = 90;
+
+        $totalScore = 0;
+        foreach ($question_ids as $questionId) {
+            $correctAnswer = Test::find($questionId)->answer; // Test modelida "answer" haqiqiy savol javobi ustida
+            // Agar berilgan javoblar va haqiqiy javob bir xil bo'lsa, 1 qo'shib sanab boramiz, aks holda 0 qo'shib sanab boramiz
+            $totalScore += ($answer[$questionId][0] == $correctAnswer) ? 1 : 0;
+        }
+        $ball = ($totalScore / $question_number) * 100;
+
+        $check = new LmsOraliqTest();
+        $check->user_id = $user_id;
+        $check->question_ids = $question_ids;
+        $check->user_answers = $answer;
+        $check->correct_answer = $totalScore;
+        $check->question_numbers = $question_number;
+        $check->ball = round($ball);
+        if (round($ball) >= $success){
+            $check->success = 1;
+        }else{
+            $check->success = 0;
+        }
+        $check->save();
+        if (round($ball) >= $success){
+            return redirect(route('user'))->with([
+                'oraliq_test_success'=>'Siz oraliq testdan muvaffaqiyatli o\'tdingiz!',
+                'oraliq_test'=>'',
+                'ball' => round($ball),
+                'success' => $success,
+            ]);
+        }else{
+            return redirect(route('user'))->with([
+                'oraliq_test_error'=>'Siz oraliq testdan muvaffaqiyatli o\'tmadingiz!',
+                'oraliq_test'=>'',
+                'ball' => round($ball),
+                'success' => $success,
+            ]);
+        }
+
+
+
     }
 }

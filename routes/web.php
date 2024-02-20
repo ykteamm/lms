@@ -90,6 +90,9 @@ Route::group(['prefix' => 'user','middleware' => ['auth','userAdminRole:old_user
     Route::get('/lesson-show/{lesson_id}',[UsersPageController::class,'LessonShow'])->name('lesson-show');
     Route::get('/lesson-test/{lesson_id}',[UsersPageController::class,'LessonTest'])->name('lesson-test');
 
+    Route::get('/oraliq-test',[UsersPageController::class,'OraliqTest'])->name('oraliq-test');
+    Route::post('/oraliq-check',[UsersPageController::class,'OraliqCheck'])->name('oraliq-check');
+
     Route::post('/first_test',[TestCheckController::class,'CheckTest'])->name('first_test');
     Route::post('/all_test',[TestCheckController::class,'AllTest'])->name('all_test');
 

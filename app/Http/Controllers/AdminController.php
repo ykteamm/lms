@@ -6,10 +6,12 @@ use App\Models\AnswerCheck;
 use App\Models\Course;
 use App\Models\GroupTest;
 use App\Models\Lesson;
+use App\Models\LmsOraliqTest;
 use App\Models\Module;
 use App\Models\Passed;
 use App\Models\Raspisaniya;
 use App\Models\RaspisaniyaUser;
+use App\Models\Test;
 use App\Models\User;
 use App\Models\UserCheck;
 use App\Models\Video;
@@ -51,7 +53,15 @@ class AdminController extends Controller
 
         $zumrad = Zumrad::where('user_id',$userID)->first();
 
-        return view('user.index',compact('course','zumrad','passed','natija_result','user','user_check','first_group_test','first_course','first_module_count','first_lesson'));
+
+        $oraliq_test = LmsOraliqTest::where('user_id',$userID)->first();
+        $passed = Passed::where('user_id',$userID)->get();
+        $lesson_ids = $passed->pluck('lesson_id');
+        $tests = Test::whereIn('lesson_id', $lesson_ids)->inRandomOrder()->limit(20)->get();
+        $count = $tests->count();
+
+
+        return view('user.index',compact('course','count','oraliq_test','zumrad','passed','natija_result','user','user_check','first_group_test','first_course','first_module_count','first_lesson'));
     }
 
 }
