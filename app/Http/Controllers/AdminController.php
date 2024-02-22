@@ -37,7 +37,7 @@ class AdminController extends Controller
         $first_group_test = GroupTest::where('lesson_id',$first_lesson ? $first_lesson->id : null)->first();
         $first_module_count = Module::where('course_id',$first_course ? $first_course->id : null)->count();
 
-        $passed = Passed::where([
+        $first_passed = Passed::where([
             'course_id'=>$first_course ? $first_course->id : null,
             'module_id'=>$first_module ? $first_module->id : null,
             'lesson_id'=>$first_lesson ? $first_lesson->id : null,
@@ -61,7 +61,7 @@ class AdminController extends Controller
         $count = $tests->count();
 
 
-        return view('user.index',compact('course','count','oraliq_test','zumrad','passed','natija_result','user','user_check','first_group_test','first_course','first_module_count','first_lesson'));
+        return view('user.index',compact('course','count','oraliq_test','zumrad','passed','natija_result','user','user_check','first_group_test','first_course','first_module_count','first_lesson','first_passed'));
     }
 
 }
