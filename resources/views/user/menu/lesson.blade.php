@@ -1,8 +1,8 @@
 <?php
 
-use app\Models\Passed;
-use app\Models\AnswerCheck;
-use app\Models\GroupTest;
+use App\Models\Passed;
+use App\Models\AnswerCheck;
+use App\Models\GroupTest;
 
 $user = auth()->user();
 ?>

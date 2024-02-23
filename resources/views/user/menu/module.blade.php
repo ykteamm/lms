@@ -1,6 +1,6 @@
 <?php
 
-use app\Models\Passed;
+use App\Models\Passed;
 
 $user = auth()->user();
 ?>
@@ -42,8 +42,8 @@ $user = auth()->user();
                 <div class="row">
                     @foreach($module as $modul)
                         @php
-                            $lesson =  \app\Models\Lesson::where('module_id', $modul->id)->count();
-                            $lesson_id =  \app\Models\Lesson::where('module_id', $modul->id)->first();
+                            $lesson =  \App\Models\Lesson::where('module_id', $modul->id)->count();
+                            $lesson_id =  \App\Models\Lesson::where('module_id', $modul->id)->first();
                             $passed = Passed::where(['user_id'=>$userID,'module_id'=>$modul->id,'course_id'=>$course_id,'pass_status'=>1])->count();
                             if ($lesson != 0){
                                 $progress = round(($passed / $lesson) * 100);
