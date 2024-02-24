@@ -407,7 +407,7 @@ $urinish = 1;
                             </div>
                         </div>
                     @else
-                        @if($passed && $passed->limit == 0)
+                        @if($passed && $passed->limit <= 0)
                             <div class="row">
                                 <div class="col-6">
                                     <div class="text-center">
@@ -642,7 +642,7 @@ $urinish = 1;
                                                             </div>
                                                         @endif
                                                     </div>
-                                                    @if($passed && $passed->limit == 0 && $user->status == 1)
+                                                    @if($passed && $passed->limit <= 0 && $user->status == 1)
                                                         <div class="col-xxl-3 col-xl-3 col-6 mt-20 text-center">
                                                             <i class="fas fa-gem text-14 lh-1" style="color:blue;"></i>
                                                             <br>
@@ -668,7 +668,7 @@ $urinish = 1;
                                                     @endif
                                                 </div>
                                             </div>
-                                            @if($passed  && $passed->limit == 0 && $user->status == 1)
+                                            @if($passed  && $passed->limit <= 0 && $user->status == 1)
                                                 <div class="text-center mt-30">
                                                     <h5 style="color: #dc1111">
                                                         Sizga berilgan imkoniyatlar tugadi.
@@ -956,7 +956,6 @@ $urinish = 1;
                         @endif
                     @endif
                 @else
-                    yoq
                 @endif
             </div>
         </div>

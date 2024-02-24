@@ -152,7 +152,7 @@ class LessonsController extends Controller
         $video_dars = Video::where('lesson_id',$lesson)->first();
         $tests = Test::where('lesson_id',$lesson)->orderBy('id','asc')->get();
         $group_test = GroupTest::where('lesson_id',$lesson)->first();
-        return view('admin.menu.lessons.show',compact('video_dars','group_test','tests','lesson_id'));
+        return view('admin.menu.lessons.show',compact('video_dars','group_test','tests','lesson_id','lesson'));
     }
 
     public function VideoDarsUpdate(Request $request, $video_id)
@@ -193,13 +193,52 @@ class LessonsController extends Controller
 
     }
 
+    public function VideoDarsCreate(Request $request, $lesson_id)
+    {
+//        $video = Video::find($video_id);
+
+        $content = $request->video_content;
+//        $dom = new DOMDocument();
+//        $dom->loadHTML($content,9);
+//        $images = $dom->getElementsByTagName('img');
+//        foreach ($images as $key => $img){
+//            if (strpos($img->getAttribute('src'),'data:image/') === 0) {
+//
+//                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+//                $image_name = "/uploads/" . time() . $key . '.png';
+//                file_put_contents(public_path() . $image_name, $data);
+//
+//                $img->removeAttribute('src');
+//                $img->setAttribute('src', $image_name);
+//            }
+//        }
+//        $content = $dom->saveHTML();
+        $video  = new Video();
+        $video->url =$request->url;
+        $video->content = $content;
+        $video->lesson_id = $lesson_id;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = Str::random(5) .'.'.$image->getClientOriginalExtension();
+            $directory = 'video_image';
+            $image->storeAs("public/{$directory}", $imageName);
+            $video->image = $directory.'/'.$imageName;
+        }
+        $video->save();
+
+        return redirect(route('lessons.show',['lesson'=>$lesson_id]))->with('success','Video dars muvaffaqiyatli yaratildi!');
+
+    }
+
 
     public function GroupTestUpdate(Request $request, $id)
     {
         $group_test = GroupTest::find($id);
 
         $lesson = $request->lesson_id;
+//        $test_ids = Test::where('lesson_id',$lesson)->pluck('id')->toArray();
         $group_test->update([
+//            'test_json'=>$test_ids,
             'lesson_id'=>$lesson,
             'level'=>$request->level,
             'ball'=>$request->ball,
@@ -208,6 +247,21 @@ class LessonsController extends Controller
 
         return redirect(route('lessons.show',['lesson'=>$lesson]))->with('success','Test qoidalari muvaffaqiyatli tahrirlandi!');
     }
+    public function GroupTestCreate(Request $request, $id)
+    {
+        $Lesson = Lesson::find($id);
+        $test_ids = Test::where('lesson_id',$id)->pluck('id')->toArray();
+        $group_test = new GroupTest();
+        $group_test->test_json = $test_ids;
+        $group_test->level = $request->level;
+        $group_test->ball = $request->ball;
+        $group_test->limit = $request->limit;
+        $group_test->lesson_id = $id;
+        $group_test->save();
+
+        return redirect(route('lessons.show',['lesson'=>$id]))->with('success','Test qoidalari muvaffaqiyatli yaratildi!');
+    }
+
 
     /**
      * Show the form for editing the specified resource.

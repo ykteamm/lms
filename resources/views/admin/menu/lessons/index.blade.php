@@ -104,6 +104,10 @@ use App\Models\GroupTest;
                             <a href="
                             @if( $video_dars && $less->id == $video_dars->lesson_id)
                             {{route('lessons.show',['lesson' => $video_dars->lesson_id])}}
+                            @elseif($group && $group->lesson_id == $less->id)
+                            {{route('lessons.show',['lesson' => $group->lesson_id])}}
+                            @elseif($quiz && $quiz->lesson_id == $less->id)
+                            {{route('lessons.show',['lesson' => $quiz->lesson_id])}}
                             @else
                             {{route('lesson-create', ['lesson_id' => $less->id])}}
                             @endif

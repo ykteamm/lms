@@ -71,7 +71,10 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'userAdminRole:admin,
     Route::get('/lesson/create/{lesson_id}',[LessonsController::class, 'create'])->name('lesson-create');
 //        Route::get('/lessons/show/{lesson_id}',[LessonsController::class, 'create'])->name('lessons-create');
     Route::put('/lesson/video_dars/update/{video_id}',[LessonsController::class, 'VideoDarsUpdate'])->name('lesson-video-dars-update');
+    Route::post('/lesson/video_dars/create/{lesson_id}',[LessonsController::class, 'VideoDarsCreate'])->name('lesson-video-dars-create');
+
     Route::put('/lesson/group_test/{id}',[LessonsController::class, 'GroupTestUpdate'])->name('lesson-group-test-update');
+    Route::post('/lesson/group_test/{id}',[LessonsController::class, 'GroupTestCreate'])->name('lesson-group-test-create');
 
     Route::post('/lesson/video_dars',[LessonsController::class, 'VideoDars'])->name('lessons-video-dars');
 

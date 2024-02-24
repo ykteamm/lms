@@ -56,6 +56,8 @@ use App\Models\Test;
                 </div>
             @endif
 
+        @if($video_dars)
+
             <div class="row">
                 <div class="col-10">
                     <h1 class="text-30 lh-12 fw-700">{{$lesson_id->title}}</h1>
@@ -143,13 +145,11 @@ use App\Models\Test;
             <div class="row">
                 <div class="col-xxl-12 col-xl-12 col-lg-12">
                     <div class="relative">
-
                         <div style="text-align: center">
                             <img class="w-full h-full rounded-16" src="{{asset('storage/'.$video_dars->image)}}"
                                  alt="image" width="350" height="80"
                                  style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                         </div>
-
                         <div class="absolute-full-center d-flex justify-center items-center">
                             <a href="{{$video_dars->url}}"
                                class="d-flex justify-center items-center size-60 rounded-full bg-white js-gallery"
@@ -158,17 +158,92 @@ use App\Models\Test;
                             </a>
                         </div>
                     </div>
-
                     <div class="mt-20 lg:mt-20">
                         <h4 class="text-18 fw-500">Ta'rif</h4>
                         <div class="mt-30">
                             {!! $video_dars->content !!}
                         </div>
 
+        @else
+               <div class="row">
+                   <div class="col-10">
+                       <h1 class="text-30 lh-12 fw-700">Video dars</h1>
+                   </div>
+                   <div class="col-2">
+                       <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                           <i class="fas fa-plus"></i>
+                           Create
+                       </button>
+                       <!-- Modal -->
+                       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                           <div class="modal-dialog modal-xl mt-50">
+                               <div class="modal-content">
+                                   <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Siz video dars
+                                           yaratayapsiz!</h5>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                   </div>
+                                   <div class="modal-body ">
+                                       <form action="{{ route('lesson-video-dars-create',['lesson_id' => $lesson]) }}"
+                                             method="POST" class="form-group" enctype="multipart/form-data">
+                                           @csrf
+                                           <input type="hidden" class="form-control" id="lesson_id"
+                                                  value="{{$lesson}}" name="lesson_id" required>
+                                           <div class="row">
+                                               <div class="col-12">
+                                                   <div class="mb-3">
+                                                       <label for="url" class="form-label fw-700">Video dars URL</label>
+                                                       <input type="text" class="border form-control"
+                                                              id="url" name="url" required>
+                                                       @error('url')
+                                                       <div style="color: red" class="form-text">{{$message}}</div>
+                                                       @enderror
+                                                   </div>
+                                               </div>
+                                               <div class="col-12">
+                                                   <div class="mb-3">
+                                                       <label for="image" class="form-label fw-700">Video dars
+                                                           rasmi</label>
+
+                                                       <input type="file" class="form-control" id="image" name="image"
+                                                              accept=".png, .jpg, .jpeg, .pdf">
+                                                   </div>
+                                                   @error('image')
+                                                   <div style="color: red" class="form-text">{{$message}}</div>
+                                                   @enderror
+                                               </div>
+                                               <div class="col-12">
+                                                   <div class="mb-3">
+                                                       <label for="video_content" class="form-label fw-700">Video dars
+                                                           description</label>
+                                                       <textarea name="video_content" id="video_content" cols="30"
+                                                                 rows="10" required></textarea>
+                                                   </div>
+                                                   @error('video_content')
+                                                   <div style="color: red" class="form-text">{{$message}}</div>
+                                                   @enderror
+                                               </div>
+                                           </div>
+                                           <button type="submit" class="btn btn-primary mt-30">
+                                               <i class="fas fa-plus"></i>
+                                               Create
+                                           </button>
+                                       </form>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+        @endif
                         <div class="mt-60">
                             <div class="row">
                                 <div class="col-10">
                                     <h4 class="text-20 mb-30">Testlar ro'yxati</h4>
+                                    @php
+                                        $lesson_name = \App\Models\Lesson::where('id',$lesson)->first();
+                                    @endphp
                                 </div>
                                 <div class="col-2">
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
@@ -184,14 +259,14 @@ use App\Models\Test;
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">
-                                                        Siz {{$video_dars->title}} darsiga test qo'shayapsiz!</h5>
+                                                        Siz {{$lesson_name->title}} darsiga test qo'shayapsiz!</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body ">
                                                     <form action="{{route('test.store')}}" method="POST"
                                                           class="form-group">
-                                                        <input type="hidden" value="{{$video_dars->lesson_id}}"
+                                                        <input type="hidden" value="{{$lesson}}"
                                                                name="lesson_id">
                                                         @csrf
                                                         <div class="row">
@@ -304,7 +379,7 @@ use App\Models\Test;
                                                                   method="POST" class="form-group">
                                                                 @csrf
                                                                 @method('PUT')
-                                                                <input type="hidden" value="{{$video_dars->lesson_id}}"
+                                                                <input type="hidden" value="{{$lesson}}"
                                                                        name="lesson_id">
                                                                 <div class="row">
                                                                     <div class="mb-3">
@@ -414,6 +489,7 @@ use App\Models\Test;
                             </div>
                         </div>
 
+                        @if($group_test)
                         <div class="mt-60">
                             <div class="row">
                                 <div class="col-8">
@@ -425,7 +501,6 @@ use App\Models\Test;
                                         <i class="fas fa-edit"></i>
                                         Test qoidalarini tahrirlash
                                     </button>
-
                                     <!-- Modal -->
                                     <div class="modal fade" id="TestQoida" tabindex="-1"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -442,7 +517,7 @@ use App\Models\Test;
                                                           method="POST" class="form-group">
                                                         @csrf
                                                         @method('PUT')
-                                                        <input type="hidden" value="{{$video_dars->lesson_id}}"
+                                                        <input type="hidden" value="{{$lesson}}"
                                                                name="lesson_id">
                                                         <div class="row">
 
@@ -511,7 +586,6 @@ use App\Models\Test;
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <ul class="ul-list y-gap-15 pt-30">
@@ -521,14 +595,109 @@ use App\Models\Test;
                                 <li><span class="text-black fw-700">Limit: </span>{{$group_test->limit}}</li>
                             </ul>
                         </div>
-                    </div>
 
+                        @elseif(!$tests->isEmpty())
+                            <div class="mt-60">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h2 class="text-20">Testni qoidalari</h2>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#TestQoidaCreate">
+                                            <i class="fas fa-plus"></i>
+                                            Test qoidalarini yaratish
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="TestQoidaCreate" tabindex="-1"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg mt-50">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Siz test qoidalarini
+                                                            yaratayapsiz!</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body ">
+                                                        <form action="{{route('lesson-group-test-create',['id'=>$lesson])}}"
+                                                              method="POST" class="form-group">
+                                                            @csrf
+                                                            <input type="hidden" value="{{$lesson}}"
+                                                                   name="lesson_id">
+                                                            <div class="row">
+
+                                                                <div class="col-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="level"
+                                                                               class="form-label fw-700">Level</label>
+                                                                        <select class="form-select answer-select" id="level"
+                                                                                name="level" required>
+                                                                            <option value="">--Select--</option>
+                                                                            <option value="Boshlang'ich">Boshlang'ich
+                                                                            </option>
+                                                                            <option  value="O'rta">O'rta
+                                                                            </option>
+                                                                            <option value="Yuqori">Yuqori
+                                                                            </option>
+                                                                        </select>
+                                                                        @error('level')
+                                                                        <div style="color: red"
+                                                                             class="form-text">{{$message}}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="ball"
+                                                                               class="form-label fw-700">Ball</label>
+                                                                        <input type="number"
+                                                                               class="border form-control" id="ball"
+                                                                               name="ball" required>
+                                                                        @error('ball')
+                                                                        <div style="color: red"
+                                                                             class="form-text">{{$message}}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="limit"
+                                                                               class="form-label fw-700">Limit</label>
+                                                                        <input type="number"
+                                                                               class="border form-control" id="limit"
+                                                                               name="limit" required>
+                                                                        @error('limit')
+                                                                        <div style="color: red"
+                                                                             class="form-text">{{$message}}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="text-center">
+                                                                <button type="submit" class="btn btn-primary mt-30">
+                                                                    <i class="fas fa-plus"></i>
+                                                                    Create
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
 
-
         </div>
-
 
         <footer class="footer -dashboard py-30">
             <div class="row items-center justify-between">

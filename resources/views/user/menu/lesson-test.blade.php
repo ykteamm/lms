@@ -93,9 +93,25 @@ $user = auth()->user();
                                                         </div>
                                              </div>
                                          @endforeach
-                                         <div class="d-flex justify-end">
-                                             <button type="submit" class="button -md -dark-1 text-white -dark-button-white mt-40">Testni tugatish</button>
+                                         <div class="" style="text-align: center" id="tugatish">
+                                             <button type="submit" class="button -md -dark-1 text-white -dark-button-white mt-40" onclick="submitWithDelay()">Testni tugatish</button>
                                          </div>
+
+                                         <div class=" d-none" style="text-align: center" id="kutish">
+                                             <button type="button" class="button -md -dark-1 text-white -dark-button-white mt-40" >Biroz kuting!!!</button>
+                                         </div>
+
+
+{{--                                         <div class="modal-footer" id="for-open-smena-user-none">--}}
+{{--                                             <button type="submit"--}}
+{{--                                                     onclick="$('#for-open-smena-user-none').addClass('d-none');$('#for-open-smena-user').removeClass('d-none');"--}}
+{{--                                                     class="btn btn-success">Smena ochish</button>--}}
+{{--                                         </div>--}}
+{{--                                         <div class="modal-footer d-none" id="for-open-smena-user">--}}
+{{--                                             <button type="button" class="btn btn-primary">Biroz kuting !!!</button>--}}
+{{--                                         </div>--}}
+
+
                                      </form>
                                 </div>
                             </div>
@@ -107,4 +123,12 @@ $user = auth()->user();
         </div>
     </div>
 @endsection
-
+@section('natija_js')
+    <script type="text/javascript">
+        function submitWithDelay() {
+            // Hide the first button and show the second button
+            document.getElementById('tugatish').classList.add('d-none');
+            document.getElementById('kutish').classList.remove('d-none');
+        }
+    </script>
+@endsection
