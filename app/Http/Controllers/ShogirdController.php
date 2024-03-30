@@ -121,7 +121,7 @@ class ShogirdController extends Controller
                   'group_test'=>$group_test,
                 ];
             }
-//            return $answer_check;
+            return $answer_check;
 //            return $lesson_ids;
 //            return $dars_ids;
 //            return $test;
