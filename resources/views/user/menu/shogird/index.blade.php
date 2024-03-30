@@ -149,21 +149,7 @@ use app\Models\Test;
                                                                                              style="background: red;color: white; border: 2px solid white;padding: 0 !important;">
                                                                                             {{$data['question_numbers'] - $data['correct_answer']}}
                                                                                         </div>
-                                                                                        @foreach($check['group_test'] as $group)
-                                                                                            @if($data['lesson_id'] == $group['lesson_id'])
-                                                                                                @if($data['foiz'] >= $group['ball'])
-                                                                                                    <div class="col-2 d-flex align-items-center justify-content-center"
-                                                                                                         style="background: green; color: white; border: 2px solid white;padding: 0 !important;">
-                                                                                                        {{$data['foiz']}}
-                                                                                                    </div>
-                                                                                                @else
-                                                                                                    <div class="col-2 d-flex align-items-center justify-content-center"
-                                                                                                         style="background: red; color: white; border: 2px solid white;padding: 0 !important;">
-                                                                                                        {{$data['foiz']}}
-                                                                                                    </div>
-                                                                                                @endif
-                                                                                            @endif
-                                                                                        @endforeach
+
                                                                                         @foreach($check['group_test'] as $group)
                                                                                             @if($data['lesson_id'] == $group['lesson_id'])
                                                                                                 @if($data['foiz'] >= $group['ball'])
